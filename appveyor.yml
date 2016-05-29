@@ -1,6 +1,6 @@
 # Test against this version of Node.js
 environment:
-  nodejs_version: "5.80"
+  nodejs_version: "5.8.0"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -20,3 +20,5 @@ test_script:
 
 # Don't actually build.
 build: off
+
+version: (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
