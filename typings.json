@@ -1,0 +1,10 @@
+{
+  "name": "vue-typed",
+  "dependencies": {
+    "chai": "registry:npm/chai#3.5.0+20160415060238"
+  },
+  "globalDependencies": {
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "vue": "registry:dt/vue#1.0.21+20160423143248"
+  }
+}
