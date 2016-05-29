@@ -16,7 +16,7 @@ test_script:
   - npm --version
   # run tests
   - npm test
-	- npm run test-browser
+  - npm run test-browser
 
 # Don't actually build.
 build: off
