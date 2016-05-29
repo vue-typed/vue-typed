@@ -8,6 +8,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm install
+	- typings install
 
 # Post-install test scripts.
 test_script:
@@ -21,4 +22,4 @@ test_script:
 # Don't actually build.
 build: off
 
-version: (Get-Content -Raw -Path package.json | ConvertFrom-Json).version
+version: "{build}"
