@@ -1,13 +1,10 @@
 language: node_js
-
 node_js:
   - 5.0.8
-	
 before_install:
-	- npm install -g npm@latest
+  - npm install -g npm@latest
   - npm install typings -g
-
 script:
-	- typings install
-	- npm test
-	- npm run test-browser
+  - typings install
+  - npm test
+  - npm run test-browser
