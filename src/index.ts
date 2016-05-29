@@ -3,10 +3,10 @@
  */
 
 
-import * as Action  from './Action'
-import * as Data  from './Data'
-import * as Getter  from './Getter'
-import * as Component  from './Component'
+import * as Action  from './action'
+import * as Data  from './data'
+import * as Getter  from './getter'
+import * as Component  from './component'
 
 
 
