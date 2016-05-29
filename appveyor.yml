@@ -1,4 +1,4 @@
-init
+init:
   - ps: Update-AppveyorBuild -Version "(Get-Content -Raw -Path package.json | ConvertFrom-Json).version"
   
 # Test against this version of Node.js
