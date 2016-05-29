@@ -1,6 +1,6 @@
 # Vue Typed
 
-[![Build status](https://ci.appveyor.com/api/projects/status/mdilb673cxwl903q/branch/master?svg=true)](https://ci.appveyor.com/project/budiadiono/vue-typed/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/mdilb673cxwl903q/branch/master?svg=true)](https://ci.appveyor.com/project/budiadiono/vue-typed/branch/master) [![Build Status](https://travis-ci.org/budiadiono/vue-typed.svg?branch=master)](https://travis-ci.org/budiadiono/vue-typed)
 
 **The [vue-class-component](https://github.com/vuejs/vue-class-component) in typescript favor**
 

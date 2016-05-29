@@ -2,6 +2,22 @@
   "name": "vue-typed",
   "version": "0.0.1",
   "description": "The vue-class-component in typescript favor",
+  "keywords": [
+		"vue",
+		"component",
+		"typescript",
+		"vue-component",
+		"vuex"
+	],
+  "author": {
+		"name": "Budi Adiono",
+		"email": "budiadiono@gmail.com",
+		"url": "http://www.budiadiono.com"
+	},
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/budiadiono/vue-typed.git"
+	},
   "main": "index.js",
   "typings": "index.d.ts",
   "files": [
@@ -12,8 +28,7 @@
     "build": "gulp build",
     "test": "gulp build && webpack --config test/webpack.config.js && mocha test/test.build.js",
     "test-browser": "karma start test/browser/karma.conf.js --single-run"
-  },
-  "author": "",
+  },  
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.9.0",
