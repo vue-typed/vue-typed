@@ -1,5 +1,7 @@
 # Vue Typed
 
+[![Build status](https://ci.appveyor.com/api/projects/status/mdilb673cxwl903q/branch/master?svg=true)](https://ci.appveyor.com/project/budiadiono/vue-typed/branch/master)
+
 **The [vue-class-component](https://github.com/vuejs/vue-class-component) in typescript favor**
 
 Fingers crossed, this module will help you to write vue-js application in typescript heavenly!
