@@ -1,6 +1,8 @@
 // Karma configuration
-// Generated on Sat May 28 2016 08:32:52 GMT+0700 (SE Asia Standard Time)
-var glob = require("glob");
+
+var merge = require('webpack-merge');
+var webpackBase = require('../webpack.config.js');
+
 
 
 module.exports = function (config) {
@@ -34,6 +36,7 @@ module.exports = function (config) {
       'specs/**/*.js': ['webpack']
     },
     
+    
     babelPreprocessor: {
       options: {
         presets: ['es2015'],
@@ -41,28 +44,13 @@ module.exports = function (config) {
       }
     },
 
-    webpack: {
-      module: {
-        resolve: {
-          extensions: [".js", ".ts"]
-        },
-        loaders: [
-          {
-            test: /\.ts$/,
-            loader: 'babel?presets[]=es2015!ts'
-          },          
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|src)/,
-            loader: 'babel',
-            query: {
-              presets: ['es2015'],
-              plugins: ["transform-decorators-legacy"]
-            }
-          }
-        ]
-      }
-    },
+
+    // webpack preprocessor config    
+    webpack: merge(webpackBase, {
+      // other webpack config
+    }),
+    
+    
 
     webpackMiddleware: {
       quiet: false,
@@ -81,35 +69,17 @@ module.exports = function (config) {
 
     plugins: [
       'karma-webpack', 
-      // 'karma-coverage', 
       'karma-mocha', 
       'karma-phantomjs-launcher', 
-      // 'karma-babel-preprocessor',
       'karma-mocha-reporter'
     ],
+    
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['mocha'],
-    
-    // coverageReporter : {
-    //   dir : 'coverage/',
-    //   reporters : [
-    //     {type : 'text-summary'},
-    //     {type : 'html'}
-    //   ]
-    // },
-    
-    // mochaReporter: {
-    //   colors: {
-    //     success: 'bgGreen',
-    //     info: 'cyan',
-    //     warning: 'bgBlue',
-    //     error: 'bgRed'
-    //   }
-    // },
-
+           
 
     // web server port
     port: 9876,
@@ -135,7 +105,7 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous

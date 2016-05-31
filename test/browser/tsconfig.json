@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "isolatedModules": false,
+    "moduleResolution": "node",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true
+  },
+  "compileOnSave": false,
+  "filesGlob": [
+    "**/*.ts"
+  ],
+  "files": [
+    "tsd.d.ts",
+    "specs/data.ts",
+    "specs/vuex.ts"
+  ]
+}

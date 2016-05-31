@@ -1,11 +1,10 @@
-
 module.exports = {
-  entry: ['./test/test.js', './test/test.ts' ],
-  output: {
-    path: './test',
-    filename: 'test.build.js'
+  
+  resolve: {
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
-  module: {	
+  
+  module: {
     loaders: [
       {
         test: /\.ts$/,
@@ -13,13 +12,16 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|src)/,
-        loader: 'babel',
-				query: {
-          presets: ['es2015'],
-          plugins: ["transform-decorators-legacy"]
-        }
+        loader: 'babel?plugins[]=transform-decorators-legacy'
       }
     ]
+  },
+
+  babel: {
+    presets: ['es2015'],
+    
+    // fix >100KB issue. see: http://stackoverflow.com/a/29857361/1586914
+    compact: false
   }
-}
+	
+};

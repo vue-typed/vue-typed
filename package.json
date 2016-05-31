@@ -3,21 +3,21 @@
   "version": "0.0.1",
   "description": "The vue-class-component in typescript favor",
   "keywords": [
-		"vue",
-		"component",
-		"typescript",
-		"vue-component",
-		"vuex"
-	],
+    "vue",
+    "component",
+    "typescript",
+    "vue-component",
+    "vuex"
+  ],
   "author": {
-		"name": "Budi Adiono",
-		"email": "budiadiono@gmail.com",
-		"url": "http://www.budiadiono.com"
-	},
+    "name": "Budi Adiono",
+    "email": "budiadiono@gmail.com",
+    "url": "http://www.budiadiono.com"
+  },
   "repository": {
-		"type": "git",
-		"url": "https://github.com/budiadiono/vue-typed.git"
-	},
+    "type": "git",
+    "url": "https://github.com/budiadiono/vue-typed.git"
+  },
   "main": "index.js",
   "typings": "index.d.ts",
   "files": [
@@ -26,9 +26,8 @@
   ],
   "scripts": {
     "build": "gulp build",
-    "test": "gulp build && webpack --config test/webpack.config.js && mocha test/test.build.js",
-    "test-browser": "karma start test/browser/karma.conf.js --single-run"
-  },  
+    "test": "gulp build && webpack --config test/common/webpack.config.js && mocha test/common/test.build.js && karma start test/browser/karma.conf.js"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.9.0",
@@ -36,7 +35,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
-    "chai": "^3.5.0",
+    "chai": "https://github.com/chaijs/chai#6611e1a",
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.13.4",
     "karma": "^0.13.22",
@@ -47,9 +46,6 @@
     "mocha": "^2.5.3",
     "node-libs-browser": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.7",
-    "rimraf": "^2.5.2",
-    "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
     "ts-loader": "^0.8.2",
     "typescript": "^1.8.10",
     "vue": "^1.0.24",

@@ -1,10 +1,10 @@
-import { Component, Data } from '../index'
+import { Component, Data } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
 
 describe('vue-class-component based test (ts)', () => {
-
+  
 
   it('hooks', () => {
     let created = false

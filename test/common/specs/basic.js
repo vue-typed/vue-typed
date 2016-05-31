@@ -1,6 +1,6 @@
 // Adopt from https://github.com/vuejs/vue-class-component/blob/master/test/test.js
 
-import { Component } from '../index.js'
+import { Component } from '../../../index.js'
 import { expect } from 'chai'
 import Vue from 'vue'
 
