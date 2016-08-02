@@ -60,7 +60,7 @@ define("getter", ["require", "exports"], function (require, exports) {
 });
 define("component", ["require", "exports", 'vue'], function (require, exports, Vue) {
     "use strict";
-    const internalHooks = [
+    var internalHooks = [
         'data',
         'el',
         'init',
