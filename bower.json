@@ -1,6 +1,19 @@
 {
     "name": "vue-typed",
-    "version": "0.0.2",
+    "version": "0.0.3",
+    "authors": [
+      "budiadiono <budiadiono@gmail.com> (http://www.budiadiono.com)"
+    ],
+    "description": "The vue-class-component in typescript favor",
+    "keywords": [
+      "vue",
+      "vue-typed",
+      "component",
+      "typescript",
+      "vue-component",
+      "vuex"
+    ],
+    "license": "MIT",
     "main": "index.js",
     "ignore": [
       "src",
@@ -10,10 +23,23 @@
       ".gitignore",
       "bower.json",
       "package.json",
-      "README.md"
+      ".vscode",
+      ".jshintrc",
+      ".npmignore",
+      ".travis.yml",
+      "appveyor.yml",
+      "gulpfile.js",
+      "jsconfig.json",
+      "tsconfig.json",
+      "tsd.d.ts",
+      "typings.json"
     ],
     "dependencies": {
       "vue": "^1.0.24",
       "vuex": "^0.6.3"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/budiadiono/vue-typed.git"
     }
 }
