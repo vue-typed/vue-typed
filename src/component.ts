@@ -5,7 +5,7 @@
 
 import * as Vue from 'vue'
 
-const internalHooks = [
+var internalHooks = [
   'data',
   'el',
   'init',
