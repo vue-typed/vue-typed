@@ -1,0 +1,19 @@
+{
+    "name": "vue-typed",
+    "version": "0.0.1",
+    "main": "index.js",
+    "ignore": [
+			"src",
+			"test",
+			"typings",
+			"typings-custom",
+			".gitignore",
+			"bower.json",
+			"package.json",
+			"README.md"
+		],
+    "dependencies": {
+			"vue": "^1.0.24",
+			"vuex": "^0.6.3"
+		}
+}
