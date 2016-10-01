@@ -86,12 +86,12 @@ define("component", ["require", "exports", 'vue'], function (require, exports, V
         if (proto.vuex) {
             var protoVue = proto.vuex;
             if (protoVue['getters']) {
-                Object.getOwnPropertyNames(protoVue['getters']).forEach((k) => {
+                Object.getOwnPropertyNames(protoVue['getters']).forEach(function(k) {
                     vueKeys.push(k);
                 });
             }
             if (protoVue['actions']) {
-                Object.getOwnPropertyNames(protoVue['actions']).forEach((k) => {
+                Object.getOwnPropertyNames(protoVue['actions']).forEach(function(k) {
                     vueKeys.push(k);
                 });
             }
@@ -107,7 +107,7 @@ define("component", ["require", "exports", 'vue'], function (require, exports, V
                             proto[key][prop] = constructor[prop];
                         });
                     }
-                    options[key] = () => {
+                    options[key] = function() {
                         return proto[key];
                     };
                 }
