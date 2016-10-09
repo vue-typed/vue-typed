@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "amd",
+    "module": "commonjs",
     "isolatedModules": false,
     "moduleResolution": "node",
     "declaration": false,
@@ -10,8 +10,7 @@
     "noLib": false,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "experimentalDecorators": true,
-    "outFile": "index.js"
+    "experimentalDecorators": true
   },
   "formatCodeOptions": {
     "indentSize": 2,
