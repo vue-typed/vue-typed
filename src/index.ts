@@ -3,13 +3,11 @@
  */
 
 
-import * as Action  from './action'
-import * as Data  from './data'
-import * as Getter  from './getter'
-import * as Component  from './component'
+import { Action }  from './action'
+import { Data }  from './data'
+import { Getter }  from './getter'
+import { Component }  from './component'
 
 
 
-export {
-	Action, Data, Getter, Component
-}
+export { Action, Data, Getter, Component }

@@ -246,147 +246,132 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_0__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_1__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_2__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_3__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;"use strict";
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
 
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_LOCAL_MODULE_0__ = (function (require, exports) {
-	    "use strict";
+	/**
+	  * vue-typed 0.0.3
+	  * The vue-class-component in typescript favor
+	  * https://github.com/budiadiono/vue-typed
+	  
+	  * Copyright 2016, [object Object]
+	  * Released under the MIT license.
+	  '*/
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(3)], __WEBPACK_AMD_DEFINE_RESULT__ = function (exports, Vue) {
+	    'use strict';
 
-	    var vuexActionsFactory = function vuexActionsFactory(target, key, descriptor, action) {
-	        if (!target['vuex']) {
-	            target['vuex'] = {};
-	        }
-	        if (!target['vuex']['actions']) {
-	            target['vuex']['actions'] = {};
-	        }
-	        if (!target['vuex']['actions'][key]) {
-	            target['vuex']['actions'][key] = action;
-	        }
-	    };
-	    var decorator = function decorator(action) {
+	    function Action(action) {
 	        return function (target, key, descriptor) {
-	            return vuexActionsFactory(target, key, descriptor, action);
+	            if (!target['vuex']) {
+	                target['vuex'] = {};
+	            }
+	            if (!target['vuex']['actions']) {
+	                target['vuex']['actions'] = {};
+	            }
+	            if (!target['vuex']['actions'][key]) {
+	                target['vuex']['actions'][key] = action;
+	            }
 	        };
-	    };
-	    return decorator;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)));
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_LOCAL_MODULE_1__ = (function (require, exports) {
-	    "use strict";
+	    }
 
-	    var dataFactory = function dataFactory(target, key) {
-	        if (target['data'] && target['data'] instanceof Function) {
-	            throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
-	        }
-	        if (!target['data']) {
-	            target['data'] = {};
-	        }
-	        if (!target['data'][key]) {
-	            target['data'][key] = key;
-	        }
-	    };
-	    var decorator = function decorator() {
+	    function Data() {
 	        return function (target, key) {
-	            return dataFactory(target, key);
+	            if (target['data'] && target['data'] instanceof Function) {
+	                throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
+	            }
+	            if (!target['data']) {
+	                target['data'] = {};
+	            }
+	            if (!target['data'][key]) {
+	                target['data'][key] = key;
+	            }
 	        };
-	    };
-	    return decorator;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)));
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_LOCAL_MODULE_2__ = (function (require, exports) {
-	    "use strict";
+	    }
 
-	    var vuexGettersFactory = function vuexGettersFactory(target, key, getter) {
-	        if (!target['vuex']) {
-	            target['vuex'] = {};
-	        }
-	        if (!target['vuex']['getters']) {
-	            target['vuex']['getters'] = {};
-	        }
-	        if (!target['vuex']['getters'][key]) {
-	            target['vuex']['getters'][key] = getter;
-	        }
-	    };
-	    var decorator = function decorator(getter) {
+	    function Getter(getter) {
 	        return function (target, key) {
-	            return vuexGettersFactory(target, key, getter);
+	            if (!target['vuex']) {
+	                target['vuex'] = {};
+	            }
+	            if (!target['vuex']['getters']) {
+	                target['vuex']['getters'] = {};
+	            }
+	            if (!target['vuex']['getters'][key]) {
+	                target['vuex']['getters'][key] = getter;
+	            }
 	        };
-	    };
-	    return decorator;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)));
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(3)], __WEBPACK_LOCAL_MODULE_3__ = (function (require, exports, Vue) {
-	    "use strict";
+	    }
 
-	    var internalHooks = ['data', 'el', 'init', 'created', 'ready', 'beforeCompile', 'compiled', 'beforeDestroy', 'destroyed', 'attached', 'detached', 'activate', 'vuex'];
-	    var componentFactory = function componentFactory(Component, options) {
-	        if (!options) {
-	            options = {};
-	        }
-	        options.name = options.name || Component.name;
-	        var proto = Component.prototype;
-	        var constructor = new proto.constructor();
-	        var vueKeys = [];
-	        if (proto.vuex) {
-	            var protoVue = proto.vuex;
-	            if (protoVue['getters']) {
-	                Object.getOwnPropertyNames(protoVue['getters']).forEach(function (k) {
-	                    vueKeys.push(k);
-	                });
+	    function Component(options) {
+	        var internalHooks = ['data', 'el', 'init', 'created', 'ready', 'beforeCompile', 'compiled', 'beforeDestroy', 'destroyed', 'attached', 'detached', 'activate', 'vuex'];
+	        var factory = function factory(Component, options) {
+	            if (!options) {
+	                options = {};
 	            }
-	            if (protoVue['actions']) {
-	                Object.getOwnPropertyNames(protoVue['actions']).forEach(function (k) {
-	                    vueKeys.push(k);
-	                });
-	            }
-	        }
-	        Object.getOwnPropertyNames(proto).forEach(function (key) {
-	            if (key === 'constructor') {
-	                return;
-	            }
-	            if (internalHooks.indexOf(key) > -1) {
-	                if (!(proto[key] instanceof Function) && key == 'data') {
-	                    if (constructor) {
-	                        Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-	                            proto[key][prop] = constructor[prop];
-	                        });
-	                    }
-	                    options[key] = function () {
-	                        return proto[key];
-	                    };
-	                } else {
-	                    options[key] = proto[key];
+	            options.name = options.name || Component.name;
+	            var proto = Component.prototype;
+	            var constructor = new proto.constructor();
+	            var vueKeys = [];
+	            if (proto.vuex) {
+	                var protoVue = proto.vuex;
+	                if (protoVue['getters']) {
+	                    Object.getOwnPropertyNames(protoVue['getters']).forEach(function (k) {
+	                        vueKeys.push(k);
+	                    });
 	                }
-	                return;
+	                if (protoVue['actions']) {
+	                    Object.getOwnPropertyNames(protoVue['actions']).forEach(function (k) {
+	                        vueKeys.push(k);
+	                    });
+	                }
 	            }
-	            var descriptor = Object.getOwnPropertyDescriptor(proto, key);
-	            if (typeof descriptor.value === 'function') {
-	                if (vueKeys.indexOf(key) > -1) return;
-	                (options.methods || (options.methods = {}))[key] = descriptor.value;
-	            } else if (descriptor.get || descriptor.set) {
-	                (options.computed || (options.computed = {}))[key] = {
-	                    get: descriptor.get,
-	                    set: descriptor.set
-	                };
-	            }
-	        });
-	        var superProto = Object.getPrototypeOf(Component.prototype);
-	        var Super = superProto instanceof Vue ? superProto.constructor : Vue;
-	        return Super.extend(options);
-	    };
-	    var decorator = function decorator(options) {
+	            Object.getOwnPropertyNames(proto).forEach(function (key) {
+	                if (key === 'constructor') {
+	                    return;
+	                }
+	                if (internalHooks.indexOf(key) > -1) {
+	                    if (!(proto[key] instanceof Function) && key == 'data') {
+	                        if (constructor) {
+	                            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
+	                                proto[key][prop] = constructor[prop];
+	                            });
+	                        }
+	                        options[key] = function () {
+	                            return proto[key];
+	                        };
+	                    } else {
+	                        options[key] = proto[key];
+	                    }
+	                    return;
+	                }
+	                var descriptor = Object.getOwnPropertyDescriptor(proto, key);
+	                if (typeof descriptor.value === 'function') {
+	                    if (vueKeys.indexOf(key) > -1) return;
+	                    (options.methods || (options.methods = {}))[key] = descriptor.value;
+	                } else if (descriptor.get || descriptor.set) {
+	                    (options.computed || (options.computed = {}))[key] = {
+	                        get: descriptor.get,
+	                        set: descriptor.set
+	                    };
+	                }
+	            });
+	            var superProto = Object.getPrototypeOf(Component.prototype);
+	            var Super = superProto instanceof Vue ? superProto.constructor : Vue;
+	            return Super.extend(options);
+	        };
 	        if (options instanceof Function) {
-	            return componentFactory(options);
+	            return factory(options);
 	        }
 	        return function (Component) {
-	            return componentFactory(Component, options);
+	            return factory(Component, options);
 	        };
-	    };
-	    return decorator;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)));
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __WEBPACK_LOCAL_MODULE_0__, __WEBPACK_LOCAL_MODULE_1__, __WEBPACK_LOCAL_MODULE_2__, __WEBPACK_LOCAL_MODULE_3__], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, Action, Data, Getter, Component) {
-	    "use strict";
+	    }
 
 	    exports.Action = Action;
 	    exports.Data = Data;
 	    exports.Getter = Getter;
 	    exports.Component = Component;
+
+	    Object.defineProperty(exports, '__esModule', { value: true });
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },

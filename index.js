@@ -1,6 +1,15 @@
-define("action", ["require", "exports"], function (require, exports) {
-    "use strict";
-    var vuexActionsFactory = function (target, key, descriptor, action) {
+/**
+  * vue-typed 0.0.3
+  * The vue-class-component in typescript favor
+  * https://github.com/budiadiono/vue-typed
+  
+  * Copyright 2016, [object Object]
+  * Released under the MIT license.
+  '*/
+define(['exports', 'vue'], function (exports, Vue) { 'use strict';
+
+function Action(action) {
+    return function (target, key, descriptor) {
         if (!target['vuex']) {
             target['vuex'] = {};
         }
@@ -11,16 +20,10 @@ define("action", ["require", "exports"], function (require, exports) {
             target['vuex']['actions'][key] = action;
         }
     };
-    var decorator = function (action) {
-        return function (target, key, descriptor) {
-            return vuexActionsFactory(target, key, descriptor, action);
-        };
-    };
-    return decorator;
-});
-define("data", ["require", "exports"], function (require, exports) {
-    "use strict";
-    var dataFactory = function (target, key) {
+}
+
+function Data() {
+    return function (target, key) {
         if (target['data'] && target['data'] instanceof Function) {
             throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
         }
@@ -31,16 +34,10 @@ define("data", ["require", "exports"], function (require, exports) {
             target['data'][key] = key;
         }
     };
-    var decorator = function () {
-        return function (target, key) {
-            return dataFactory(target, key);
-        };
-    };
-    return decorator;
-});
-define("getter", ["require", "exports"], function (require, exports) {
-    "use strict";
-    var vuexGettersFactory = function (target, key, getter) {
+}
+
+function Getter(getter) {
+    return function (target, key) {
         if (!target['vuex']) {
             target['vuex'] = {};
         }
@@ -51,15 +48,9 @@ define("getter", ["require", "exports"], function (require, exports) {
             target['vuex']['getters'][key] = getter;
         }
     };
-    var decorator = function (getter) {
-        return function (target, key) {
-            return vuexGettersFactory(target, key, getter);
-        };
-    };
-    return decorator;
-});
-define("component", ["require", "exports", 'vue'], function (require, exports, Vue) {
-    "use strict";
+}
+
+function Component(options) {
     var internalHooks = [
         'data',
         'el',
@@ -75,7 +66,7 @@ define("component", ["require", "exports", 'vue'], function (require, exports, V
         'activate',
         'vuex'
     ];
-    var componentFactory = function (Component, options) {
+    var factory = function (Component, options) {
         if (!options) {
             options = {};
         }
@@ -135,20 +126,19 @@ define("component", ["require", "exports", 'vue'], function (require, exports, V
             : Vue;
         return Super.extend(options);
     };
-    var decorator = function (options) {
-        if (options instanceof Function) {
-            return componentFactory(options);
-        }
-        return function (Component) {
-            return componentFactory(Component, options);
-        };
+    if (options instanceof Function) {
+        return factory(options);
+    }
+    return function (Component) {
+        return factory(Component, options);
     };
-    return decorator;
-});
-define("index", ["require", "exports", "action", "data", "getter", "component"], function (require, exports, Action, Data, Getter, Component) {
-    "use strict";
-    exports.Action = Action;
-    exports.Data = Data;
-    exports.Getter = Getter;
-    exports.Component = Component;
+}
+
+exports.Action = Action;
+exports.Data = Data;
+exports.Getter = Getter;
+exports.Component = Component;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 });
