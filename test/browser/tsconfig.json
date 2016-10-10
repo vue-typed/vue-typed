@@ -19,6 +19,7 @@
   "files": [
     "tsd.d.ts",
     "specs/data.ts",
+    "specs/methods.ts",
     "specs/vuex.ts"
   ]
 }

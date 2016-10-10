@@ -6,8 +6,8 @@
 
 Fingers crossed, this module will help you to write vue-js application in typescript heavenly!
 
-## Usage
-## Component and Data Decorator
+## Basic Usage
+### Component and Data Decorator
 
 ```
 import { Component, Data } from 'vue-typed'
@@ -39,7 +39,48 @@ var Foo = Vue.extend({
 
 ``` 
 
-### Vuex Supports (Getter and Action Decorator)
+### Methods
+
+All methods in `Component` class decorated will become part of `methods` attributes.
+
+```
+@Component({
+  template: '<div><div id="text">{{text}}</div><button id="btn" v-on:click="greet">Greet</button></div>'
+})
+class Foo {
+  
+  @Data()
+  text: string
+  
+  constructor() {
+    this.text = 'foo'
+  }
+
+  greet() {
+    this.text = 'hello foo!'
+  }
+}
+```
+
+Code above is equivalent to:
+
+```
+Vue.extend({
+  template: '<div><div id="text">{{text}}</div><button id="btn" v-on:click="greet">Greet</button></div>',
+  data: function () {
+    return { text: 'foo' }
+  },
+  methods: {
+    greet: function () {
+      this.text = 'hello foo!'
+    }
+  }
+})
+```
+
+
+## Vuex
+### Getter and Action Decorator
 
 In the same manner, you can use `Getter` and `Action` decorator as vuex attribute.
 
