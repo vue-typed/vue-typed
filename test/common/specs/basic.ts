@@ -1,4 +1,4 @@
-import { Component, Data } from '../../../index'
+import { Component, Data, Props } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -62,6 +62,54 @@ describe('vue-class-component based test (ts)', () => {
     expect(c.b).to.equal(2)
     c.a = 2
     expect(c.b).to.equal(3)
+  })
+
+  it('props', () => {
+    
+    @Component()
+    class MyComp {
+
+      @Props()
+      message: string
+
+      @Props({
+				default: 'meh',
+        type: String
+			})
+      message2: any
+
+      @Props()
+      message3: string
+
+      @Props()
+      message4: string = 'yeah'
+
+      @Props({				
+        type: String
+			})
+      message5: any = 'foo'
+
+      @Props({				
+        type: String,
+        default: "I'm win"
+			})
+      message6: any = 'kick'
+
+      constructor() {
+        this.message3 = 'what'
+      }
+
+    }
+
+    const c = new MyComp()
+    
+    expect(c['$options']['props']).to.have.property('message')
+    expect(c['$options']['props']).to.have.property('message2').that.has.property('default').that.equals('meh');
+    expect(c['$options']['props']).to.have.property('message3').that.has.property('default').that.equals('what');
+    expect(c['$options']['props']).to.have.property('message4').that.has.property('default').that.equals('yeah');
+    expect(c['$options']['props']).to.have.property('message5').that.has.property('default').that.equals('foo');
+    expect(c['$options']['props']).to.have.property('message6').that.has.property('default').that.equals("I'm win");
+
   })
 
   it('other options', (done) => {

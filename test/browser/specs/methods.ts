@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import * as Vue from 'vue'
 
 
-describe('vue-typed', () => {
+describe('methods', () => {
 	
 	
-	it ('methods', () => {
+	it ('should be able to binding primitive method', () => {
 		
 				
 		@Component({

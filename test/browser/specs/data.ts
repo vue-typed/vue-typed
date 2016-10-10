@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import * as Vue from 'vue'
 
 
-describe('vue-typed decorators (ts)', () => {
+describe('data decorator', () => {
 	
 	
-	it ('data', () => {
+	it ('it should be able to do simple binding', () => {
 		
 				
 		@Component({

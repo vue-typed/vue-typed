@@ -20,6 +20,7 @@
     "tsd.d.ts",
     "specs/data.ts",
     "specs/methods.ts",
+    "specs/props.ts",
     "specs/vuex.ts"
   ]
 }

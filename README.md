@@ -1,8 +1,12 @@
 # Vue Typed
 
-[![Build status](https://ci.appveyor.com/api/projects/status/mdilb673cxwl903q/branch/master?svg=true)](https://ci.appveyor.com/project/budiadiono/vue-typed/branch/master) [![Build Status](https://travis-ci.org/budiadiono/vue-typed.svg?branch=master)](https://travis-ci.org/budiadiono/vue-typed)
-
 **The [vue-class-component](https://github.com/vuejs/vue-class-component) in typescript favor**
+
+[![Build status](https://ci.appveyor.com/api/projects/status/mdilb673cxwl903q/branch/master?svg=true)](https://ci.appveyor.com/project/budiadiono/vue-typed/branch/master) [![Build Status](https://travis-ci.org/budiadiono/vue-typed.svg?branch=master)](https://travis-ci.org/budiadiono/vue-typed) [![GitHub issues](https://img.shields.io/github/issues/budiadiono/vue-typed.svg)](https://github.com/budiadiono/vue-typed/issues) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/budiadiono/vue-typed/master/LICENSE) 
+
+[![NPM](https://nodei.co/npm/vue-typed.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vue-typed/)
+
+
 
 Fingers crossed, this module will help you to write vue-js application in typescript heavenly!
 
@@ -77,6 +81,56 @@ Vue.extend({
   }
 })
 ```
+
+### Props
+
+You can use `Props` decorator to have props in your class. 
+
+```
+@Component()
+class MyComp {
+
+  // simple props
+  @Props()
+  message: string
+
+  // props with options (you can put all official Vue props options here)
+  @Props({
+    default: 'meh',
+    type: String
+  })
+  message2: any
+
+  // props with default value assigned from constructor
+  @Props()
+  message3: string
+
+  // props with default value assigned inline
+  @Props()
+  message4: string = 'yeah'
+
+  // props with options and default value assigned inline
+  @Props({				
+    type: String
+  })
+  message5: any = 'foo'
+
+  // props with default value assigned both inline/constructor and in options
+  // you should avoid this way - however default value assigned in options will be use.
+  // if you do this, then you'll see warning in the console.  
+  @Props({				
+    type: String,
+    default: "I'm win"
+  })
+  message6: any = 'kick'
+
+  constructor() {
+    this.message3 = 'what'
+  }
+
+}
+```
+
 
 
 ## Vuex

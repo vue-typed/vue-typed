@@ -20,7 +20,8 @@ export function Component(options?): ClassDecorator {
     'attached',
     'detached',
     'activate',
-    'vuex'
+    'vuex',
+    'props'
   ]
 
   var factory = function (Component: Function, options?: any): <Function>(target: any) => Function | void {
@@ -31,7 +32,7 @@ export function Component(options?): ClassDecorator {
     options.name = options.name || Component.name
 
 
-    // prototype props.
+    // class prototype.
     var proto = Component.prototype
     var constructor = new proto.constructor();
 
@@ -82,8 +83,36 @@ export function Component(options?): ClassDecorator {
             return proto[key];
           }
 
-
         } else {
+
+          if (key == 'props' && constructor) {
+            
+            // assign props default values initialized from constructor
+            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {              
+              var val = constructor[prop];
+
+              if (val) {
+                
+                if (typeof proto[key][prop] == 'string') {
+                  // no options defined in Props decorator
+
+                  proto[key][prop] = {
+                    default: val
+                  }
+                } else if (typeof proto[key][prop] == 'object') {
+
+                  // when options defined in Props decorator
+                  if (!proto[key][prop]['default']) {
+                    proto[key][prop]['default'] = val;
+                  } else {
+                    console.error('[Vue-typed warn]: You have defined default value for Props both in options and constructor. (found in component: <' + Component.name + '>, props: <'+prop+'>)');
+                  }
+                  
+                }
+              }
+              
+            })
+          }
 
           options[key] = proto[key]
 

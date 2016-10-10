@@ -8,11 +8,18 @@ module.exports = {
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'babel!ts'
+        loader: 'babel!ts', 
+        
+        // resolve: https://github.com/chaijs/chai/issues/384
+        exclude: /node_modules/
+        
       },
       {
         test: /\.js$/,
-        loader: 'babel?plugins[]=transform-decorators-legacy'
+        loader: 'babel?plugins[]=transform-decorators-legacy',
+        
+        // resolve: https://github.com/chaijs/chai/issues/384
+        exclude: /node_modules/
       }
     ]
   },

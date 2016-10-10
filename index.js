@@ -64,7 +64,8 @@ function Component(options) {
         'attached',
         'detached',
         'activate',
-        'vuex'
+        'vuex',
+        'props'
     ];
     var factory = function (Component, options) {
         if (!options) {
@@ -103,6 +104,26 @@ function Component(options) {
                     };
                 }
                 else {
+                    if (key == 'props' && constructor) {
+                        Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
+                            var val = constructor[prop];
+                            if (val) {
+                                if (typeof proto[key][prop] == 'string') {
+                                    proto[key][prop] = {
+                                        default: val
+                                    };
+                                }
+                                else if (typeof proto[key][prop] == 'object') {
+                                    if (!proto[key][prop]['default']) {
+                                        proto[key][prop]['default'] = val;
+                                    }
+                                    else {
+                                        console.error('[Vue-typed warn]: You have defined default value for Props both in options and constructor. (found in component: <' + Component.name + '>, props: <' + prop + '>)');
+                                    }
+                                }
+                            }
+                        });
+                    }
                     options[key] = proto[key];
                 }
                 return;
@@ -134,10 +155,30 @@ function Component(options) {
     };
 }
 
+function Props(options) {
+    return function (target, key) {
+        if (target['props'] && target['props'] instanceof Function) {
+            throw "vue-typed error: [" + target.constructor.name + "]: You can't use @props attribute while you have already props() function in your class.";
+        }
+        if (!target['props']) {
+            target['props'] = {};
+        }
+        if (!target['props'][key]) {
+            if (options) {
+                target['props'][key] = options;
+            }
+            else {
+                target['props'][key] = key;
+            }
+        }
+    };
+}
+
 exports.Action = Action;
 exports.Data = Data;
 exports.Getter = Getter;
 exports.Component = Component;
+exports.Props = Props;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
