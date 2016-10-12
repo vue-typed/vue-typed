@@ -3,4 +3,6 @@
 	"jshint.options": {
 		"esversion": "6"
 	}
+,
+"typescript.tsdk": "./node_modules/typescript/lib"
 }

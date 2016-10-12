@@ -43,25 +43,29 @@ var Foo = Vue.extend({
 
 ``` 
 
-### Methods
+### Methods and Computed Properties
 
-All methods in `Component` class decorated will become part of `methods` attributes.
+All methods in `Component` class will become part of `methods` attributes. You can also define `getter` and `setter` that will become part of `computed` attribute.
 
 ```
 @Component({
-  template: '<div><div id="text">{{text}}</div><button id="btn" v-on:click="greet">Greet</button></div>'
+  template: '<div><div id="text">now: <span id="now">{{val}}</span>, next: <span id="next">{{next}}</span></div><button id="btn" v-on:click="inc">Inc</button></div>'
 })
 class Foo {
-  
+
   @Data()
-  text: string
-  
+  val: number
+
   constructor() {
-    this.text = 'foo'
+    this.val = 1
   }
 
-  greet() {
-    this.text = 'hello foo!'
+  inc() {
+    this.val += 1;
+  }
+
+  get next() {
+    return this.val + 1;
   }
 }
 ```
@@ -70,13 +74,20 @@ Code above is equivalent to:
 
 ```
 Vue.extend({
-  template: '<div><div id="text">{{text}}</div><button id="btn" v-on:click="greet">Greet</button></div>',
+  template: '<div><div id="text">now: <span id="now">{{val}}</span>, next: <span id="next">{{next}}</span></div><button id="btn" v-on:click="inc">Inc</button></div>',
   data: function () {
-    return { text: 'foo' }
+    return { val: 1 }
   },
   methods: {
-    greet: function () {
-      this.text = 'hello foo!'
+    inc: function () {
+      this.val += 1;
+    }
+  },
+  computed: {
+    next: {
+      get: function() {
+        return this.val + 1;
+      }
     }
   }
 })
