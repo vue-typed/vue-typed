@@ -7,8 +7,8 @@ import { Action }  from './action'
 import { Data }  from './data'
 import { Getter }  from './getter'
 import { Component }  from './component'
-import { Props } from './props';
+import { Prop } from './prop';
 
 
 
-export { Action, Data, Getter, Component, Props }
+export { Action, Data, Getter, Component, Prop }

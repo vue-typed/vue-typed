@@ -1,4 +1,4 @@
-import { Component, Data, Props } from '../../../index'
+import { Component, Data, Prop } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -69,27 +69,27 @@ describe('vue-class-component based test (ts)', () => {
     @Component()
     class MyComp {
 
-      @Props()
+      @Prop()
       message: string
 
-      @Props({
+      @Prop({
 				default: 'meh',
         type: String
 			})
       message2: any
 
-      @Props()
+      @Prop()
       message3: string
 
-      @Props()
+      @Prop()
       message4: string = 'yeah'
 
-      @Props({				
+      @Prop({				
         type: String
 			})
       message5: any = 'foo'
 
-      @Props({				
+      @Prop({				
         type: String,
         default: "I'm win"
 			})

@@ -5,7 +5,7 @@
 
 import { PropOption } from '../index.d.ts';
 
-export function Props(options?: PropOption): PropertyDecorator {
+export function Prop(options?: PropOption): PropertyDecorator {
 
 	return function (target: Object, key: string) {
 		if (target['props'] && target['props'] instanceof Function) {

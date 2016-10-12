@@ -78,4 +78,4 @@ export function Component(options?: ComponentOption): ClassDecorator
 export function Data(): PropertyDecorator
 export function Getter(getter: Function): PropertyDecorator
 export function Action(action: Function): MethodDecorator
-export function Props(options?: PropOption): PropertyDecorator 
+export function Prop(options?: PropOption): PropertyDecorator 

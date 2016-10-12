@@ -200,43 +200,43 @@ Vue.extend({
 })
 ```
 
-### Props
+### Prop
 
-You can use `Props` decorator to have props in your class. 
+You can use `Prop` decorator to have [props](http://v1.vuejs.org/guide/components.html#Props) in your class. 
 
 ```
 @Component()
 class MyComp {
 
-  // simple props
-  @Props()
+  // simple prop
+  @Prop()
   message: string
 
-  // props with options (you can put all official Vue props options here)
-  @Props({
+  // prop with options (you can put all official Vue props options here)
+  @Prop({
     default: 'meh',
     type: String
   })
   message2: any
 
-  // props with default value assigned from constructor
-  @Props()
+  // prop with default value assigned from constructor
+  @Prop()
   message3: string
 
-  // props with default value assigned inline
-  @Props()
+  // prop with default value assigned inline
+  @Prop()
   message4: string = 'yeah'
 
-  // props with options and default value assigned inline
-  @Props({				
+  // prop with options and default value assigned inline
+  @Prop({				
     type: String
   })
   message5: any = 'foo'
 
-  // props with default value assigned both inline/constructor and in options
+  // prop with default value assigned both inline/constructor and in options
   // you should avoid this way - however default value assigned in options will be use.
   // if you do this, then you'll see warning in the console.  
-  @Props({				
+  @Prop({				
     type: String,
     default: "I'm win"
   })

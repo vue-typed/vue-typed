@@ -155,7 +155,7 @@ function Component(options) {
     };
 }
 
-function Props(options) {
+function Prop(options) {
     return function (target, key) {
         if (target['props'] && target['props'] instanceof Function) {
             throw "vue-typed error: [" + target.constructor.name + "]: You can't use @props attribute while you have already props() function in your class.";
@@ -178,7 +178,7 @@ exports.Action = Action;
 exports.Data = Data;
 exports.Getter = Getter;
 exports.Component = Component;
-exports.Props = Props;
+exports.Prop = Prop;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -1,4 +1,4 @@
-import { Component, Data, Props } from '../../../index'
+import { Component, Data, Prop } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -14,7 +14,7 @@ describe('props decorator', () => {
 		})
 		class Foo {			
 			
-			@Props()
+			@Prop()
 			foo: string = 'meh'
 
 		}

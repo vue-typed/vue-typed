@@ -386,7 +386,7 @@
 	        };
 	    }
 
-	    function Props(options) {
+	    function Prop(options) {
 	        return function (target, key) {
 	            if (target['props'] && target['props'] instanceof Function) {
 	                throw "vue-typed error: [" + target.constructor.name + "]: You can't use @props attribute while you have already props() function in your class.";
@@ -408,7 +408,7 @@
 	    exports.Data = Data;
 	    exports.Getter = Getter;
 	    exports.Component = Component;
-	    exports.Props = Props;
+	    exports.Prop = Prop;
 
 	    Object.defineProperty(exports, '__esModule', { value: true });
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -20560,17 +20560,17 @@
 	                this.message6 = 'kick';
 	                this.message3 = 'what';
 	            }
-	            __decorate([index_1.Props()], MyComp.prototype, "message", void 0);
-	            __decorate([index_1.Props({
+	            __decorate([index_1.Prop()], MyComp.prototype, "message", void 0);
+	            __decorate([index_1.Prop({
 	                default: 'meh',
 	                type: String
 	            })], MyComp.prototype, "message2", void 0);
-	            __decorate([index_1.Props()], MyComp.prototype, "message3", void 0);
-	            __decorate([index_1.Props()], MyComp.prototype, "message4", void 0);
-	            __decorate([index_1.Props({
+	            __decorate([index_1.Prop()], MyComp.prototype, "message3", void 0);
+	            __decorate([index_1.Prop()], MyComp.prototype, "message4", void 0);
+	            __decorate([index_1.Prop({
 	                type: String
 	            })], MyComp.prototype, "message5", void 0);
-	            __decorate([index_1.Props({
+	            __decorate([index_1.Prop({
 	                type: String,
 	                default: "I'm win"
 	            })], MyComp.prototype, "message6", void 0);
