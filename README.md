@@ -43,6 +43,113 @@ var Foo = Vue.extend({
 
 ``` 
 
+### Component Registration
+
+Same as described in the [doc](http://v1.vuejs.org/guide/components.html#Using-Components), you can do both **global** and **local** registration.
+For example you have this class:
+
+```
+//
+// components/main.ts
+//
+
+import { Component } from 'vue-typed'
+
+@Component({
+  template: `<div>Main Component</div>`
+})
+export class Main {
+
+}
+```
+
+In your main app, for **global** registration you can do:
+
+```
+import * as Vue from 'vue'
+import { Main } from './components/main'
+
+Vue.component('my-main', Main);
+
+new Vue({
+  el: '#app'
+})
+```
+
+For **local registration** you can do:
+
+```
+import * as Vue from 'vue'
+import { Main } from './components/main'
+
+new Vue({
+  el: '#app',
+  components: {
+    'my-main': Main
+  }
+})
+```
+
+### Use Component With [VueRouter](https://github.com/vuejs/vue-router/tree/1.0/docs/en)
+
+From `Main` component above you want to add `About` component and add route to your main app:
+
+```
+//
+// components/about.ts
+//
+
+import { Component } from 'vue-typed'
+
+@Component({
+  template: `<div>About Component</div>`
+})
+export class About {
+
+}
+```
+
+Modify the template of `Main` component to:
+
+```
+...
+template: `
+  <div>
+    <div>
+      Main Component
+    <div>
+    <div>
+      <a v-link="{ path: '/' }">Home</a>
+      <a v-link="{ path: 'about' }">About</a>
+    </div>
+    <router-view></router-view>
+  </div>`
+...
+```
+
+
+Then, modify your main app module to:
+
+```
+import * as Vue from 'vue'
+import { Main } from './components/main'
+import { About } from './components/about'
+import * as VueRouter from 'vue-router';
+
+
+Vue.use(VueRouter);
+
+var router = new VueRouter();
+router.map({
+  'about': {
+    component: About
+  }
+})
+
+router.start(Main, '#app');
+```
+
+
 ### Methods and Computed Properties
 
 All methods in `Component` class will become part of `methods` attributes. You can also define `getter` and `setter` that will become part of `computed` attribute.
