@@ -6,7 +6,7 @@ import * as Vue from 'vue'
 describe('methods', () => {
 	
 	
-	it ('should be able to binding primitive method', () => {
+	it ('should be able to binding primitive method', (done) => {
 		
 				
 		@Component({
@@ -39,6 +39,7 @@ describe('methods', () => {
 		// after click
 		Vue.nextTick(() => {									
 			expect(vm['$el'].querySelector('#text').textContent).to.contain('hello foo!');
+			done();
 		});
 		
 	})

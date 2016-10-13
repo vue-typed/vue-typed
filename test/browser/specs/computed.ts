@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import * as Vue from 'vue'
 
 describe('methods and computed', () => {
-	it('should take normal methods and getter setter', () => {
+	it('should take normal methods and getter setter', (done) => {
 
 		@Component({
 			template: '<div><div id="text">now: <span id="now">{{val}}</span>, next: <span id="next">{{next}}</span></div><button id="btn" v-on:click="inc">Inc</button></div>'
@@ -40,6 +40,8 @@ describe('methods and computed', () => {
 			// clicked
 			expect(vm['$el'].querySelector('#now').textContent, 'now 2nd state').to.contain('2')
 			expect(vm['$el'].querySelector('#next').textContent, 'next 2nd state').to.contain('3')
+
+			done()
 		});
 
 
