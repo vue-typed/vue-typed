@@ -1,5 +1,5 @@
 /**
-  * vue-typed 1.0.1
+  * vue-typed 1.0.2
   * The vue-class-component in typescript favor
   * https://github.com/budiadiono/vue-typed
   
