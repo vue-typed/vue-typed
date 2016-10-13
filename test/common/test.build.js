@@ -252,7 +252,7 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	/**
-	  * vue-typed 1.0.0
+	  * vue-typed 1.0.1
 	  * The vue-class-component in typescript favor
 	  * https://github.com/budiadiono/vue-typed
 	  
@@ -305,7 +305,7 @@
 	    }
 
 	    function Component(options) {
-	        var internalHooks = ['data', 'el', 'init', 'created', 'ready', 'beforeCompile', 'compiled', 'beforeDestroy', 'destroyed', 'attached', 'detached', 'activate', 'vuex', 'props'];
+	        var internalHooks = ['data', 'el', 'init', 'created', 'ready', 'beforeCompile', 'compiled', 'beforeDestroy', 'destroyed', 'attached', 'detached', 'activate', 'vuex', 'props', 'watch'];
 	        var factory = function factory(Component, options) {
 	            if (!options) {
 	                options = {};
@@ -407,11 +407,23 @@
 	        };
 	    }
 
+	    function Watch(property) {
+	        return function (target, key) {
+	            if (!target['watch']) {
+	                target['watch'] = {};
+	            }
+	            if (!target['watch'][property]) {
+	                target['watch'][property] = target[key];
+	            }
+	        };
+	    }
+
 	    exports.Action = Action;
 	    exports.Data = Data;
 	    exports.Getter = Getter;
 	    exports.Component = Component;
 	    exports.Prop = Prop;
+	    exports.Watch = Watch;
 
 	    Object.defineProperty(exports, '__esModule', { value: true });
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -20587,6 +20599,26 @@
 	        chai_1.expect(c['$options']['props']).to.have.property('message4').that.has.property('default').that.equals('yeah');
 	        chai_1.expect(c['$options']['props']).to.have.property('message5').that.has.property('default').that.equals('foo');
 	        chai_1.expect(c['$options']['props']).to.have.property('message6').that.has.property('default').that.equals("I'm win");
+	    });
+	    it('watch', function () {
+	        var Watcher = function () {
+	            function Watcher() {
+	                this.msg = 'Hello!';
+	            }
+	            Watcher.prototype.changeData = function () {
+	                this.msg = 'Hola!';
+	            };
+	            Watcher.prototype.spyData = function (newValue, oldValue) {
+	                this.info = oldValue + ' -> ' + newValue;
+	            };
+	            __decorate([index_1.Data()], Watcher.prototype, "msg", void 0);
+	            __decorate([index_1.Data()], Watcher.prototype, "info", void 0);
+	            __decorate([index_1.Watch('msg')], Watcher.prototype, "spyData", null);
+	            Watcher = __decorate([index_1.Component()], Watcher);
+	            return Watcher;
+	        }();
+	        var vm = new Watcher();
+	        chai_1.expect(vm['$options']['watch']['msg']).is.a('function');
 	    });
 	    it('other options', function (done) {
 	        var v;

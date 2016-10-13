@@ -23,6 +23,7 @@
     "specs/methods.ts",
     "specs/props.ts",
     "specs/v-on.ts",
-    "specs/vuex.ts"
+    "specs/vuex.ts",
+    "specs/watch.ts"
   ]
 }

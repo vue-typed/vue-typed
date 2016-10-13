@@ -1,4 +1,4 @@
-import { Component, Data, Prop } from '../../../index'
+import { Component, Data, Prop, Watch } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -109,6 +109,32 @@ describe('vue-class-component based test (ts)', () => {
     expect(c['$options']['props']).to.have.property('message4').that.has.property('default').that.equals('yeah');
     expect(c['$options']['props']).to.have.property('message5').that.has.property('default').that.equals('foo');
     expect(c['$options']['props']).to.have.property('message6').that.has.property('default').that.equals("I'm win");
+
+  })
+
+
+  it('watch', () => {
+
+    @Component()
+    class Watcher {
+      @Data()
+      msg:string = 'Hello!';
+      
+      @Data()
+      info:string
+      
+      changeData() {
+        this.msg = 'Hola!';
+      }
+      
+      @Watch('msg')
+      spyData(newValue:string, oldValue:string) {
+        this.info = oldValue + ' -> ' + newValue ;
+      }
+    }
+
+    var vm = new Watcher();    
+    expect(vm['$options']['watch']['msg']).is.a('function')
 
   })
 

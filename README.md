@@ -249,6 +249,40 @@ class MyComp {
 }
 ```
 
+### Watch
+Vue allows you to observe the data changes through [$watch](http://v1.vuejs.org/guide/computed.html#Computed-Property-vs-watch). To do it in Vue-Typed you just simply need to add function in your class decorated with **Watch** decorator like this:
+
+```
+import { Component, Data, Prop, Watch } from 'vue-typed'
+
+@Component({
+  template: `
+  <div>
+    <div>{{msg}}</div>
+    <ul>
+      <li v-for="i in info">{{i}}</li>
+    </ul>
+    <button v-on:click='changeData'>Add</button>
+  </div>
+	`
+})
+export class Watcher {
+  @Data()
+  msg:number = 1;
+  
+  @Data()
+  info:string[] = []
+  
+  changeData() {
+    this.msg += 1;
+  }
+  
+  @Watch('msg')
+  spyProp(newValue:number, oldValue:number) {
+    this.info.push( oldValue + ' -> ' + newValue );
+  }
+}
+``` 
 
 
 ## Vuex

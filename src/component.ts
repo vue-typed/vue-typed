@@ -21,7 +21,8 @@ export function Component(options?): ClassDecorator {
     'detached',
     'activate',
     'vuex',
-    'props'
+    'props',
+    'watch'
   ]
 
   var factory = function (Component: Function, options?: any): <Function>(target: any) => Function | void {

@@ -1,5 +1,5 @@
 /**
-  * vue-typed 1.0.0
+  * vue-typed 1.0.1
   * The vue-class-component in typescript favor
   * https://github.com/budiadiono/vue-typed
   
@@ -65,7 +65,8 @@ function Component(options) {
         'detached',
         'activate',
         'vuex',
-        'props'
+        'props',
+        'watch'
     ];
     var factory = function (Component, options) {
         if (!options) {
@@ -176,11 +177,23 @@ function Prop(options) {
     };
 }
 
+function Watch(property) {
+    return function (target, key) {
+        if (!target['watch']) {
+            target['watch'] = {};
+        }
+        if (!target['watch'][property]) {
+            target['watch'][property] = target[key];
+        }
+    };
+}
+
 exports.Action = Action;
 exports.Data = Data;
 exports.Getter = Getter;
 exports.Component = Component;
 exports.Prop = Prop;
+exports.Watch = Watch;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
