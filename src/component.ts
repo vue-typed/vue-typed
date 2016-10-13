@@ -69,18 +69,25 @@ export function Component(options?): ClassDecorator {
         // this came from @Data() decorator
         if (!(proto[key] instanceof Function) && key == 'data') {
 
-          if (constructor) {
+          // get data property names 
+          var data_keys = Object.getOwnPropertyNames(proto[key]);
 
-            // assign data default values initialized from constructor
-            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-              proto[key][prop] = constructor[prop]
-            })
-
-          }
+          // won't use that fake 'data' property in class prototype
+          delete proto[key];
 
           // create data() fn in options
           options[key] = () => {
-            return proto[key];
+
+            // define new data object
+            var data_obj = {}
+
+            // assign data default values initialized from constructor
+            for (var i = 0; i < data_keys.length; i++) {
+              var prop = data_keys[i];
+              data_obj[prop] = constructor[prop];
+            }
+            
+            return data_obj
           }
 
         } else {
@@ -144,7 +151,7 @@ export function Component(options?): ClassDecorator {
     })
 
     // Build vue component
-    var superProto = Object.getPrototypeOf(Component.prototype)
+    var superProto = Object.getPrototypeOf(proto)
     var Super = superProto instanceof Vue
       ? superProto.constructor
       : Vue

@@ -1,5 +1,5 @@
 /**
-  * vue-typed 0.0.3
+  * vue-typed 1.0.0
   * The vue-class-component in typescript favor
   * https://github.com/budiadiono/vue-typed
   
@@ -94,13 +94,15 @@ function Component(options) {
             }
             if (internalHooks.indexOf(key) > -1) {
                 if (!(proto[key] instanceof Function) && key == 'data') {
-                    if (constructor) {
-                        Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-                            proto[key][prop] = constructor[prop];
-                        });
-                    }
+                    var data_keys = Object.getOwnPropertyNames(proto[key]);
+                    delete proto[key];
                     options[key] = () => {
-                        return proto[key];
+                        var data_obj = {};
+                        for (var i = 0; i < data_keys.length; i++) {
+                            var prop = data_keys[i];
+                            data_obj[prop] = constructor[prop];
+                        }
+                        return data_obj;
                     };
                 }
                 else {
@@ -141,7 +143,7 @@ function Component(options) {
                 };
             }
         });
-        var superProto = Object.getPrototypeOf(Component.prototype);
+        var superProto = Object.getPrototypeOf(proto);
         var Super = superProto instanceof Vue
             ? superProto.constructor
             : Vue;

@@ -45,7 +45,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(48);
+	__webpack_require__(48);
+	module.exports = __webpack_require__(49);
 
 
 /***/ },
@@ -251,7 +252,7 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	/**
-	  * vue-typed 0.0.3
+	  * vue-typed 1.0.0
 	  * The vue-class-component in typescript favor
 	  * https://github.com/budiadiono/vue-typed
 	  
@@ -332,13 +333,15 @@
 	                }
 	                if (internalHooks.indexOf(key) > -1) {
 	                    if (!(proto[key] instanceof Function) && key == 'data') {
-	                        if (constructor) {
-	                            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-	                                proto[key][prop] = constructor[prop];
-	                            });
-	                        }
+	                        var data_keys = Object.getOwnPropertyNames(proto[key]);
+	                        delete proto[key];
 	                        options[key] = function () {
-	                            return proto[key];
+	                            var data_obj = {};
+	                            for (var i = 0; i < data_keys.length; i++) {
+	                                var prop = data_keys[i];
+	                                data_obj[prop] = constructor[prop];
+	                            }
+	                            return data_obj;
 	                        };
 	                    } else {
 	                        if (key == 'props' && constructor) {
@@ -374,7 +377,7 @@
 	                    };
 	                }
 	            });
-	            var superProto = Object.getPrototypeOf(Component.prototype);
+	            var superProto = Object.getPrototypeOf(proto);
 	            var Super = superProto instanceof Vue ? superProto.constructor : Vue;
 	            return Super.extend(options);
 	        };
@@ -20630,6 +20633,95 @@
 	        var a = new A();
 	        chai_1.expect(a.a).to.equal(1);
 	        chai_1.expect(a.b).to.equal(2);
+	    });
+	});
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var index_1 = __webpack_require__(2);
+	var chai_1 = __webpack_require__(5);
+	describe('vue-class-component data test', function () {
+	    it('simple data decorator', function () {
+	        var App = function () {
+	            function App() {}
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }();
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').that.equals(undefined);
+	    });
+	    it('data decorator with default value', function () {
+	        var App = function () {
+	            function App() {
+	                this.msg = 'hello';
+	            }
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }();
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').that.equals('hello');
+	    });
+	    it('data decorator with complex object', function () {
+	        var App = function () {
+	            function App() {
+	                this.msg = {
+	                    say: 'hello',
+	                    in: {
+	                        the: 'morning'
+	                    }
+	                };
+	            }
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }();
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').to.have.property('say').that.equals('hello');
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').to.have.property('in').to.have.property('the').that.equals('morning');
+	    });
+	    it('avoid shared data when using @Data decorator', function () {
+	        var AppA = function () {
+	            function AppA() {
+	                this.msg = 'hello';
+	            }
+	            __decorate([index_1.Data()], AppA.prototype, "msg", void 0);
+	            AppA = __decorate([index_1.Component()], AppA);
+	            return AppA;
+	        }();
+	        var appA1 = new AppA();
+	        var appA2 = new AppA();
+	        chai_1.expect(appA1['$options']['data'](), 'local data').to.not.equal(appA2['$options']['data']());
+	        var theData = {
+	            msg: 'hello'
+	        };
+	        var AppB = function () {
+	            function AppB() {}
+	            AppB = __decorate([index_1.Component({
+	                data: function data() {
+	                    return theData;
+	                }
+	            })], AppB);
+	            return AppB;
+	        }();
+	        var appB1 = new AppB();
+	        var appB2 = new AppB();
+	        chai_1.expect(appB1['$options']['data'](), 'shared data').to.equal(appB2['$options']['data']());
 	    });
 	});
 

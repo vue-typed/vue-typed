@@ -18,6 +18,7 @@
   ],
   "files": [
     "tsd.d.ts",
-    "specs/basic.ts"
+    "specs/basic.ts",
+    "specs/data.ts"
   ]
 }

@@ -22,6 +22,7 @@
     "specs/data.ts",
     "specs/methods.ts",
     "specs/props.ts",
+    "specs/v-on.ts",
     "specs/vuex.ts"
   ]
 }
