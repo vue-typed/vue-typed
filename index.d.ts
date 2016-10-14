@@ -79,4 +79,4 @@ export function Data(): PropertyDecorator
 export function Getter(getter: Function): PropertyDecorator
 export function Action(action: Function): MethodDecorator
 export function Prop(options?: PropOption): PropertyDecorator
-export function Watch(property: string): MethodDecorator 
+export function Watch(property: string, deep?:boolean): MethodDecorator 

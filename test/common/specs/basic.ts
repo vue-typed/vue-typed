@@ -138,6 +138,28 @@ describe('vue-class-component based test (ts)', () => {
 
   })
 
+  it('watch-deep', () => {
+
+    @Component()
+    class Watcher {
+      @Data()
+      msg:string[] = [];
+      
+      @Data()
+      info:string
+            
+      @Watch('msg', true)
+      spyData(newValue:string[], oldValue:string[]) {
+        
+      }
+    }
+
+    var vm = new Watcher();    
+    expect(vm['$options']['watch']['msg']).that.has.property('deep').that.equals(true);
+    expect(vm['$options']['watch']['msg']).that.has.property('handler').that.is.a('function');
+
+  })
+
   it('other options', (done) => {
     let v
 

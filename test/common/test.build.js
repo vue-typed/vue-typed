@@ -252,7 +252,7 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	/**
-	  * vue-typed 1.0.1
+	  * vue-typed 1.0.2
 	  * The vue-class-component in typescript favor
 	  * https://github.com/budiadiono/vue-typed
 	  
@@ -407,13 +407,22 @@
 	        };
 	    }
 
-	    function Watch(property) {
+	    function Watch(property, deep) {
 	        return function (target, key) {
 	            if (!target['watch']) {
 	                target['watch'] = {};
 	            }
 	            if (!target['watch'][property]) {
-	                target['watch'][property] = target[key];
+	                var watcher;
+	                if (deep !== undefined) {
+	                    watcher = {
+	                        handler: target[key],
+	                        deep: deep
+	                    };
+	                } else {
+	                    watcher = target[key];
+	                }
+	                target['watch'][property] = watcher;
 	            }
 	        };
 	    }
@@ -20619,6 +20628,22 @@
 	        }();
 	        var vm = new Watcher();
 	        chai_1.expect(vm['$options']['watch']['msg']).is.a('function');
+	    });
+	    it('watch-deep', function () {
+	        var Watcher = function () {
+	            function Watcher() {
+	                this.msg = [];
+	            }
+	            Watcher.prototype.spyData = function (newValue, oldValue) {};
+	            __decorate([index_1.Data()], Watcher.prototype, "msg", void 0);
+	            __decorate([index_1.Data()], Watcher.prototype, "info", void 0);
+	            __decorate([index_1.Watch('msg', true)], Watcher.prototype, "spyData", null);
+	            Watcher = __decorate([index_1.Component()], Watcher);
+	            return Watcher;
+	        }();
+	        var vm = new Watcher();
+	        chai_1.expect(vm['$options']['watch']['msg']).that.has.property('deep').that.equals(true);
+	        chai_1.expect(vm['$options']['watch']['msg']).that.has.property('handler').that.is.a('function');
 	    });
 	    it('other options', function (done) {
 	        var v;

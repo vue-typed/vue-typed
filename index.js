@@ -177,13 +177,23 @@ function Prop(options) {
     };
 }
 
-function Watch(property) {
+function Watch(property, deep) {
     return function (target, key) {
         if (!target['watch']) {
             target['watch'] = {};
         }
         if (!target['watch'][property]) {
-            target['watch'][property] = target[key];
+            var watcher;
+            if (deep !== undefined) {
+                watcher = {
+                    handler: target[key],
+                    deep: deep
+                };
+            }
+            else {
+                watcher = target[key];
+            }
+            target['watch'][property] = watcher;
         }
     };
 }
