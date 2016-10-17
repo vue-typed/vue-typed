@@ -8,21 +8,40 @@ import * as Vue from 'vue'
 export function Component(options?): ClassDecorator {
 
   var internalHooks = [
-    'data',
-    'el',
-    'init',
+
+    // vue 0.7 (deprecated in 1.0)
+    'activate',
+
+    // vue 1.0 (deprecated in 2.0)
+    'init', // => beforeCreate
+    'ready', // => mounted
+    'beforeCompile', // => created
+    'compiled', // => mounted
+    'attached', // => mounted
+    'detached', // => destroyed
+
+    // vue 1.0/2.0
     'created',
-    'ready',
-    'beforeCompile',
-    'compiled',
     'beforeDestroy',
     'destroyed',
-    'attached',
-    'detached',
-    'activate',
-    'vuex',
     'props',
-    'watch'
+    'watch',
+    'data',
+
+    // vue 2.0    
+    'beforeCreate',
+    'beforeMount',
+    'mounted',
+    'beforeUpdate',
+    'updated',
+    'activated',
+    'deactivated',
+    'render',
+
+    // etc
+    'el',
+    'vuex',
+
   ]
 
   var factory = function (Component: Function, options?: any): <Function>(target: any) => Function | void {

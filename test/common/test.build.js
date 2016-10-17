@@ -305,7 +305,7 @@
 	    }
 
 	    function Component(options) {
-	        var internalHooks = ['data', 'el', 'init', 'created', 'ready', 'beforeCompile', 'compiled', 'beforeDestroy', 'destroyed', 'attached', 'detached', 'activate', 'vuex', 'props', 'watch'];
+	        var internalHooks = ['activate', 'init', 'ready', 'beforeCompile', 'compiled', 'attached', 'detached', 'created', 'beforeDestroy', 'destroyed', 'props', 'watch', 'data', 'beforeCreate', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'render', 'el', 'vuex'];
 	        var factory = function factory(Component, options) {
 	            if (!options) {
 	                options = {};

@@ -52,21 +52,29 @@ function Getter(getter) {
 
 function Component(options) {
     var internalHooks = [
-        'data',
-        'el',
+        'activate',
         'init',
-        'created',
         'ready',
         'beforeCompile',
         'compiled',
-        'beforeDestroy',
-        'destroyed',
         'attached',
         'detached',
-        'activate',
-        'vuex',
+        'created',
+        'beforeDestroy',
+        'destroyed',
         'props',
-        'watch'
+        'watch',
+        'data',
+        'beforeCreate',
+        'beforeMount',
+        'mounted',
+        'beforeUpdate',
+        'updated',
+        'activated',
+        'deactivated',
+        'render',
+        'el',
+        'vuex',
     ];
     var factory = function (Component, options) {
         if (!options) {
