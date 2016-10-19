@@ -179,7 +179,7 @@ function Prop(options) {
                 target['props'][key] = options;
             }
             else {
-                target['props'][key] = key;
+                target['props'][key] = true;
             }
         }
     };

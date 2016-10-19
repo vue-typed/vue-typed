@@ -20,7 +20,7 @@ export function Prop(options?: PropOption): PropertyDecorator {
 			if (options) {
 				target['props'][key] = options
 			} else {
-				target['props'][key] = key
+				target['props'][key] = true
 			}
 		}
 	}
