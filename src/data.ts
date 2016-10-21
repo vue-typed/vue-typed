@@ -10,12 +10,14 @@ export function Data(): PropertyDecorator {
 			throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
 		}
 
-		if (!target['data']) {
-			target['data'] = {}
+		var id = '$_vt_data';
+		
+		if (!target[id]) {
+			target[id] = {}
 		}
 
-		if (!target['data'][key]) {
-			target['data'][key] = key
+		if (!target[id][key]) {
+			target[id][key] = key
 		}
 	}
 

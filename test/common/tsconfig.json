@@ -18,7 +18,9 @@
   ],
   "files": [
     "tsd.d.ts",
+    "specs/abstract.ts",
     "specs/basic.ts",
-    "specs/data.ts"
+    "specs/data.ts",
+    "specs/inheritance.ts"
   ]
 }

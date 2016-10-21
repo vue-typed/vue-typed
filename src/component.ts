@@ -57,7 +57,7 @@ export function Component(options?): ClassDecorator {
     var constructor = new proto.constructor();
 
 
-    /// has vue?
+    // has vuex?
     var vueKeys = [];
     if (proto.vuex) {
       var protoVue = proto.vuex;
@@ -74,6 +74,72 @@ export function Component(options?): ClassDecorator {
       }
     }
 
+    var dataAttrs = proto['$_vt_data'];
+    delete proto['$_vt_data'];
+    if (dataAttrs) {
+      
+      // get data property names
+      var data_keys = Object.getOwnPropertyNames(dataAttrs)
+
+      // create data() fn in options
+      options['data'] = () => {
+
+        // define new data object
+        var data_obj = {}
+
+        // assign data default values initialized from constructor
+        for (var i = 0; i < data_keys.length; i++) {
+          var prop = data_keys[i]
+          data_obj[prop] = constructor[prop]
+        }
+        return data_obj
+      }
+      
+    }
+
+    var propAttrs = proto['$_vt_props'];
+    delete proto['$_vt_props'];
+    if (propAttrs) {
+      var key = 'props';
+      var props = {}
+
+      var prop_keys = Object.getOwnPropertyNames(propAttrs);
+      for (var i = 0; i < prop_keys.length; i++) {
+        var prop = prop_keys[i];
+        var propVal;
+        var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop)
+        var constructorDefault = constructor[prop]; 
+
+        if (typeof(descriptor.value) === 'object') {
+
+          // prop options defined
+          propVal = descriptor.value
+
+          // try to assign default value
+          if (!propVal.default)
+            propVal.default= constructorDefault;
+
+        } else if (constructorDefault) {
+
+          // create prop object with default value from constructor
+          propVal = {
+            default: constructorDefault
+          }
+        }
+
+        // just define empty prop
+        if (typeof(propVal) === 'undefined') {
+          propVal = true;
+        } 
+
+        props[prop] = propVal;
+      }
+
+      
+      options['props'] = props;
+    }
+
+
 
     Object.getOwnPropertyNames(proto).forEach(function (key) {
 
@@ -85,70 +151,9 @@ export function Component(options?): ClassDecorator {
 
       // hooks
       if (internalHooks.indexOf(key) > -1) {
-
-        // this came from @Data() decorator
-        if (!(proto[key] instanceof Function) && key == 'data') {
-
-          // get data property names 
-          var data_keys = Object.getOwnPropertyNames(proto[key]);
-
-          // won't use that fake 'data' property in class prototype
-          delete proto[key];
-
-          // create data() fn in options
-          options[key] = () => {
-
-            // define new data object
-            var data_obj = {}
-
-            // assign data default values initialized from constructor
-            for (var i = 0; i < data_keys.length; i++) {
-              var prop = data_keys[i];
-              data_obj[prop] = constructor[prop];
-            }
-            
-            return data_obj
-          }
-
-        } else {
-
-          if (key == 'props' && constructor) {
-            
-            // assign props default values initialized from constructor
-            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {              
-              var val = constructor[prop];
-
-              if (val) {
-                
-                if (typeof proto[key][prop] != 'object') {
-                  // no options defined in Props decorator
-
-                  proto[key][prop] = {
-                    default: val
-                  }
-                } else {
-
-                  // when options defined in Props decorator
-                  if (!proto[key][prop]['default']) {
-                    proto[key][prop]['default'] = val;
-                  } else {
-                    console.error('[Vue-typed warn]: You have defined default value for Props both in options and constructor. (found in component: <' + Component.name + '>, props: <'+prop+'>)');
-                  }
-                  
-                }
-              }
-              
-            })
-          }
-
-          options[key] = proto[key]
-
-        }
-
+        options[key] = proto[key]
         return
       }
-
-
 
 
       var descriptor = Object.getOwnPropertyDescriptor(proto, key)

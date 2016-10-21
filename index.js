@@ -27,11 +27,12 @@ function Data() {
         if (target['data'] && target['data'] instanceof Function) {
             throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
         }
-        if (!target['data']) {
-            target['data'] = {};
+        var id = '$_vt_data';
+        if (!target[id]) {
+            target[id] = {};
         }
-        if (!target['data'][key]) {
-            target['data'][key] = key;
+        if (!target[id][key]) {
+            target[id][key] = key;
         }
     };
 }
@@ -97,46 +98,53 @@ function Component(options) {
                 });
             }
         }
+        var dataAttrs = proto['$_vt_data'];
+        delete proto['$_vt_data'];
+        if (dataAttrs) {
+            var data_keys = Object.getOwnPropertyNames(dataAttrs);
+            options['data'] = () => {
+                var data_obj = {};
+                for (var i = 0; i < data_keys.length; i++) {
+                    var prop = data_keys[i];
+                    data_obj[prop] = constructor[prop];
+                }
+                return data_obj;
+            };
+        }
+        var propAttrs = proto['$_vt_props'];
+        delete proto['$_vt_props'];
+        if (propAttrs) {
+            var key = 'props';
+            var props = {};
+            var prop_keys = Object.getOwnPropertyNames(propAttrs);
+            for (var i = 0; i < prop_keys.length; i++) {
+                var prop = prop_keys[i];
+                var propVal;
+                var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop);
+                var constructorDefault = constructor[prop];
+                if (typeof (descriptor.value) === 'object') {
+                    propVal = descriptor.value;
+                    if (!propVal.default)
+                        propVal.default = constructorDefault;
+                }
+                else if (constructorDefault) {
+                    propVal = {
+                        default: constructorDefault
+                    };
+                }
+                if (typeof (propVal) === 'undefined') {
+                    propVal = true;
+                }
+                props[prop] = propVal;
+            }
+            options['props'] = props;
+        }
         Object.getOwnPropertyNames(proto).forEach(function (key) {
             if (key === 'constructor') {
                 return;
             }
             if (internalHooks.indexOf(key) > -1) {
-                if (!(proto[key] instanceof Function) && key == 'data') {
-                    var data_keys = Object.getOwnPropertyNames(proto[key]);
-                    delete proto[key];
-                    options[key] = () => {
-                        var data_obj = {};
-                        for (var i = 0; i < data_keys.length; i++) {
-                            var prop = data_keys[i];
-                            data_obj[prop] = constructor[prop];
-                        }
-                        return data_obj;
-                    };
-                }
-                else {
-                    if (key == 'props' && constructor) {
-                        Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-                            var val = constructor[prop];
-                            if (val) {
-                                if (typeof proto[key][prop] != 'object') {
-                                    proto[key][prop] = {
-                                        default: val
-                                    };
-                                }
-                                else {
-                                    if (!proto[key][prop]['default']) {
-                                        proto[key][prop]['default'] = val;
-                                    }
-                                    else {
-                                        console.error('[Vue-typed warn]: You have defined default value for Props both in options and constructor. (found in component: <' + Component.name + '>, props: <' + prop + '>)');
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    options[key] = proto[key];
-                }
+                options[key] = proto[key];
                 return;
             }
             var descriptor = Object.getOwnPropertyDescriptor(proto, key);
@@ -168,18 +176,16 @@ function Component(options) {
 
 function Prop(options) {
     return function (target, key) {
-        if (target['props'] && target['props'] instanceof Function) {
-            throw "vue-typed error: [" + target.constructor.name + "]: You can't use @props attribute while you have already props() function in your class.";
+        var id = '$_vt_props';
+        if (!target[id]) {
+            target[id] = {};
         }
-        if (!target['props']) {
-            target['props'] = {};
-        }
-        if (!target['props'][key]) {
+        if (!target[id][key]) {
             if (options) {
-                target['props'][key] = options;
+                target[id][key] = options;
             }
             else {
-                target['props'][key] = true;
+                target[id][key] = true;
             }
         }
     };

@@ -45,203 +45,52 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(48);
-	module.exports = __webpack_require__(49);
+	__webpack_require__(5);
+	__webpack_require__(49);
+	__webpack_require__(50);
+	module.exports = __webpack_require__(51);
 
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // Adopt from https://github.com/vuejs/vue-class-component/blob/master/test/test.js
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _index = __webpack_require__(2);
-
-	var _chai = __webpack_require__(5);
-
-	var _vue = __webpack_require__(3);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	describe('vue-class-component based test (js)', function () {
-
-	  it('hooks', function () {
-	    var _class;
-
-	    var _created = false;
-	    var _destroyed = false;
-
-	    var MyComp = (0, _index.Component)(_class = function () {
-	      function MyComp() {
-	        _classCallCheck(this, MyComp);
-	      }
-
-	      _createClass(MyComp, [{
-	        key: 'created',
-	        value: function created() {
-	          _created = true;
-	        }
-	      }, {
-	        key: 'destroyed',
-	        value: function destroyed() {
-	          _destroyed = true;
-	        }
-	      }]);
-
-	      return MyComp;
-	    }()) || _class;
-
-	    var c = new MyComp();
-	    (0, _chai.expect)(_created).to.be.true;
-	    (0, _chai.expect)(_destroyed).to.be.false;
-	    c.$destroy();
-	    (0, _chai.expect)(_destroyed).to.be.true;
-	  });
-
-	  it('methods', function () {
-	    var _class2;
-
-	    var msg = void 0;
-
-	    var MyComp = (0, _index.Component)(_class2 = function () {
-	      function MyComp() {
-	        _classCallCheck(this, MyComp);
-	      }
-
-	      _createClass(MyComp, [{
-	        key: 'hello',
-	        value: function hello() {
-	          msg = 'hi';
-	        }
-	      }]);
-
-	      return MyComp;
-	    }()) || _class2;
-
-	    var c = new MyComp();
-	    c.hello();
-	    (0, _chai.expect)(msg).to.equal('hi');
-	  });
-
-	  it('computed', function () {
-	    var _class3;
-
-	    var MyComp = (0, _index.Component)(_class3 = function () {
-	      function MyComp() {
-	        _classCallCheck(this, MyComp);
-	      }
-
-	      _createClass(MyComp, [{
-	        key: 'data',
-	        value: function data() {
-	          return {
-	            a: 1
-	          };
-	        }
-	      }, {
-	        key: 'b',
-	        get: function get() {
-	          return this.a + 1;
-	        }
-	      }]);
-
-	      return MyComp;
-	    }()) || _class3;
-
-	    var c = new MyComp();
-	    (0, _chai.expect)(c.a).to.equal(1);
-	    (0, _chai.expect)(c.b).to.equal(2);
-	    c.a = 2;
-	    (0, _chai.expect)(c.b).to.equal(3);
-	  });
-
-	  it('other options', function (done) {
-	    var _dec, _class4;
-
-	    var v = void 0;
-
-	    var MyComp = (_dec = (0, _index.Component)({
-	      watch: {
-	        a: function a(val) {
-	          return v = val;
-	        }
-	      }
-	    }), _dec(_class4 = function () {
-	      function MyComp() {
-	        _classCallCheck(this, MyComp);
-	      }
-
-	      _createClass(MyComp, [{
-	        key: 'data',
-	        value: function data() {
-	          return { a: 1 };
-	        }
-	      }]);
-
-	      return MyComp;
-	    }()) || _class4);
-
-
-	    var c = new MyComp();
-	    c.a = 2;
-	    _vue2.default.nextTick(function () {
-	      (0, _chai.expect)(v).to.equal(2);
-	      done();
-	    });
-	  });
-
-	  it('extending', function () {
-	    var _class5, _class6;
-
-	    var Base = (0, _index.Component)(_class5 = function () {
-	      function Base() {
-	        _classCallCheck(this, Base);
-	      }
-
-	      _createClass(Base, [{
-	        key: 'data',
-	        value: function data() {
-	          return { a: 1 };
-	        }
-	      }]);
-
-	      return Base;
-	    }()) || _class5;
-
-	    var A = (0, _index.Component)(_class6 = function (_Base) {
-	      _inherits(A, _Base);
-
-	      function A() {
-	        _classCallCheck(this, A);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(A).apply(this, arguments));
-	      }
-
-	      _createClass(A, [{
-	        key: 'data',
-	        value: function data() {
-	          return { b: 2 };
-	        }
-	      }]);
-
-	      return A;
-	    }(Base)) || _class6;
-
-	    var a = new A();
-	    (0, _chai.expect)(a.a).to.equal(1);
-	    (0, _chai.expect)(a.b).to.equal(2);
-	  });
-	});
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var index_1 = __webpack_require__(2);
+	var AbstractClass = function () {
+	    function AbstractClass() {
+	        this.baseData = 'hello';
+	    }
+	    __decorate([index_1.Data()], AbstractClass.prototype, "baseData", void 0);
+	    __decorate([index_1.Prop({
+	        default: 'hi'
+	    })], AbstractClass.prototype, "baseProp", void 0);
+	    return AbstractClass;
+	}();
+	exports.AbstractClass = AbstractClass;
+	var AbstractComponent = function () {
+	    function AbstractComponent() {
+	        this.baseData = 'hello';
+	    }
+	    __decorate([index_1.Data()], AbstractComponent.prototype, "baseData", void 0);
+	    __decorate([index_1.Prop({
+	        default: 'hi'
+	    })], AbstractComponent.prototype, "baseProp", void 0);
+	    AbstractComponent = __decorate([index_1.Component()], AbstractComponent);
+	    return AbstractComponent;
+	}();
+	exports.AbstractComponent = AbstractComponent;
 
 /***/ },
 /* 2 */
@@ -281,11 +130,12 @@
 	            if (target['data'] && target['data'] instanceof Function) {
 	                throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
 	            }
-	            if (!target['data']) {
-	                target['data'] = {};
+	            var id = '$_vt_data';
+	            if (!target[id]) {
+	                target[id] = {};
 	            }
-	            if (!target['data'][key]) {
-	                target['data'][key] = key;
+	            if (!target[id][key]) {
+	                target[id][key] = key;
 	            }
 	        };
 	    }
@@ -327,43 +177,51 @@
 	                    });
 	                }
 	            }
+	            var dataAttrs = proto['$_vt_data'];
+	            delete proto['$_vt_data'];
+	            if (dataAttrs) {
+	                var data_keys = Object.getOwnPropertyNames(dataAttrs);
+	                options['data'] = function () {
+	                    var data_obj = {};
+	                    for (var i = 0; i < data_keys.length; i++) {
+	                        var prop = data_keys[i];
+	                        data_obj[prop] = constructor[prop];
+	                    }
+	                    return data_obj;
+	                };
+	            }
+	            var propAttrs = proto['$_vt_props'];
+	            delete proto['$_vt_props'];
+	            if (propAttrs) {
+	                var key = 'props';
+	                var props = {};
+	                var prop_keys = Object.getOwnPropertyNames(propAttrs);
+	                for (var i = 0; i < prop_keys.length; i++) {
+	                    var prop = prop_keys[i];
+	                    var propVal;
+	                    var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop);
+	                    var constructorDefault = constructor[prop];
+	                    if (_typeof(descriptor.value) === 'object') {
+	                        propVal = descriptor.value;
+	                        if (!propVal.default) propVal.default = constructorDefault;
+	                    } else if (constructorDefault) {
+	                        propVal = {
+	                            default: constructorDefault
+	                        };
+	                    }
+	                    if (typeof propVal === 'undefined') {
+	                        propVal = true;
+	                    }
+	                    props[prop] = propVal;
+	                }
+	                options['props'] = props;
+	            }
 	            Object.getOwnPropertyNames(proto).forEach(function (key) {
 	                if (key === 'constructor') {
 	                    return;
 	                }
 	                if (internalHooks.indexOf(key) > -1) {
-	                    if (!(proto[key] instanceof Function) && key == 'data') {
-	                        var data_keys = Object.getOwnPropertyNames(proto[key]);
-	                        delete proto[key];
-	                        options[key] = function () {
-	                            var data_obj = {};
-	                            for (var i = 0; i < data_keys.length; i++) {
-	                                var prop = data_keys[i];
-	                                data_obj[prop] = constructor[prop];
-	                            }
-	                            return data_obj;
-	                        };
-	                    } else {
-	                        if (key == 'props' && constructor) {
-	                            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
-	                                var val = constructor[prop];
-	                                if (val) {
-	                                    if (_typeof(proto[key][prop]) != 'object') {
-	                                        proto[key][prop] = {
-	                                            default: val
-	                                        };
-	                                    } else {
-	                                        if (!proto[key][prop]['default']) {
-	                                            proto[key][prop]['default'] = val;
-	                                        } else {
-	                                            console.error('[Vue-typed warn]: You have defined default value for Props both in options and constructor. (found in component: <' + Component.name + '>, props: <' + prop + '>)');
-	                                        }
-	                                    }
-	                                }
-	                            });
-	                        }
-	                        options[key] = proto[key];
-	                    }
+	                    options[key] = proto[key];
 	                    return;
 	                }
 	                var descriptor = Object.getOwnPropertyDescriptor(proto, key);
@@ -391,17 +249,15 @@
 
 	    function Prop(options) {
 	        return function (target, key) {
-	            if (target['props'] && target['props'] instanceof Function) {
-	                throw "vue-typed error: [" + target.constructor.name + "]: You can't use @props attribute while you have already props() function in your class.";
+	            var id = '$_vt_props';
+	            if (!target[id]) {
+	                target[id] = {};
 	            }
-	            if (!target['props']) {
-	                target['props'] = {};
-	            }
-	            if (!target['props'][key]) {
+	            if (!target[id][key]) {
 	                if (options) {
-	                    target['props'][key] = options;
+	                    target[id][key] = options;
 	                } else {
-	                    target['props'][key] = true;
+	                    target[id][key] = true;
 	                }
 	            }
 	        };
@@ -10577,11 +10433,205 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6);
+	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // Adopt from https://github.com/vuejs/vue-class-component/blob/master/test/test.js
+
+	var _index = __webpack_require__(2);
+
+	var _chai = __webpack_require__(6);
+
+	var _vue = __webpack_require__(3);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	describe('vue-class-component based test (js)', function () {
+
+	  it('hooks', function () {
+	    var _class;
+
+	    var _created = false;
+	    var _destroyed = false;
+
+	    var MyComp = (0, _index.Component)(_class = function () {
+	      function MyComp() {
+	        _classCallCheck(this, MyComp);
+	      }
+
+	      _createClass(MyComp, [{
+	        key: 'created',
+	        value: function created() {
+	          _created = true;
+	        }
+	      }, {
+	        key: 'destroyed',
+	        value: function destroyed() {
+	          _destroyed = true;
+	        }
+	      }]);
+
+	      return MyComp;
+	    }()) || _class;
+
+	    var c = new MyComp();
+	    (0, _chai.expect)(_created).to.be.true;
+	    (0, _chai.expect)(_destroyed).to.be.false;
+	    c.$destroy();
+	    (0, _chai.expect)(_destroyed).to.be.true;
+	  });
+
+	  it('methods', function () {
+	    var _class2;
+
+	    var msg = void 0;
+
+	    var MyComp = (0, _index.Component)(_class2 = function () {
+	      function MyComp() {
+	        _classCallCheck(this, MyComp);
+	      }
+
+	      _createClass(MyComp, [{
+	        key: 'hello',
+	        value: function hello() {
+	          msg = 'hi';
+	        }
+	      }]);
+
+	      return MyComp;
+	    }()) || _class2;
+
+	    var c = new MyComp();
+	    c.hello();
+	    (0, _chai.expect)(msg).to.equal('hi');
+	  });
+
+	  it('computed', function () {
+	    var _class3;
+
+	    var MyComp = (0, _index.Component)(_class3 = function () {
+	      function MyComp() {
+	        _classCallCheck(this, MyComp);
+	      }
+
+	      _createClass(MyComp, [{
+	        key: 'data',
+	        value: function data() {
+	          return {
+	            a: 1
+	          };
+	        }
+	      }, {
+	        key: 'b',
+	        get: function get() {
+	          return this.a + 1;
+	        }
+	      }]);
+
+	      return MyComp;
+	    }()) || _class3;
+
+	    var c = new MyComp();
+	    (0, _chai.expect)(c.a).to.equal(1);
+	    (0, _chai.expect)(c.b).to.equal(2);
+	    c.a = 2;
+	    (0, _chai.expect)(c.b).to.equal(3);
+	  });
+
+	  it('other options', function (done) {
+	    var _dec, _class4;
+
+	    var v = void 0;
+
+	    var MyComp = (_dec = (0, _index.Component)({
+	      watch: {
+	        a: function a(val) {
+	          return v = val;
+	        }
+	      }
+	    }), _dec(_class4 = function () {
+	      function MyComp() {
+	        _classCallCheck(this, MyComp);
+	      }
+
+	      _createClass(MyComp, [{
+	        key: 'data',
+	        value: function data() {
+	          return { a: 1 };
+	        }
+	      }]);
+
+	      return MyComp;
+	    }()) || _class4);
+
+
+	    var c = new MyComp();
+	    c.a = 2;
+	    _vue2.default.nextTick(function () {
+	      (0, _chai.expect)(v).to.equal(2);
+	      done();
+	    });
+	  });
+
+	  it('extending', function () {
+	    var _class5, _class6;
+
+	    var Base = (0, _index.Component)(_class5 = function () {
+	      function Base() {
+	        _classCallCheck(this, Base);
+	      }
+
+	      _createClass(Base, [{
+	        key: 'data',
+	        value: function data() {
+	          return { a: 1 };
+	        }
+	      }]);
+
+	      return Base;
+	    }()) || _class5;
+
+	    var A = (0, _index.Component)(_class6 = function (_Base) {
+	      _inherits(A, _Base);
+
+	      function A() {
+	        _classCallCheck(this, A);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(A).apply(this, arguments));
+	      }
+
+	      _createClass(A, [{
+	        key: 'data',
+	        value: function data() {
+	          return { b: 2 };
+	        }
+	      }]);
+
+	      return A;
+	    }(Base)) || _class6;
+
+	    var a = new A();
+	    (0, _chai.expect)(a.a).to.equal(1);
+	    (0, _chai.expect)(a.b).to.equal(2);
+	  });
+	});
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(7);
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -10603,13 +10653,13 @@
 	 * Assertion Error
 	 */
 
-	exports.AssertionError = __webpack_require__(7);
+	exports.AssertionError = __webpack_require__(8);
 
 	/*!
 	 * Utils for plugins (not exported)
 	 */
 
-	var util = __webpack_require__(8);
+	var util = __webpack_require__(9);
 
 	/**
 	 * # .use(function)
@@ -10640,47 +10690,47 @@
 	 * Configuration
 	 */
 
-	var config = __webpack_require__(21);
+	var config = __webpack_require__(22);
 	exports.config = config;
 
 	/*!
 	 * Primary `Assertion` prototype
 	 */
 
-	var assertion = __webpack_require__(43);
+	var assertion = __webpack_require__(44);
 	exports.use(assertion);
 
 	/*!
 	 * Core Assertions
 	 */
 
-	var core = __webpack_require__(44);
+	var core = __webpack_require__(45);
 	exports.use(core);
 
 	/*!
 	 * Expect interface
 	 */
 
-	var expect = __webpack_require__(45);
+	var expect = __webpack_require__(46);
 	exports.use(expect);
 
 	/*!
 	 * Should interface
 	 */
 
-	var should = __webpack_require__(46);
+	var should = __webpack_require__(47);
 	exports.use(should);
 
 	/*!
 	 * Assert interface
 	 */
 
-	var assert = __webpack_require__(47);
+	var assert = __webpack_require__(48);
 	exports.use(assert);
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*!
@@ -10802,7 +10852,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -10821,124 +10871,124 @@
 	 * test utility
 	 */
 
-	exports.test = __webpack_require__(9);
+	exports.test = __webpack_require__(10);
 
 	/*!
 	 * type utility
 	 */
 
-	exports.type = __webpack_require__(11);
+	exports.type = __webpack_require__(12);
 
 	/*!
 	 * expectTypes utility
 	 */
-	exports.expectTypes = __webpack_require__(13);
+	exports.expectTypes = __webpack_require__(14);
 
 	/*!
 	 * message utility
 	 */
 
-	exports.getMessage = __webpack_require__(14);
+	exports.getMessage = __webpack_require__(15);
 
 	/*!
 	 * actual utility
 	 */
 
-	exports.getActual = __webpack_require__(15);
+	exports.getActual = __webpack_require__(16);
 
 	/*!
 	 * Inspect util
 	 */
 
-	exports.inspect = __webpack_require__(16);
+	exports.inspect = __webpack_require__(17);
 
 	/*!
 	 * Object Display util
 	 */
 
-	exports.objDisplay = __webpack_require__(20);
+	exports.objDisplay = __webpack_require__(21);
 
 	/*!
 	 * Flag utility
 	 */
 
-	exports.flag = __webpack_require__(10);
+	exports.flag = __webpack_require__(11);
 
 	/*!
 	 * Flag transferring utility
 	 */
 
-	exports.transferFlags = __webpack_require__(22);
+	exports.transferFlags = __webpack_require__(23);
 
 	/*!
 	 * Deep equal utility
 	 */
 
-	exports.eql = __webpack_require__(23);
+	exports.eql = __webpack_require__(24);
 
 	/*!
 	 * Deep path value
 	 */
 
-	exports.getPathValue = __webpack_require__(34);
+	exports.getPathValue = __webpack_require__(35);
 
 	/*!
 	 * Deep path info
 	 */
 
-	exports.getPathInfo = __webpack_require__(35);
+	exports.getPathInfo = __webpack_require__(36);
 
 	/*!
 	 * Check if a property exists
 	 */
 
-	exports.hasProperty = __webpack_require__(36);
+	exports.hasProperty = __webpack_require__(37);
 
 	/*!
 	 * Function name
 	 */
 
-	exports.getName = __webpack_require__(17);
+	exports.getName = __webpack_require__(18);
 
 	/*!
 	 * add Property
 	 */
 
-	exports.addProperty = __webpack_require__(37);
+	exports.addProperty = __webpack_require__(38);
 
 	/*!
 	 * add Method
 	 */
 
-	exports.addMethod = __webpack_require__(38);
+	exports.addMethod = __webpack_require__(39);
 
 	/*!
 	 * overwrite Property
 	 */
 
-	exports.overwriteProperty = __webpack_require__(39);
+	exports.overwriteProperty = __webpack_require__(40);
 
 	/*!
 	 * overwrite Method
 	 */
 
-	exports.overwriteMethod = __webpack_require__(40);
+	exports.overwriteMethod = __webpack_require__(41);
 
 	/*!
 	 * Add a chainable method
 	 */
 
-	exports.addChainableMethod = __webpack_require__(41);
+	exports.addChainableMethod = __webpack_require__(42);
 
 	/*!
 	 * Overwrite chainable method
 	 */
 
-	exports.overwriteChainableMethod = __webpack_require__(42);
+	exports.overwriteChainableMethod = __webpack_require__(43);
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -10951,7 +11001,7 @@
 	 * Module dependancies
 	 */
 
-	var flag = __webpack_require__(10);
+	var flag = __webpack_require__(11);
 
 	/**
 	 * # test(object, expression)
@@ -10972,7 +11022,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11011,14 +11061,14 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(12);
+	module.exports = __webpack_require__(13);
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11158,7 +11208,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -11181,9 +11231,9 @@
 	 * @api public
 	 */
 
-	var AssertionError = __webpack_require__(7);
-	var flag = __webpack_require__(10);
-	var type = __webpack_require__(11);
+	var AssertionError = __webpack_require__(8);
+	var flag = __webpack_require__(11);
+	var type = __webpack_require__(12);
 
 	module.exports = function (obj, types) {
 	  var obj = flag(obj, 'object');
@@ -11206,7 +11256,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -11219,10 +11269,10 @@
 	 * Module dependancies
 	 */
 
-	var flag = __webpack_require__(10)
-	  , getActual = __webpack_require__(15)
-	  , inspect = __webpack_require__(16)
-	  , objDisplay = __webpack_require__(20);
+	var flag = __webpack_require__(11)
+	  , getActual = __webpack_require__(16)
+	  , inspect = __webpack_require__(17)
+	  , objDisplay = __webpack_require__(21);
 
 	/**
 	 * ### .getMessage(object, message, negateMessage)
@@ -11263,7 +11313,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11289,15 +11339,15 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// This is (almost) directly from Node.js utils
 	// https://github.com/joyent/node/blob/f8c335d0caf47f16d31413f89aa28eda3878e3aa/lib/util.js
 
-	var getName = __webpack_require__(17);
-	var getProperties = __webpack_require__(18);
-	var getEnumerableProperties = __webpack_require__(19);
+	var getName = __webpack_require__(18);
+	var getProperties = __webpack_require__(19);
+	var getEnumerableProperties = __webpack_require__(20);
 
 	module.exports = inspect;
 
@@ -11630,7 +11680,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11658,7 +11708,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11700,7 +11750,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11732,7 +11782,7 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -11745,8 +11795,8 @@
 	 * Module dependancies
 	 */
 
-	var inspect = __webpack_require__(16);
-	var config = __webpack_require__(21);
+	var inspect = __webpack_require__(17);
+	var config = __webpack_require__(22);
 
 	/**
 	 * ### .objDisplay (object)
@@ -11788,7 +11838,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -11849,7 +11899,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/*!
@@ -11900,14 +11950,14 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(24);
+	module.exports = __webpack_require__(25);
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -11920,14 +11970,14 @@
 	 * Module dependencies
 	 */
 
-	var type = __webpack_require__(25);
+	var type = __webpack_require__(26);
 
 	/*!
 	 * Buffer.isBuffer browser shim
 	 */
 
 	var Buffer;
-	try { Buffer = __webpack_require__(27).Buffer; }
+	try { Buffer = __webpack_require__(28).Buffer; }
 	catch(ex) {
 	  Buffer = {};
 	  Buffer.isBuffer = function() { return false; }
@@ -12170,14 +12220,14 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(26);
+	module.exports = __webpack_require__(27);
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	/*!
@@ -12325,7 +12375,7 @@
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -12338,9 +12388,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(32)
-	var ieee754 = __webpack_require__(30)
-	var isArray = __webpack_require__(33)
+	var base64 = __webpack_require__(33)
+	var ieee754 = __webpack_require__(31)
+	var isArray = __webpack_require__(34)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -14040,10 +14090,10 @@
 	  return val !== val // eslint-disable-line no-self-compare
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -14056,9 +14106,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(29)
-	var ieee754 = __webpack_require__(30)
-	var isArray = __webpack_require__(31)
+	var base64 = __webpack_require__(30)
+	var ieee754 = __webpack_require__(31)
+	var isArray = __webpack_require__(32)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -15595,10 +15645,10 @@
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -15728,7 +15778,7 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -15818,7 +15868,7 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -15829,7 +15879,7 @@
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -15944,7 +15994,7 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -15955,7 +16005,7 @@
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -15965,7 +16015,7 @@
 	 * MIT Licensed
 	 */
 
-	var getPathInfo = __webpack_require__(35);
+	var getPathInfo = __webpack_require__(36);
 
 	/**
 	 * ### .getPathValue(path, object)
@@ -16004,7 +16054,7 @@
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16013,7 +16063,7 @@
 	 * MIT Licensed
 	 */
 
-	var hasProperty = __webpack_require__(36);
+	var hasProperty = __webpack_require__(37);
 
 	/**
 	 * ### .getPathInfo(path, object)
@@ -16121,7 +16171,7 @@
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16130,7 +16180,7 @@
 	 * MIT Licensed
 	 */
 
-	var type = __webpack_require__(11);
+	var type = __webpack_require__(12);
 
 	/**
 	 * ### .hasProperty(object, name)
@@ -16191,7 +16241,7 @@
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16200,8 +16250,8 @@
 	 * MIT Licensed
 	 */
 
-	var config = __webpack_require__(21);
-	var flag = __webpack_require__(10);
+	var config = __webpack_require__(22);
+	var flag = __webpack_require__(11);
 
 	/**
 	 * ### addProperty (ctx, name, getter)
@@ -16245,7 +16295,7 @@
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16254,7 +16304,7 @@
 	 * MIT Licensed
 	 */
 
-	var config = __webpack_require__(21);
+	var config = __webpack_require__(22);
 
 	/**
 	 * ### .addMethod (ctx, name, method)
@@ -16281,7 +16331,7 @@
 	 * @name addMethod
 	 * @api public
 	 */
-	var flag = __webpack_require__(10);
+	var flag = __webpack_require__(11);
 
 	module.exports = function (ctx, name, method) {
 	  ctx[name] = function () {
@@ -16295,7 +16345,7 @@
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/*!
@@ -16356,7 +16406,7 @@
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports) {
 
 	/*!
@@ -16414,7 +16464,7 @@
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16427,9 +16477,9 @@
 	 * Module dependencies
 	 */
 
-	var transferFlags = __webpack_require__(22);
-	var flag = __webpack_require__(10);
-	var config = __webpack_require__(21);
+	var transferFlags = __webpack_require__(23);
+	var flag = __webpack_require__(11);
+	var config = __webpack_require__(22);
 
 	/*!
 	 * Module variables
@@ -16532,7 +16582,7 @@
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	/*!
@@ -16592,7 +16642,7 @@
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -16602,7 +16652,7 @@
 	 * MIT Licensed
 	 */
 
-	var config = __webpack_require__(21);
+	var config = __webpack_require__(22);
 
 	module.exports = function (_chai, util) {
 	  /*!
@@ -16729,7 +16779,7 @@
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/*!
@@ -18595,7 +18645,7 @@
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/*!
@@ -18635,7 +18685,7 @@
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/*!
@@ -18842,7 +18892,7 @@
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports) {
 
 	/*!
@@ -20493,7 +20543,7 @@
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20517,7 +20567,7 @@
 	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
 	};
 	var index_1 = __webpack_require__(2);
-	var chai_1 = __webpack_require__(5);
+	var chai_1 = __webpack_require__(6);
 	var Vue = __webpack_require__(3);
 	describe('vue-class-component based test (ts)', function () {
 	    it('hooks', function () {
@@ -20695,7 +20745,7 @@
 	});
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20711,7 +20761,7 @@
 	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
 	};
 	var index_1 = __webpack_require__(2);
-	var chai_1 = __webpack_require__(5);
+	var chai_1 = __webpack_require__(6);
 	describe('vue-class-component data test', function () {
 	    it('simple data decorator', function () {
 	        var App = function () {
@@ -20780,6 +20830,94 @@
 	        var appB1 = new AppB();
 	        var appB2 = new AppB();
 	        chai_1.expect(appB1['$options']['data'](), 'shared data').to.equal(appB2['$options']['data']());
+	    });
+	});
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var __extends = undefined && undefined.__extends || function (d, b) {
+	    for (var p in b) {
+	        if (b.hasOwnProperty(p)) d[p] = b[p];
+	    }function __() {
+	        this.constructor = d;
+	    }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = undefined && undefined.__decorate || function (decorators, target, key, desc) {
+	    var c = arguments.length,
+	        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+	        d;
+	    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+	        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var index_1 = __webpack_require__(2);
+	var chai_1 = __webpack_require__(6);
+	var abstract_1 = __webpack_require__(1);
+	describe('inheritance', function () {
+	    it('Should be OK to inherit from other component', function () {
+	        var Base = function () {
+	            function Base() {
+	                this.baseData = 'hello';
+	            }
+	            Base.prototype.method1 = function () {};
+	            __decorate([index_1.Data()], Base.prototype, "baseData", void 0);
+	            __decorate([index_1.Prop({
+	                default: 'hi'
+	            })], Base.prototype, "baseProp", void 0);
+	            Base = __decorate([index_1.Component()], Base);
+	            return Base;
+	        }();
+	        var App = function (_super) {
+	            __extends(App, _super);
+	            function App() {
+	                _super.apply(this, arguments);
+	            }
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }(Base);
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').that.equals(undefined);
+	        chai_1.expect(app['$options']['data']()).to.have.property('baseData').that.equals('hello');
+	        chai_1.expect(app['$options']['props']).to.have.property('baseProp').that.has.property('default').that.equals('hi');
+	        chai_1.expect(app['$options']['methods']).to.have.property('method1').that.is.a('function');
+	    });
+	    it('Should be OK to inherit from other abstract class', function () {
+	        var App = function (_super) {
+	            __extends(App, _super);
+	            function App() {
+	                _super.apply(this, arguments);
+	            }
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }(abstract_1.AbstractClass);
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').that.equals(undefined);
+	        chai_1.expect(app['$options']['data']()).to.have.property('baseData').that.equals('hello');
+	        chai_1.expect(app['$options']['props']).to.have.property('baseProp').that.has.property('default').that.equals('hi');
+	    });
+	    it('Should be OK to inherit from other abstract component', function () {
+	        var App = function (_super) {
+	            __extends(App, _super);
+	            function App() {
+	                _super.apply(this, arguments);
+	            }
+	            __decorate([index_1.Data()], App.prototype, "msg", void 0);
+	            App = __decorate([index_1.Component()], App);
+	            return App;
+	        }(abstract_1.AbstractComponent);
+	        var app = new App();
+	        chai_1.expect(app['$options']['data']()).to.have.property('msg').that.equals(undefined);
+	        chai_1.expect(app['$options']['data']()).to.have.property('baseData').that.equals('hello');
+	        chai_1.expect(app['$options']['props']).to.have.property('baseProp').that.has.property('default').that.equals('hi');
 	    });
 	});
 
