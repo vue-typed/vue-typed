@@ -101,14 +101,15 @@ describe('vue-class-component based test (ts)', () => {
 
     }
 
-    const c = new MyComp()
+    const c = new MyComp()   
     
-    expect(c['$options']['props']).to.have.property('message')
-    expect(c['$options']['props']).to.have.property('message2').that.has.property('default').that.equals('meh');
-    expect(c['$options']['props']).to.have.property('message3').that.has.property('default').that.equals('what');
-    expect(c['$options']['props']).to.have.property('message4').that.has.property('default').that.equals('yeah');
-    expect(c['$options']['props']).to.have.property('message5').that.has.property('default').that.equals('foo');
-    expect(c['$options']['props']).to.have.property('message6').that.has.property('default').that.equals("I'm win");
+    expect(c['$options']['props'], 'Empty prop should be a boolean').to.have.property('message').that.is.a('boolean');
+    expect(c['$options']['props'], 'Prop with option').to.have.property('message2').that.has.property('default').that.equals('meh');
+    expect(c['$options']['props'], 'Prop init value in constructor').to.have.property('message3').that.has.property('default').that.equals('what');
+    expect(c['$options']['props'], 'Prop init value inline').to.have.property('message4').that.has.property('default').that.equals('yeah');
+    expect(c['$options']['props'], 'Prop with option init value inline').to.have.property('message5').that.has.property('default').that.equals('foo');
+    expect(c['$options']['props'], 'Prop with option init value inline').to.have.property('message5').that.has.property('type').that.equals(String);
+    expect(c['$options']['props'], 'Prop with option init value inline and option (conflict)').to.have.property('message6').that.has.property('default').that.equals("I'm win");
 
   })
 

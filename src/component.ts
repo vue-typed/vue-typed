@@ -120,13 +120,13 @@ export function Component(options?): ClassDecorator {
 
               if (val) {
                 
-                if (typeof proto[key][prop] == 'string') {
+                if (typeof proto[key][prop] != 'object') {
                   // no options defined in Props decorator
 
                   proto[key][prop] = {
                     default: val
                   }
-                } else if (typeof proto[key][prop] == 'object') {
+                } else {
 
                   // when options defined in Props decorator
                   if (!proto[key][prop]['default']) {

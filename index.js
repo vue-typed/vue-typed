@@ -119,12 +119,12 @@ function Component(options) {
                         Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
                             var val = constructor[prop];
                             if (val) {
-                                if (typeof proto[key][prop] == 'string') {
+                                if (typeof proto[key][prop] != 'object') {
                                     proto[key][prop] = {
                                         default: val
                                     };
                                 }
-                                else if (typeof proto[key][prop] == 'object') {
+                                else {
                                     if (!proto[key][prop]['default']) {
                                         proto[key][prop]['default'] = val;
                                     }

@@ -252,7 +252,7 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	/**
-	  * vue-typed 1.0.2
+	  * vue-typed 1.0.3
 	  * The vue-class-component in typescript favor
 	  * https://github.com/budiadiono/vue-typed
 	  
@@ -348,11 +348,11 @@
 	                            Object.getOwnPropertyNames(proto[key]).forEach(function (prop) {
 	                                var val = constructor[prop];
 	                                if (val) {
-	                                    if (typeof proto[key][prop] == 'string') {
+	                                    if (_typeof(proto[key][prop]) != 'object') {
 	                                        proto[key][prop] = {
 	                                            default: val
 	                                        };
-	                                    } else if (_typeof(proto[key][prop]) == 'object') {
+	                                    } else {
 	                                        if (!proto[key][prop]['default']) {
 	                                            proto[key][prop]['default'] = val;
 	                                        } else {
@@ -401,7 +401,7 @@
 	                if (options) {
 	                    target['props'][key] = options;
 	                } else {
-	                    target['props'][key] = key;
+	                    target['props'][key] = true;
 	                }
 	            }
 	        };
@@ -20602,12 +20602,13 @@
 	            return MyComp;
 	        }();
 	        var c = new MyComp();
-	        chai_1.expect(c['$options']['props']).to.have.property('message');
-	        chai_1.expect(c['$options']['props']).to.have.property('message2').that.has.property('default').that.equals('meh');
-	        chai_1.expect(c['$options']['props']).to.have.property('message3').that.has.property('default').that.equals('what');
-	        chai_1.expect(c['$options']['props']).to.have.property('message4').that.has.property('default').that.equals('yeah');
-	        chai_1.expect(c['$options']['props']).to.have.property('message5').that.has.property('default').that.equals('foo');
-	        chai_1.expect(c['$options']['props']).to.have.property('message6').that.has.property('default').that.equals("I'm win");
+	        chai_1.expect(c['$options']['props'], 'Empty prop should be a boolean').to.have.property('message').that.is.a('boolean');
+	        chai_1.expect(c['$options']['props'], 'Prop with option').to.have.property('message2').that.has.property('default').that.equals('meh');
+	        chai_1.expect(c['$options']['props'], 'Prop init value in constructor').to.have.property('message3').that.has.property('default').that.equals('what');
+	        chai_1.expect(c['$options']['props'], 'Prop init value inline').to.have.property('message4').that.has.property('default').that.equals('yeah');
+	        chai_1.expect(c['$options']['props'], 'Prop with option init value inline').to.have.property('message5').that.has.property('default').that.equals('foo');
+	        chai_1.expect(c['$options']['props'], 'Prop with option init value inline').to.have.property('message5').that.has.property('type').that.equals(String);
+	        chai_1.expect(c['$options']['props'], 'Prop with option init value inline and option (conflict)').to.have.property('message6').that.has.property('default').that.equals("I'm win");
 	    });
 	    it('watch', function () {
 	        var Watcher = function () {
