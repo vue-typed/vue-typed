@@ -6,7 +6,11 @@
   * Copyright 2016, Budi Adiono
   * Released under the MIT license.
   '*/
-define(['exports', 'vue'], function (exports, Vue) { 'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
+    (factory((global.VueTyped = global.VueTyped || {}),global.Vue));
+}(this, (function (exports,Vue) { 'use strict';
 
 function Action(action) {
     return function (target, key, descriptor) {
@@ -221,4 +225,4 @@ exports.Watch = Watch;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-});
+})));

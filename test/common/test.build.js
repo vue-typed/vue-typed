@@ -96,7 +96,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -105,10 +105,12 @@
 	  * The vue-class-component in typescript favor
 	  * https://github.com/budiadiono/vue-typed
 	  
-	  * Copyright 2016, [object Object]
+	  * Copyright 2016, Budi Adiono
 	  * Released under the MIT license.
 	  '*/
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(3)], __WEBPACK_AMD_DEFINE_RESULT__ = function (exports, Vue) {
+	(function (global, factory) {
+	    ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(3)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(3)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.VueTyped = global.VueTyped || {}, global.Vue);
+	})(undefined, function (exports, Vue) {
 	    'use strict';
 
 	    function Action(action) {
@@ -198,7 +200,7 @@
 	                var prop_keys = Object.getOwnPropertyNames(propAttrs);
 	                for (var i = 0; i < prop_keys.length; i++) {
 	                    var prop = prop_keys[i];
-	                    var propVal;
+	                    var propVal = undefined;
 	                    var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop);
 	                    var constructorDefault = constructor[prop];
 	                    if (_typeof(descriptor.value) === 'object') {
@@ -291,7 +293,7 @@
 	    exports.Watch = Watch;
 
 	    Object.defineProperty(exports, '__esModule', { value: true });
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	});
 
 /***/ },
 /* 3 */
