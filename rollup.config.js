@@ -6,7 +6,7 @@ var banner = `/**
   * ${pkg.description}
   * ${pkg.homepage}
   
-  * Copyright 2016, ${pkg.author}
+  * Copyright 2016, ${pkg.author.name}
   * Released under the ${pkg.license} license.
   '*/`;
 

@@ -3,7 +3,7 @@
   * The vue-class-component in typescript favor
   * https://github.com/budiadiono/vue-typed
   
-  * Copyright 2016, [object Object]
+  * Copyright 2016, Budi Adiono
   * Released under the MIT license.
   '*/
 define(['exports', 'vue'], function (exports, Vue) { 'use strict';
