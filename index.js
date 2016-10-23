@@ -119,7 +119,7 @@ function Component(options) {
             var prop_keys = Object.getOwnPropertyNames(propAttrs);
             for (var i = 0; i < prop_keys.length; i++) {
                 var prop = prop_keys[i];
-                var propVal;
+                var propVal = undefined;
                 var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop);
                 var constructorDefault = constructor[prop];
                 if (typeof (descriptor.value) === 'object') {
