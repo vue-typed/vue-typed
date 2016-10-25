@@ -3,7 +3,7 @@
  * Make normal class property to be props attribute.
  */
 
-import { PropOption } from '../index.d.ts';
+import { PropOption } from '../index';
 
 export function Prop(options?: PropOption): PropertyDecorator {
 
