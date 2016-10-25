@@ -15,7 +15,9 @@ export default {
   format: 'umd',
   dest: 'index.js',
   moduleName: 'VueTyped',
-  plugins: [ typescript() ],
+  plugins: [ typescript({
+    typescript: require('typescript')
+  }) ],
   banner: banner,
   globals: {
     'vue': 'Vue'

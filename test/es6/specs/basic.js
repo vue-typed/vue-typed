@@ -6,21 +6,18 @@ import Vue from 'vue'
 
 
 
-describe('vue-class-component based test (js)', () => {
- 
+describe('vue-class-component based test (js)', () => { 
 
   it('hooks', () => {
     let created = false
     let destroyed = false
-    
-    
 
     @Component
     class MyComp {
-      created() {
+      created () {
         created = true
       }
-      destroyed() {
+      destroyed () {
         destroyed = true
       }
     }
@@ -37,7 +34,7 @@ describe('vue-class-component based test (js)', () => {
 
     @Component
     class MyComp {
-      hello() {
+      hello () {
         msg = 'hi'
       }
     }
@@ -50,12 +47,12 @@ describe('vue-class-component based test (js)', () => {
   it('computed', () => {
     @Component
     class MyComp {
-      data() {
+      data () {
         return {
           a: 1
         }
       }
-      get b() {
+      get b () {
         return this.a + 1
       }
     }
@@ -76,7 +73,7 @@ describe('vue-class-component based test (js)', () => {
       }
     })
     class MyComp {
-      data() {
+      data () {
         return { a: 1 }
       }
     }
@@ -92,14 +89,14 @@ describe('vue-class-component based test (js)', () => {
   it('extending', function () {
     @Component
     class Base {
-      data() {
+      data () {
         return { a: 1 }
       }
     }
 
     @Component
     class A extends Base {
-      data() {
+      data () {
         return { b: 2 }
       }
     }

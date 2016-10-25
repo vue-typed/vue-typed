@@ -10,35 +10,11 @@
     "noLib": false,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "experimentalDecorators": true
-  },
-  "formatCodeOptions": {
-    "indentSize": 2,
-    "tabSize": 2,
-    "newLineCharacter": "\r\n",
-    "convertTabsToSpaces": true,
-    "insertSpaceAfterCommaDelimiter": true,
-    "insertSpaceAfterSemicolonInForStatements": true,
-    "insertSpaceBeforeAndAfterBinaryOperators": true,
-    "insertSpaceAfterKeywordsInControlFlowStatements": true,
-    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
-    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-    "placeOpenBraceOnNewLineForFunctions": true,
-    "placeOpenBraceOnNewLineForControlBlocks": true
-  },
-  "compileOnSave": false,
-  "filesGlob": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "!typings/**",
-    "!node_modules/**"
-  ],
-  "files": [
-    "src/tsd.d.ts",
-    "src/index.ts",
-    "src/action.ts",
-    "src/component.ts",
-    "src/data.ts",
-    "src/getter.ts"
-  ]
+    "experimentalDecorators": true,
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ]
+  }
 }
