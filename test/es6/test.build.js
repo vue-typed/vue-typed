@@ -71,7 +71,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	describe('ES6 vue-class-component based test (js)', function () {
+	describe('vue-class-component based test (js)', function () {
 
 	  it('hooks', function () {
 	    var _class;

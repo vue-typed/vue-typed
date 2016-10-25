@@ -168,7 +168,7 @@ function Component(options) {
         var Super = superProto instanceof Vue
             ? superProto.constructor
             : Vue;
-        return Super.extend(options);
+        return Super['extend'](options);
     };
     if (options instanceof Function) {
         return factory(options);

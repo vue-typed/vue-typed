@@ -180,7 +180,7 @@ export function Component(options?): ClassDecorator {
     var Super = superProto instanceof Vue
       ? superProto.constructor
       : Vue
-    return Super.extend(options)
+    return Super['extend'](options)
 
   }
 
