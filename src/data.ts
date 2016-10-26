@@ -1,24 +1,15 @@
 /**
  * Make normal class property to be data attribute.
+ *
+ * THIS DECORATOR HAS BEEN DEPRECATED AND WILL BE REMOVED SOON
+ * 
+ * @export
+ * @returns {PropertyDecorator}
  */
-
-
 export function Data(): PropertyDecorator {
 
-	return function (target: Object, key: string) {
-		if (target['data'] && target['data'] instanceof Function) {
-			throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
-		}
+	return function (target: Object, key: string) {		
 
-		var id = '$_vt_data';
-		
-		if (!target[id]) {
-			target[id] = {}
-		}
-
-		if (!target[id][key]) {
-			target[id][key] = key
-		}
 	}
 
 }

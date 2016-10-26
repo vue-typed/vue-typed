@@ -30,6 +30,7 @@
     "test:_es6": "webpack --config test/es6/webpack.config.js && mocha test/es6/test.build.js",
     "test:_common": "mocha --require ts-node/register test/common/specs/**/*.ts",
     "test:_browser": "karma start test/browser/karma.conf.js",
+    "test:es6": "npm run build && npm run test:_es6",
     "test:common": "npm run build && npm run test:_common",
     "test:browser": "npm run build && npm run test:_browser",
     "test": "npm run build && npm run test:_es6 && npm run test:_common && npm run test:_browser"
