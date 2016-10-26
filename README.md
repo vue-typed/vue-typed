@@ -25,7 +25,8 @@ import { Component, Data } from 'vue-typed'
 })
 class Foo {
   
-  @Data()
+  // deprecated
+  // @Data() 
   text: string
   
   constructor() {
@@ -35,7 +36,7 @@ class Foo {
 
 ```
 
-All properties marked with `@Data()` decorator will become part of `data()` attributes. So, in javascript traditional vue component, code above equals to:
+All ~~properties marked with `@Data()` decorator~~ fields will become part of `data()` attributes. So, in javascript traditional vue component, code above equals to:
 
 ```
 var Foo = Vue.extend({
@@ -164,7 +165,8 @@ All methods in `Component` class will become part of `methods` attributes except
 })
 class Foo {
 
-  @Data()
+  // deprecated
+  // @Data()
   val: number
 
   constructor() {
@@ -318,10 +320,12 @@ import { Component, Data, Prop, Watch } from 'vue-typed'
 	`
 })
 export class Watcher {
-  @Data()
+  // deprecated
+  // @Data()
   msg:number = 1;
   
-  @Data()
+  // deprecated
+  // @Data()
   info:string[] = []
   
   changeData() {
