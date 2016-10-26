@@ -277,18 +277,7 @@
 	    }
 
 	    function Data() {
-	        return function (target, key) {
-	            if (target['data'] && target['data'] instanceof Function) {
-	                throw "vue-typed error: [" + target.constructor.name + "]: You can't use @data attribute while you have already data() function in your class.";
-	            }
-	            var id = '$_vt_data';
-	            if (!target[id]) {
-	                target[id] = {};
-	            }
-	            if (!target[id][key]) {
-	                target[id][key] = key;
-	            }
-	        };
+	        return function (target, key) {};
 	    }
 
 	    function Getter(getter) {
@@ -305,8 +294,9 @@
 	        };
 	    }
 
+	    var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
+	    var vueInternalHooks = ['activate', 'init', 'ready', 'beforeCompile', 'compiled', 'attached', 'detached', 'created', 'beforeDestroy', 'destroyed', 'props', 'watch', 'data', 'beforeCreate', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'render', 'el', 'vuex'];
 	    function Component(options) {
-	        var internalHooks = ['activate', 'init', 'ready', 'beforeCompile', 'compiled', 'attached', 'detached', 'created', 'beforeDestroy', 'destroyed', 'props', 'watch', 'data', 'beforeCreate', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'render', 'el', 'vuex'];
 	        var factory = function factory(Component, options) {
 	            if (!options) {
 	                options = {};
@@ -328,27 +318,15 @@
 	                    });
 	                }
 	            }
-	            var dataAttrs = proto['$_vt_data'];
-	            delete proto['$_vt_data'];
-	            if (dataAttrs) {
-	                var data_keys = Object.getOwnPropertyNames(dataAttrs);
-	                options['data'] = function () {
-	                    var data_obj = {};
-	                    for (var i = 0; i < data_keys.length; i++) {
-	                        var prop = data_keys[i];
-	                        data_obj[prop] = constructor[prop];
-	                    }
-	                    return data_obj;
-	                };
-	            }
 	            var propAttrs = proto['$_vt_props'];
+	            var propNames = undefined;
 	            delete proto['$_vt_props'];
 	            if (propAttrs) {
 	                var key = 'props';
 	                var props = {};
-	                var prop_keys = Object.getOwnPropertyNames(propAttrs);
-	                for (var i = 0; i < prop_keys.length; i++) {
-	                    var prop = prop_keys[i];
+	                propNames = Object.getOwnPropertyNames(propAttrs);
+	                for (var i = 0; i < propNames.length; i++) {
+	                    var prop = propNames[i];
 	                    var propVal = undefined;
 	                    var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop);
 	                    var constructorDefault = constructor[prop];
@@ -371,7 +349,7 @@
 	                if (key === 'constructor') {
 	                    return;
 	                }
-	                if (internalHooks.indexOf(key) > -1) {
+	                if (vueInternalHooks.indexOf(key) > -1) {
 	                    options[key] = proto[key];
 	                    return;
 	                }
@@ -386,6 +364,34 @@
 	                    };
 	                }
 	            });
+	            var dataNames = [];
+	            var restrictedNames = vueInternalPropNames;
+	            if (propNames) restrictedNames = restrictedNames.concat(propNames);
+	            if (vueKeys && vueKeys.length) restrictedNames = restrictedNames.concat(vueKeys);
+	            Object.getOwnPropertyNames(constructor).forEach(function (key) {
+	                if (restrictedNames.indexOf(key) === -1) {
+	                    dataNames.push(key);
+	                }
+	            });
+	            if (dataNames.length > 0) {
+	                var parentData = undefined;
+	                var parentDataType = _typeof(options['data']);
+	                if (parentDataType === 'function') {
+	                    parentData = options['data']();
+	                } else if (parentDataType === 'object') {
+	                    parentData = options['data'];
+	                }
+	                options['data'] = function () {
+	                    var data_obj = parentData || {};
+	                    dataNames.forEach(function (prop) {
+	                        var descriptor = Object.getOwnPropertyDescriptor(constructor, prop);
+	                        if (!descriptor.get && !descriptor.set && typeof descriptor.value !== 'function') {
+	                            data_obj[prop] = constructor[prop];
+	                        }
+	                    });
+	                    return data_obj;
+	                };
+	            }
 	            var superProto = Object.getPrototypeOf(proto);
 	            var Super = superProto instanceof Vue ? superProto.constructor : Vue;
 	            return Super['extend'](options);

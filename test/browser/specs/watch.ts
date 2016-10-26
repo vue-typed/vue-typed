@@ -29,7 +29,7 @@ describe('watch decorator', () => {
 			data2: number = 1;
 
 			@Data()
-			info: string;
+			info: string = undefined;
 
 			changeData1() {
 				this.data1 = 'Hola!';
@@ -78,7 +78,7 @@ describe('watch decorator', () => {
 				this.title = title;
 			}
 
-			title: string
+			title: string = undefined
 		}
 
 
@@ -97,7 +97,7 @@ describe('watch decorator', () => {
 			data: Foo[] = [ new Foo('Hello!') ];
 
 			@Data()
-			info: string;
+			info: string = undefined;
 
 			changeData1() {
 				this.data[0].title = 'Hi!';

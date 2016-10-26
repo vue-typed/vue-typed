@@ -12,7 +12,7 @@ describe('vue-class-component data test', () => {
 		class App {
 
 			@Data()
-			msg: string
+			msg: string = undefined
 		}
 
 		var app = new App();

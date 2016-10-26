@@ -31,7 +31,7 @@ describe('inheritance', () => {
 		class App extends Base {
 
 			@Data()
-			msg: string
+			msg: string = undefined
 		}
 
 		var app = new App();
@@ -49,7 +49,7 @@ describe('inheritance', () => {
 		class App extends AbstractClass {
 
 			@Data()
-			msg: string
+			msg: string = undefined
 		}
 
 		var app = new App();
@@ -65,7 +65,7 @@ describe('inheritance', () => {
 		class App extends AbstractComponent {
 
 			@Data()
-			msg: string
+			msg: string = undefined
 		}
 
 		var app = new App();
