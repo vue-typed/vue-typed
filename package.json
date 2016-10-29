@@ -28,7 +28,7 @@
   "scripts": {
     "build": "rollup -c",
     "test:_es6": "webpack --config test/es6/webpack.config.js && mocha test/es6/test.build.js",
-    "test:_common": "mocha --require ts-node/register test/common/specs/**/*.ts",
+    "test:_common": "webpack --config test/common/webpack.config.js && mocha test/common/test.build.js",
     "test:_browser": "karma start test/browser/karma.conf.js",
     "test:es6": "npm run build && npm run test:_es6",
     "test:common": "npm run build && npm run test:_common",
@@ -63,7 +63,6 @@
     "rollup": "^0.36.1",
     "rollup-plugin-typescript": "^0.8.1",
     "ts-loader": "^0.8.2",
-    "ts-node": "^1.6.0",
     "typescript": "^2.0.3",
     "vue": "^1.0.24",
     "vuex": "^0.6.3",

@@ -1,7 +1,7 @@
 /**
   * vue-typed 1.0.3
   * The vue-class-component in typescript favor
-  * https://github.com/budiadiono/vue-typed
+  * http://vue-typed.github.io/vue-typed/
   
   * Copyright 2016, Budi Adiono
   * Released under the MIT license.
