@@ -7,15 +7,27 @@ module.exports = {
     filename: 'test.build.js'
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+    alias: {
+      'vue-typed': '../../index.js'
+    }
   },
   module: {
     loaders: [
       {
         test: /\.ts$/,
         exclude: /node_modules|vue\/src/,
-        loader: 'ts'
+        loader: 'babel!ts'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
       }
     ]
+  },
+  babel: {
+    presets: ['es2015'],
+    plugins: ['transform-decorators-legacy']
   }
 }
