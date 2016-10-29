@@ -1,7 +1,7 @@
 {
   "name": "vue-typed",
   "version": "1.0.3",
-  "description": "The vue-class-component in typescript favor",
+  "description": "Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.",
   "keywords": [
     "vue",
     "component",
@@ -34,8 +34,7 @@
     "test:common": "npm run build && npm run test:_common",
     "test:browser": "npm run build && npm run test:_browser",
     "test": "npm run build && npm run test:_es6 && npm run test:_common && npm run test:_browser"
-  },
-  "license": "MIT",
+  },  
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
@@ -68,5 +67,6 @@
     "vuex": "^0.6.3",
     "webpack": "^1.13.1",
     "webpack-merge": "^0.13.0"
-  }
+  },
+  "license": "MIT"
 }

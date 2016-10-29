@@ -1,10 +1,6 @@
 {
-    "name": "vue-typed",
-    "version": "1.0.3",
-    "authors": [
-      "budiadiono <budiadiono@gmail.com> (http://www.budiadiono.com)"
-    ],
-    "description": "The vue-class-component in typescript favor",
+    "name": "vue-typed",    
+    "description": "Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.",
     "keywords": [
       "vue",
       "vue-typed",
@@ -13,8 +9,18 @@
       "vue-component",
       "vuex"
     ],
-    "license": "MIT",
+    "authors": [
+      "budiadiono <budiadiono@gmail.com> (http://www.budiadiono.com)"
+    ],
+    "homepage": "http://vue-typed.github.io/vue-typed/",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/vue-typed/vue-typed.git"
+    },
     "main": "index.js",
+    "moduleType": [
+      "amd", "es6", "globals", "node"
+    ],    
     "ignore": [
       "src",
       "test",
@@ -34,12 +40,5 @@
       "tsd.d.ts",
       "typings.json"
     ],
-    "dependencies": {
-      "vue": "^1.0.24",
-      "vuex": "^0.6.3"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/budiadiono/vue-typed.git"
-    }
+    "license": "MIT"
 }

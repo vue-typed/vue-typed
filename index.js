@@ -1,6 +1,6 @@
 /**
   * vue-typed 1.0.3
-  * The vue-class-component in typescript favor
+  * Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.
   * http://vue-typed.github.io/vue-typed/
   
   * Copyright 2016, Budi Adiono
