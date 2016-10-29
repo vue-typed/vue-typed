@@ -1,8 +1,9 @@
 import typescript from 'rollup-plugin-typescript'
 var pkg = require('./package.json')
+var version = process.env.VERSION || pkg.version
 
 var banner = `/**
-  * ${pkg.name} ${pkg.version}
+  * ${pkg.name} ${version}
   * ${pkg.description}
   * ${pkg.homepage}
   
