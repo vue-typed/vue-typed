@@ -14,10 +14,10 @@
     "email": "budiadiono@gmail.com",
     "url": "http://www.budiadiono.com"
   },
-  "homepage": "https://github.com/budiadiono/vue-typed",
+  "homepage": "http://vue-typed.github.io/vue-typed/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/budiadiono/vue-typed.git"
+    "url": "https://github.com/vue-typed/vue-typed.git"
   },
   "main": "index.js",
   "typings": "index.d.ts",
