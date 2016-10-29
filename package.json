@@ -1,6 +1,6 @@
 {
   "name": "vue-typed",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.",
   "keywords": [
     "vue",
@@ -34,7 +34,7 @@
     "test:common": "npm run build && npm run test:_common",
     "test:browser": "npm run build && npm run test:_browser",
     "test": "npm run build && npm run test:_es6 && npm run test:_common && npm run test:_browser"
-  },  
+  },
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
