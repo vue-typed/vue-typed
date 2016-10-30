@@ -49,6 +49,8 @@
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "gitbook": "^3.2.2",
+    "gitbook-plugin-edit-link": "^2.0.2",
+    "gitbook-plugin-github": "^2.0.0",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "karma": "^0.13.22",
