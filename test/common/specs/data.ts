@@ -1,4 +1,4 @@
-import { Component, Data } from '../../../index'
+import { Component } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -10,8 +10,6 @@ describe('vue-class-component data test', () => {
 
 		@Component()
 		class App {
-
-			@Data()
 			msg: string = undefined
 		}
 
@@ -24,8 +22,6 @@ describe('vue-class-component data test', () => {
 
 		@Component()
 		class App {
-
-			@Data()
 			msg: string = 'hello'
 		}
 
@@ -38,8 +34,6 @@ describe('vue-class-component data test', () => {
 
 		@Component()
 		class App {
-
-			@Data()
 			msg: {
 				say: string,
 				in: {
@@ -63,8 +57,6 @@ describe('vue-class-component data test', () => {
 
 		@Component()
 		class AppA {
-
-			@Data()
 			msg: string = 'hello'
 		}
 

@@ -1,4 +1,4 @@
-import { Component, Data, Prop, Watch } from '../../../index'
+import { Component, Prop, Watch } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -45,7 +45,6 @@ describe('vue-class-component based test (ts)', () => {
   it('computed', () => {
     @Component()
     class MyComp {
-      @Data()
       a: number
       
       constructor(){
@@ -118,10 +117,8 @@ describe('vue-class-component based test (ts)', () => {
 
     @Component()
     class Watcher {
-      @Data()
       msg:string = 'Hello!';
       
-      @Data()
       info:string
       
       changeData() {
@@ -143,10 +140,8 @@ describe('vue-class-component based test (ts)', () => {
 
     @Component()
     class Watcher {
-      @Data()
       msg:string[] = [];
       
-      @Data()
       info:string
             
       @Watch('msg', true)
@@ -170,7 +165,6 @@ describe('vue-class-component based test (ts)', () => {
       }
     })
     class MyComp {
-      @Data()
       a: number
       
       constructor(){
@@ -193,7 +187,6 @@ describe('vue-class-component based test (ts)', () => {
     @Component()
     class Base {
       
-      @Data()
       a: number
       
       constructor() {
@@ -204,7 +197,6 @@ describe('vue-class-component based test (ts)', () => {
     @Component()
     class A extends Base {
       
-      @Data()
       b: number
       
       constructor() {

@@ -1,4 +1,4 @@
-import { Component, Data } from '../../../index'
+import { Component } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -14,7 +14,6 @@ describe('v-on', () => {
 		})
 		class ButtonCounter extends Vue {
 
-			@Data()
 			counter: number = 0
 
 			increment() {
@@ -39,7 +38,6 @@ describe('v-on', () => {
 		})
 		class App {
 
-			@Data()
 			total: number = 0
 
 			incrementTotal() {

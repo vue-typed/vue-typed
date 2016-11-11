@@ -1,4 +1,4 @@
-import { Component, Data } from '../../../index'
+import { Component } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -14,7 +14,6 @@ describe('methods', () => {
 		})
 		class Foo {
 			
-			@Data()
 			text: string
 			
 			constructor() {

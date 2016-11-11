@@ -1,4 +1,4 @@
-import { Component, Data, Getter, Action } from '../../../index'
+import { Component, Getter, Action } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 import * as Vuex from 'vuex'

@@ -1,4 +1,4 @@
-import { Component, Data, Prop, Watch, Action, Getter } from '../../../index'
+import { Component, Prop, Watch, Action, Getter } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 

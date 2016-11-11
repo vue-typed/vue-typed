@@ -1,8 +1,7 @@
-import { Component, Data, Prop } from '../../../index'
+import { Component, Prop } from '../../../index'
 
 export abstract class AbstractClass {
 
-	@Data()
 	baseData = 'hello'
 
 	@Prop({
@@ -15,7 +14,6 @@ export abstract class AbstractClass {
 @Component()
 export abstract class AbstractComponent {
 
-	@Data()
 	baseData = 'hello'
 
 	@Prop({

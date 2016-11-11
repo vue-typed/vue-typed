@@ -26,10 +26,6 @@ function Action(action) {
     };
 }
 
-function Data() {
-    return function (target, key) {};
-}
-
 function Getter(getter) {
     return function (target, key) {
         if (!target['vuex']) {
@@ -193,7 +189,6 @@ function Watch(property, deep) {
 }
 
 exports.Action = Action;
-exports.Data = Data;
 exports.Getter = Getter;
 exports.Component = Component;
 exports.Prop = Prop;
