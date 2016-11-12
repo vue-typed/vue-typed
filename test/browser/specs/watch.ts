@@ -1,4 +1,4 @@
-import { Component, Data, Prop, Watch } from '../../../index';
+import { Component, Prop, Watch } from '../../../index';
 import { expect } from 'chai';
 import * as Vue from 'vue';
 
@@ -22,13 +22,10 @@ describe('watch decorator', () => {
 				`
 		})
 		class Watcher {
-			@Data()
 			data1: string = 'Hello!';
 
-			@Data()
 			data2: number = 1;
 
-			@Data()
 			info: string = undefined;
 
 			changeData1() {
@@ -93,10 +90,8 @@ describe('watch decorator', () => {
 				`
 		})
 		class Watcher {
-			@Data()
 			data: Foo[] = [ new Foo('Hello!') ];
 
-			@Data()
 			info: string = undefined;
 
 			changeData1() {

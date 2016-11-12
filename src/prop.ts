@@ -3,9 +3,9 @@
  * Make normal class property to be props attribute.
  */
 
-import { PropOption } from '../index';
+import { PropOptions } from 'vue/types/options';
 
-export function Prop(options?: PropOption): PropertyDecorator {
+export function Prop(options?: PropOptions): PropertyDecorator {
 
 	return function (target: Object, key: string) {
 

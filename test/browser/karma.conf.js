@@ -29,7 +29,6 @@ module.exports = function (config) {
       'specs/**/*.js': ['webpack']
     },
 
-
     babelPreprocessor: {
       options: {
         presets: ['es2015'],
@@ -39,6 +38,11 @@ module.exports = function (config) {
 
     // webpack preprocessor config    
     webpack: merge(webpackBase, {
+      resolve: {
+        alias: {
+          'vue$': 'vue/dist/vue.js'
+        }
+      },
       module: {
         loaders: [
           {
@@ -46,12 +50,10 @@ module.exports = function (config) {
             loader: 'babel!ts',
 
             // resolve: https://github.com/chaijs/chai/issues/384
-            exclude: /node_modules|vue\/src/,
+            exclude: /node_modules|vue\/src/
           }
-      ]}      
+      ]}
     }),
-
-
 
     webpackMiddleware: {
       quiet: false,
@@ -74,12 +76,10 @@ module.exports = function (config) {
       'karma-mocha-reporter'
     ],
 
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['mocha'],
-
 
     // web server port
     port: 9876,

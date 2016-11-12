@@ -4,3 +4,4 @@ typings/
 npm-debug.log
 **/test.build.js
 **/_book
+.vscode
