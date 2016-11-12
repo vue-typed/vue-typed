@@ -3,7 +3,7 @@
 	<img src="images/logo.png" alt="vue-typed"/>
 </p>
 
- **VueTyped** contains sets of [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript) / [Typescript](typescriptlang.org) decorators that helps you write **[Vue](vuejs.org)** component easily. It would be something like this:
+ **VueTyped** contains sets of [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript) / [Typescript](http://www.typescriptlang.org) decorators that helps you write **[Vue](https://vuejs.org)** component easily. It would be something like this:
 
 
 ```typescript
@@ -30,6 +30,6 @@ class App {
 }
 ```
 
-> See live demo [here](http://embed.plnkr.co/CbLa2z/).
+> See live demo [here](http://embed.plnkr.co/QUh8YY/).
 
 Thanks to **[vue-class-component](https://github.com/vuejs/vue-class-component)** for the inspiration! **Vue-Typed** adopted from this module.  

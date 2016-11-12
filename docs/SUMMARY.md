@@ -9,7 +9,6 @@
 	* [Watch](usage/watch.md)	
 * Advanced Usage
 	* [VueRouter](advanced/vue-router.md)
-	* [Vuex (Vue 1.0)](advanced/vuex.md)
 	* [Class Inheritance](advanced/class-inheritance.md)
 * Examples
 	* [Todo MVC](examples/todo-mvc.md)

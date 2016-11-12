@@ -1,8 +1,9 @@
 # Installation
 
 ## Compatibility
+**Vue 2.0**
 
-**Vue 0.7, 1.x and 2.0**  
+> For older Vue supports please refer to [VueTyped 2.0.1](https://github.com/vue-typed/vue-typed/tree/v2.0.1).  
 
 ## NPM
 ```bash

@@ -107,7 +107,7 @@ $ npm start
 
 ## Compatibility
 
-**2.0.5 and above**
+**2.0**
 
 
 ## License
