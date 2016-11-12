@@ -43,7 +43,7 @@ function Getter(getter) {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
-var vueInternalHooks = ['activate', 'init', 'ready', 'beforeCompile', 'compiled', 'attached', 'detached', 'created', 'beforeDestroy', 'destroyed', 'props', 'watch', 'data', 'beforeCreate', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'render', 'el', 'vuex'];
+var vueInternalHooks = ['data', 'props', 'watch', 'beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'beforeDestroy', 'destroyed', 'render'];
 function Component(options) {
     var factory = function factory(Component, options) {
         if (!options) {

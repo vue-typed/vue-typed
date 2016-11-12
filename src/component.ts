@@ -4,47 +4,28 @@
 
 
 import * as Vue from 'vue'
+import { ComponentOptions } from 'vue/types/options';
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
 var vueInternalHooks = [
-
-  // vue 0.7 (deprecated in 1.0)
-  'activate',
-
-  // vue 1.0 (deprecated in 2.0)
-  'init', // => beforeCreate
-  'ready', // => mounted
-  'beforeCompile', // => created
-  'compiled', // => mounted
-  'attached', // => mounted
-  'detached', // => destroyed
-
-  // vue 1.0/2.0
-  'created',
-  'beforeDestroy',
-  'destroyed',
+  'data',
   'props',
   'watch',
-  'data',
-
-  // vue 2.0    
   'beforeCreate',
+  'created',
   'beforeMount',
   'mounted',
   'beforeUpdate',
   'updated',
   'activated',
   'deactivated',
-  'render',
-
-  // etc
-  'el',
-  'vuex',
-
+  'beforeDestroy',
+  'destroyed',
+  'render'
 ]
 
 
-export function Component(options?): ClassDecorator {
+export function Component(options? : ComponentOptions<Vue>): ClassDecorator {
 
   var factory = function (Component: Function, options?: any): <Function>(target: any) => Function | void {
 

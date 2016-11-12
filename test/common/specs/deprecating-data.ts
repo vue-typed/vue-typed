@@ -1,7 +1,7 @@
 import { Component, Prop, Watch, Action, Getter } from '../../../index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
-
+import { getDataOptionsValue } from '../utils';
 
 describe('deprecating data test', () => {
 
@@ -14,7 +14,7 @@ describe('deprecating data test', () => {
 		}
 
 		var app = new App();
-		expect(app['$options']['data']()).to.have.property('msg').that.equals('hello')
+		expect(getDataOptionsValue(app)).to.have.property('msg').that.equals('hello')
 
 	})
 
@@ -32,8 +32,8 @@ describe('deprecating data test', () => {
 
 		var app = new App();
 
-		expect(app['$options']['data']()).to.have.property('data1').that.equals('hi')
-		expect(app['$options']['data']()).to.not.have.property('msg')
+		expect(getDataOptionsValue(app)).to.have.property('data1').that.equals('hi')
+		expect(getDataOptionsValue(app)).to.not.have.property('msg')
 
 	})
 
@@ -50,8 +50,8 @@ describe('deprecating data test', () => {
 
 		var app = new App();
 
-		expect(app['$options']['data']()).to.have.property('data1').that.equals('hi')
-		expect(app['$options']['data']()).to.not.have.property('msg')
+		expect(getDataOptionsValue(app)).to.have.property('data1').that.equals('hi')
+		expect(getDataOptionsValue(app)).to.not.have.property('msg')
 
 	})
 
@@ -73,9 +73,9 @@ describe('deprecating data test', () => {
 
 		var app = new App();
 
-		expect(app['$options']['data']()).to.have.property('data1').that.equals('hi')
-		expect(app['$options']['data']()).to.not.have.property('msg')
-		expect(app['$options']['data']()).to.not.have.property('data_wacther')
+		expect(getDataOptionsValue(app)).to.have.property('data1').that.equals('hi')
+		expect(getDataOptionsValue(app)).to.not.have.property('msg')
+		expect(getDataOptionsValue(app)).to.not.have.property('data_wacther')
 
 	})
 
@@ -98,8 +98,8 @@ describe('deprecating data test', () => {
 
 		var app = new App();
 
-		expect(app['$options']['data']()).to.have.property('data1').that.equals('hi')
-		expect(app['$options']['data']()).to.not.have.property('msg')
+		expect(getDataOptionsValue(app)).to.have.property('data1').that.equals('hi')
+		expect(getDataOptionsValue(app)).to.not.have.property('msg')
 
 	})
 
@@ -150,10 +150,10 @@ describe('deprecating data test', () => {
 
 		var app = new App();
 
-		expect(app['$options']['data']()).to.have.property('data1').that.equals('hi')
-		expect(app['$options']['data']()).to.not.have.property('count')
-		expect(app['$options']['data']()).to.not.have.property('increment')
-		expect(app['$options']['data']()).to.not.have.property('add')
+		expect(getDataOptionsValue(app)).to.have.property('data1').that.equals('hi')
+		expect(getDataOptionsValue(app)).to.not.have.property('count')
+		expect(getDataOptionsValue(app)).to.not.have.property('increment')
+		expect(getDataOptionsValue(app)).to.not.have.property('add')
 
 	})
 

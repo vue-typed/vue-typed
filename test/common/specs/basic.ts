@@ -100,9 +100,9 @@ describe('vue-class-component based test (ts)', () => {
 
     }
 
-    const c = new MyComp()   
+    const c = new MyComp()
     
-    expect(c['$options']['props'], 'Empty prop should be a boolean').to.have.property('message').that.is.a('boolean');
+    expect(c['$options']['props'], 'Empty prop should be a boolean').to.have.property('message').to.have.property('type').that.equals(true);
     expect(c['$options']['props'], 'Prop with option').to.have.property('message2').that.has.property('default').that.equals('meh');
     expect(c['$options']['props'], 'Prop init value in constructor').to.have.property('message3').that.has.property('default').that.equals('what');
     expect(c['$options']['props'], 'Prop init value inline').to.have.property('message4').that.has.property('default').that.equals('yeah');
