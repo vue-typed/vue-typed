@@ -12,34 +12,6 @@
     (factory((global.VueTyped = global.VueTyped || {}),global.Vue));
 }(this, (function (exports,Vue) { 'use strict';
 
-function Action(action) {
-    return function (target, key, descriptor) {
-        if (!target['vuex']) {
-            target['vuex'] = {};
-        }
-        if (!target['vuex']['actions']) {
-            target['vuex']['actions'] = {};
-        }
-        if (!target['vuex']['actions'][key]) {
-            target['vuex']['actions'][key] = action;
-        }
-    };
-}
-
-function Getter(getter) {
-    return function (target, key) {
-        if (!target['vuex']) {
-            target['vuex'] = {};
-        }
-        if (!target['vuex']['getters']) {
-            target['vuex']['getters'] = {};
-        }
-        if (!target['vuex']['getters'][key]) {
-            target['vuex']['getters'][key] = getter;
-        }
-    };
-}
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
@@ -188,8 +160,6 @@ function Watch(property, deep) {
     };
 }
 
-exports.Action = Action;
-exports.Getter = Getter;
 exports.Component = Component;
 exports.Prop = Prop;
 exports.Watch = Watch;
