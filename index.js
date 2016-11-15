@@ -63,7 +63,12 @@ function Component(options) {
                 }
                 props[prop] = propVal;
             }
-            options['props'] = props;
+            if (!options.props) {
+                options.props = {};
+            }
+            for (var p in props) {
+                options.props[p] = props[p];
+            }
         }
         Object.getOwnPropertyNames(proto).forEach(function (key) {
             if (key === 'constructor') {

@@ -97,8 +97,14 @@ export function Component(options? : ComponentOptions<Vue>): ClassDecorator {
         props[prop] = propVal;
       }
 
+      if (!options.props) {
+        options.props = {}
+      }
 
-      options['props'] = props;
+      for(let p in props) {
+        options.props[p] = props[p]
+      }
+
     }
 
 
