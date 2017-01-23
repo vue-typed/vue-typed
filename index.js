@@ -1,5 +1,5 @@
 /**
-  * vue-typed 2.0.3
+  * vue-typed 2.0.4
   * Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.
   * http://vue-typed.github.io/vue-typed/
   
