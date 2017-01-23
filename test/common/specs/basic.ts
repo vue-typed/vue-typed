@@ -200,7 +200,10 @@ describe('vue-class-component based test (ts)', () => {
       b: number
       
       constructor() {
-        super();
+        super();        
+      }
+
+      created() {
         this.b = this.a + 1
       }
     }
