@@ -37,6 +37,11 @@ export function Component(options? : ComponentOptions<Vue>): ClassDecorator {
 
     // class prototype.
     var proto = Component.prototype
+    
+    // avoid parent component initialization while building component
+    if (Object.getPrototypeOf(proto) instanceof Vue)
+      Object.setPrototypeOf(proto.constructor, function() {})
+  
     var constructor = new proto.constructor();
 
 

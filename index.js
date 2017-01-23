@@ -23,6 +23,7 @@ function Component(options) {
         }
         options.name = options.name || Component.name;
         var proto = Component.prototype;
+        if (Object.getPrototypeOf(proto) instanceof Vue) Object.setPrototypeOf(proto.constructor, function () {});
         var constructor = new proto.constructor();
         var vueKeys = [];
         if (proto.vuex) {
