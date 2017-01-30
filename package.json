@@ -1,6 +1,6 @@
 {
   "name": "vue-typed",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Sets of ECMAScript / Typescript decorators that helps you write Vue component easily.",
   "keywords": [
     "vue",
