@@ -172,9 +172,11 @@ function Prop(options) {
     };
 }
 
+var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function Watch(property, deep) {
     return function (target, key) {
-        if (!target['watch']) {
+        if (_typeof$1(target['watch']) !== 'object') {
             target['watch'] = {};
         }
         if (!target['watch'][property]) {

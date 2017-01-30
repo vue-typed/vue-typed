@@ -7,7 +7,7 @@ export function Watch(property: string, deep?:boolean): MethodDecorator {
 
 	return function (target: Object, key: string) {
 		
-		if (!target['watch']) {
+		if (typeof target['watch'] !== 'object') {
 			target['watch'] = {};
 		}
 		
