@@ -12,6 +12,8 @@
     (factory((global.VueTyped = global.VueTyped || {}),global.Vue));
 }(this, (function (exports,Vue) { 'use strict';
 
+Vue = 'default' in Vue ? Vue['default'] : Vue;
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());

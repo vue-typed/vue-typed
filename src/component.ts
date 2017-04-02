@@ -3,7 +3,7 @@
  */
 
 
-import * as Vue from 'vue'
+import Vue from 'vue'
 import { ComponentOptions } from 'vue/types/options';
 import { BuildOptions } from './utils';
 

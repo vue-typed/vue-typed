@@ -1,5 +1,5 @@
 import { VirtualClass } from '../'
-import * as Vue from 'vue'
+import Vue from 'vue'
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
 var vueInternalHooks = [
