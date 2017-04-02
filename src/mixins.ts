@@ -2,7 +2,7 @@
  * Vue Mixins
  */
 
-import * as Vue from 'vue'
+import Vue from 'vue'
 import { VirtualClass } from '../'
 
 export function Mixin<T>(component: { new () : T; }): VirtualClass<T> {
