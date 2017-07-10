@@ -3,6 +3,7 @@
 var merge = require('webpack-merge')
 var webpackBase = require('../es6/webpack.config.js')
 
+
 module.exports = function (config) {
   config.set({
 
@@ -15,45 +16,32 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './specs/**/*.ts',
-      './specs/**/*.js'
+      'specs/**/*.ts',
     ],
 
     // list of files to exclude
-    exclude: [],
+    exclude: [
+    ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'specs/**/*.ts': ['webpack'],
-      'specs/**/*.js': ['webpack']
     },
-
-    babelPreprocessor: {
-      options: {
-        presets: ['es2015'],
-        sourceMap: 'inline'
-      }
-    },
-
     // webpack preprocessor config    
-    webpack: merge(webpackBase, {
+    webpack: {
       resolve: {
+        extensions: ['.js', '.ts'],
         alias: {
-          'vue$': 'vue/dist/vue.js'
+          'vue$': 'vue/dist/vue.common.js'
         }
       },
       module: {
         loaders: [
-          {
-            test: /\.ts$/,
-            loader: 'babel!ts',
-
-            // resolve: https://github.com/chaijs/chai/issues/384
-            exclude: /node_modules|vue\/src/
-          }
-      ]}
-    }),
+          { test: /\.ts(x?)$/, loader: 'ts-loader' }
+        ]
+      }
+    },
 
     webpackMiddleware: {
       quiet: false,

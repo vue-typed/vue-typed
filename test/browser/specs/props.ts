@@ -12,7 +12,7 @@ describe('props decorator', () => {
 		@Component({
 			template: '<div><div id="text">{{foo}}</div></div>'
 		})
-		class Foo {			
+		class Foo extends Vue {			
 			
 			@Prop()
 			foo: string = 'meh'

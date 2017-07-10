@@ -19,10 +19,11 @@ export default {
   moduleName: 'VueTyped',
   plugins: [
     typescript({ typescript: require('typescript') }),
-    babel({ 'presets': [['es2015', {'modules': false}]] })
+    babel({ 'presets': [['es2015', {'modules': false}]], 'plugins': ['external-helpers'] })
   ],
   banner: banner,
   globals: {
     'vue': 'Vue'
-  }
+  },
+  external: ['vue']
 }

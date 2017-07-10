@@ -11,7 +11,9 @@ describe('options', () => {
 
 		@Options({
 			props: {
-				'prop-in-options': 'Foo'
+				'prop-in-options': {
+					default: 'Foo'
+				}
 			}
 		})
 		class Container {
@@ -32,7 +34,7 @@ describe('options', () => {
 
 			}
 
-			
+
 			get identity() {
 				return this.data1;
 			}
@@ -46,7 +48,7 @@ describe('options', () => {
 
 		expect(Container['data'](), 'assert data').to.have.property('data1').eq('the data')
 		expect(Container, 'assert props').to.have.property('props').to.have.property('prop1').to.have.property('default').eq('the prop')
-		expect(Container, 'assert props in options').to.have.property('props').to.have.property('prop-in-options').eq('Foo')
+		expect(Container, 'assert props in options').to.have.property('props').to.have.property('prop-in-options').to.have.property('default').eq('Foo')
 		expect(Container, 'assert methods').to.have.property('methods').to.have.property('method1').to.be.a('Function')
 		expect(Container, 'assert created').to.have.property('created').to.be.a('Function')
 		expect(Container, 'assert watch').to.have.property('watch').to.have.property('data1').to.be.a('Function')
@@ -86,7 +88,9 @@ describe('options', () => {
 
 		@Options({
 			props: {
-				'prop-in-options': 'Foo'
+				'prop-in-options': {
+					default: 'Foo'
+				}
 			}
 		})
 		class Container extends Parent {
@@ -113,7 +117,7 @@ describe('options', () => {
 		expect(Container['data'](), 'assert parent data').to.have.property('dataParent').eq('the parent data')
 		expect(Container['data'](), 'assert super parent data').to.have.property('_identity').eq('')
 		expect(Container, 'assert props').to.have.property('props').to.have.property('prop1').to.have.property('default').eq('the prop')
-		expect(Container, 'assert props in options').to.have.property('props').to.have.property('prop-in-options').eq('Foo')
+		expect(Container, 'assert props in options').to.have.property('props').to.have.property('prop-in-options').to.have.property('default').eq('Foo')
 		expect(Container, 'assert parent props').to.have.property('props').to.have.property('propParent').to.have.property('default').eq('the parent prop')
 		expect(Container, 'assert created').to.have.property('created').to.be.a('Function')
 		expect(Container, 'assert methods').to.have.property('methods').to.have.property('method1').to.be.a('Function')

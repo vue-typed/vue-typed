@@ -7,12 +7,16 @@
   * Released under the MIT license.
   '*/
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
-    (factory((global.VueTyped = global.VueTyped || {}),global.Vue));
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
+	(factory((global.VueTyped = {}),global.Vue));
 }(this, (function (exports,Vue) { 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
 var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
 var vueInternalHooks = ['data', 'props', 'watch', 'beforeCreate', 'created', 'beforeMount', 'mounted', 'beforeUpdate', 'updated', 'activated', 'deactivated', 'beforeDestroy', 'destroyed', 'render'];
@@ -172,11 +176,9 @@ function Prop(options) {
     };
 }
 
-var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 function Watch(property, deep) {
     return function (target, key) {
-        if (_typeof$1(target['watch']) !== 'object') {
+        if (_typeof(target['watch']) !== 'object') {
             target['watch'] = {};
         }
         if (!target['watch'][property]) {
@@ -200,10 +202,10 @@ function Mixin(component) {
     });
 }
 function Mixins() {
-    for (var _len = arguments.length, components = Array(_len), _key = 0; _key < _len; _key++) {
-        components[_key] = arguments[_key];
+    var components = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        components[_i] = arguments[_i];
     }
-
     return Vue.extend({
         mixins: components
     });
