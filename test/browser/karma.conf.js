@@ -1,7 +1,6 @@
 // Karma configuration
 
 var merge = require('webpack-merge')
-var webpackBase = require('../es6/webpack.config.js')
 
 
 module.exports = function (config) {
