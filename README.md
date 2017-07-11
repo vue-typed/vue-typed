@@ -107,8 +107,12 @@ $ npm start
 
 ## Compatibility
 
-**Vue 2.0**
+**Vue 2.0** or above
+
 > For older Vue supports please refer to [VueTyped 2.0.1](https://github.com/vue-typed/vue-typed/tree/v2.0.1).
+
+**Typescript 2.2.2** or above
+
 
 
 ## License
