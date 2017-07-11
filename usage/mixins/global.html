@@ -1,0 +1,565 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Global Mixins · VueTyped</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="multiple.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../installation.html">
+            
+                <a href="../../installation.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../getting-started.html">
+            
+                <a href="../../getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Basic Usage
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../component.html">
+            
+                <a href="../component.html">
+            
+                    
+                    Component
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../options.html">
+            
+                <a href="../options.html">
+            
+                    
+                    Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../methods-and-computed-properties.html">
+            
+                <a href="../methods-and-computed-properties.html">
+            
+                    
+                    Methods and Computed Properties
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../props.html">
+            
+                <a href="../props.html">
+            
+                    
+                    Prop
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../watch.html">
+            
+                <a href="../watch.html">
+            
+                    
+                    Watch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../virtual.html">
+            
+                <a href="../virtual.html">
+            
+                    
+                    Virtual
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" >
+            
+                <span>
+            
+                    
+                    Mixins
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.7.1" data-path="single.html">
+            
+                <a href="single.html">
+            
+                    
+                    Single Mixin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.2" data-path="multiple.html">
+            
+                <a href="multiple.html">
+            
+                    
+                    Multiple Mixins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.7.3" data-path="global.html">
+            
+                <a href="global.html">
+            
+                    
+                    Global Mixins
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    Advanced Usage
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../advanced/vue-router.html">
+            
+                <a href="../../advanced/vue-router.html">
+            
+                    
+                    VueRouter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../advanced/class-inheritance.html">
+            
+                <a href="../../advanced/class-inheritance.html">
+            
+                    
+                    Class Inheritance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Examples
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../examples/todo-mvc.html">
+            
+                <a href="../../examples/todo-mvc.html">
+            
+                    
+                    Todo MVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Global Mixins</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="global-mixin">Global Mixin</h1>
+<p>To have a global mixin just simply decorate your class with <code>@GlobalMixin</code> decorator.</p>
+<h3 id="example">Example</h3>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { GlobalMixin } from <span class="hljs-string">&apos;vue-typed&apos;</span>
+
+@GlobalMixin()
+<span class="hljs-keyword">class</span> Global {
+  created() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;created method called from global mixin&apos;</span>);        
+  }
+  globalMethod() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;global method called&apos;</span>);        
+  }
+}
+</code></pre>
+<p>is equivalent to </p>
+<pre><code class="lang-javascript">Vue.mixin({
+  created: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;created method called from global mixin&apos;</span>);        
+  },
+  methods: {
+    globalMethod: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;global method called&apos;</span>);        
+    }
+  }
+})
+</code></pre>
+<h2 id="invoke-global-method">Invoke global method</h2>
+<p>From the example above you should be able to do this:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { Component } from <span class="hljs-string">&apos;vue-typed&apos;</span>
+
+@Component({
+  template: <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./container.html&apos;</span>)
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Container {
+  created() {
+    <span class="hljs-comment">// Raising error since globalMethod is not defined</span>
+    <span class="hljs-keyword">this</span>.globalMethod()
+  }
+}
+</code></pre>
+<p>But unfortunatelly NOT, the <code>globalMethod()</code> will not recognized by <code>Container</code> class since it&apos;s not defined anywhere. Thus you have to extend this class from <code>Global</code> class. 
+But again it&apos;s not make sense since the <code>globalMethod()</code> is actually already exists magically be the global mixin. Then here&apos;s come <code>Virtual&lt;T&gt;</code> function to help you:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { Component, Virtual } from <span class="hljs-string">&apos;vue-typed&apos;</span>
+
+@Component({
+  template: <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./container.html&apos;</span>)
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Container extends Virtual&lt;Global&gt;() {
+  created() {
+    <span class="hljs-comment">// It&apos;s available now</span>
+    <span class="hljs-keyword">this</span>.globalMethod()
+  }
+}
+</code></pre>
+<p><code>Virtual&lt;T&gt;</code> function is just a helper to help us deal with typescript. It does not extend the class anywhere but an empty function.</p>
+<p>You will do same way to invoke both the global methods and mixin(s) methods together:</p>
+<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { Component, Options, Mixin, Virtual } from <span class="hljs-string">&apos;vue-typed&apos;</span>
+
+@Options()
+<span class="hljs-keyword">class</span> MyMixin extends Virtual&lt;Global&gt;() {
+  mymix() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;my mix method called&apos;</span>);        
+  }
+}
+
+@Component({
+  template: <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./container.html&apos;</span>),
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Container extends Mixin(MyMixin) {
+  created() {
+    <span class="hljs-keyword">this</span>.mymix()
+    <span class="hljs-keyword">this</span>.globalMethod()
+  }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="multiple.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Multiple Mixins">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Global Mixins","level":"1.4.7.3","depth":3,"next":{"title":"Advanced Usage","level":"1.5","depth":1,"ref":"","articles":[{"title":"VueRouter","level":"1.5.1","depth":2,"path":"advanced/vue-router.md","ref":"advanced/vue-router.md","articles":[]},{"title":"Class Inheritance","level":"1.5.2","depth":2,"path":"advanced/class-inheritance.md","ref":"advanced/class-inheritance.md","articles":[]}]},"previous":{"title":"Multiple Mixins","level":"1.4.7.2","depth":3,"path":"usage/mixins/multiple.md","ref":"usage/mixins/multiple.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"edit-link":{"label":"Edit This Page","base":"https://github.com/vue-typed/vue-typed/tree/docs/docs"},"github":{"url":"https://github.com/vue-typed/vue-typed/"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"VueTyped","gitbook":"*"},"file":{"path":"usage/mixins/global.md","mtime":"2017-01-23T11:47:25.330Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-07-11T01:55:16.577Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
