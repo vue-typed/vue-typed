@@ -1,6 +1,6 @@
 # Options
 
-Is a decorator that converts your `class` into **Vue** options object.
+Is a decorator that converts your `class` into **Vue** simple options object. `Options` does not support inheritance nor mixins. To force inheritance in `Options` please refer to [Virtual](virtual.html).
 
 ```typescript
 @Options({
@@ -74,7 +74,6 @@ var Container = {
     data1: function(val){
       // do something...
     }
-  },
-  data: [Function]
+  }
 }
 ```

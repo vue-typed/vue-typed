@@ -8,6 +8,7 @@
 	* [Methods and Computed Properties](usage/methods-and-computed-properties.md)
 	* [Prop](usage/props.md)
 	* [Watch](usage/watch.md)
+	* [Virtual](usage/virtual.md)
 	* Mixins
 		* [Single Mixin](usage/mixins/single.md)
 		* [Multiple Mixins](usage/mixins/multiple.md)

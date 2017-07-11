@@ -9,10 +9,18 @@ class Foo { }
 @Component({ template: '<div>This is bar!</div>' }) 
 class Bar { }
 
-var routes = [
-  { path: '/foo', Foo },
-  { path: '/bar', Bar },
+const routes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
 ]
+
+const router = new VueRouter({
+  routes // short for routes: routes
+})
+
+new Vue({
+  router
+}).$mount('#app')
 ```
 
 

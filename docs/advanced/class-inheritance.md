@@ -35,4 +35,6 @@ class Child extends Parent {
 }
 ```  
 
+Inheritance only works for `Component`.
+
 See live demo [here](http://embed.plnkr.co/3o8enK/) or [here](http://embed.plnkr.co/S3XEbG/).
