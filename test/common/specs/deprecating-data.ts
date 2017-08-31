@@ -1,4 +1,4 @@
-import { Component, Prop, Watch } from '../../../index'
+import { Component, Prop, Watch } from '../../../dist/index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 import { getDataOptionsValue } from '../utils';

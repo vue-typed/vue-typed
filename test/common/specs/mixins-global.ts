@@ -1,4 +1,4 @@
-import { Component, Prop, GlobalMixin, Virtual } from '../../../index'
+import { Component, Prop, GlobalMixin, Virtual } from '../../../dist/index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -12,17 +12,17 @@ describe('global mixins', () => {
 		let globalMethodInvoked = false
 
 		interface IGlobal {
-			globalMethod()
+			globalMethod(): void
 		}
 
 		@GlobalMixin()
-		class Global implements IGlobal {
+		class Global extends Vue implements IGlobal {
 
 			created() {
 				globalMixinCreated = true
 			}
 
-			globalMethod() {
+			globalMethod(): void {
 				globalMethodInvoked = true
 			}
 
@@ -39,7 +39,7 @@ describe('global mixins', () => {
 			}
 		}
 
-		const c = new MyComp()
+		const c:any = new MyComp()
 
 		expect(globalMixinCreated).eq(true)
 		expect(globalMethodInvoked).eq(true)

@@ -1,16 +1,20 @@
-/**
- * Vue Options
- */
-
 import * as Vue from 'vue'
 import { ComponentOptions } from 'vue/types/options';
 import { BuildOptions } from './utils';
 
+/**
+ * Build Vue simple raw options object.
+ * Inheritance is not supported, unless virtual inheritance.
+ * 
+ * @export
+ * @param {ComponentOptions<Vue>} [options] 
+ * @returns {ClassDecorator} 
+ */
 export function Options(options?: ComponentOptions<Vue>): ClassDecorator {
 
-	return function (Component) {
+	return function (Component: any) {
 
-		function chainUp(component) {
+		function chainUp(component: any) {
 			var Super = Object.getPrototypeOf(component)
 
 			if (Super instanceof Object && Super.prototype) {
@@ -28,7 +32,7 @@ export function Options(options?: ComponentOptions<Vue>): ClassDecorator {
 		// normalize object
 		chainUp(Component)
 
-		return BuildOptions(Component, options)
+		return BuildOptions(Component, options) as any
 	}
 
 }

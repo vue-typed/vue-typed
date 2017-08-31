@@ -1,4 +1,4 @@
-import { Component, Prop, Watch } from '../../../index';
+import { Component, Watch } from '../../../dist/index';
 import { expect } from 'chai';
 import * as Vue from 'vue';
 
@@ -26,7 +26,7 @@ describe('watch decorator', () => {
 
 			data2: number = 1;
 
-			info: string = undefined;
+			info: string|any = undefined;
 
 			changeData1() {
 				this.data1 = 'Hola!';
@@ -71,11 +71,11 @@ describe('watch decorator', () => {
 	it('it should be able to observe deep data changes', (done) => {
 
 		class Foo {
-			constructor(title){
+			constructor(title: string){
 				this.title = title;
 			}
 
-			title: string = undefined
+			title: string | any = undefined
 		}
 
 
@@ -92,7 +92,7 @@ describe('watch decorator', () => {
 		class Watcher {
 			data: Foo[] = [ new Foo('Hello!') ];
 
-			info: string = undefined;
+			info: string | any = undefined;
 
 			changeData1() {
 				this.data[0].title = 'Hi!';

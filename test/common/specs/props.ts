@@ -1,4 +1,4 @@
-import { Component, Prop } from '../../../index'
+import { Component, Prop } from '../../../dist/index'
 import { expect } from 'chai'
 
 
@@ -15,7 +15,7 @@ describe('props extending tests', () => {
 		class App {
 
 			@Prop({ type: Number })
-			age
+			age: number
 		}
 
 		var app = new App()

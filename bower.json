@@ -17,7 +17,7 @@
       "type": "git",
       "url": "https://github.com/vue-typed/vue-typed.git"
     },
-    "main": "index.js",
+    "main": "dist/index.js",
     "moduleType": [
       "amd", "es6", "globals", "node"
     ],    

@@ -1,12 +1,14 @@
-/**
- * Vue Component
- */
-
-
 import * as Vue from 'vue'
 import { ComponentOptions } from 'vue/types/options';
 import { BuildOptions } from './utils';
 
+/**
+ * Build Vue component.
+ * 
+ * @export
+ * @param {ComponentOptions<Vue>} [options] 
+ * @returns {ClassDecorator} 
+ */
 export function Component(options?: ComponentOptions<Vue>): ClassDecorator {
 
   var factory = function (Component: Function, options?: any): <Function>(target: any) => Function | void {
@@ -24,7 +26,7 @@ export function Component(options?: ComponentOptions<Vue>): ClassDecorator {
   }
 
   return function (Component) {
-    return factory(Component, options)
+    return factory(Component, options) as any
   }
 
 }

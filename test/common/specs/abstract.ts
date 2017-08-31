@@ -1,4 +1,4 @@
-import { Component, Prop } from '../../../index'
+import { Component, Prop } from '../../../dist/index'
 
 export abstract class AbstractClass {
 
@@ -7,7 +7,7 @@ export abstract class AbstractClass {
 	@Prop({
 		default: 'hi'
 	})
-	baseProp
+	baseProp: string
 
 }
 
@@ -19,7 +19,7 @@ export abstract class AbstractComponent {
 	@Prop({
 		default: 'hi'
 	})
-	baseProp
+	baseProp: string
 
 }
 

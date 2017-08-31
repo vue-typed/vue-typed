@@ -1,6 +1,5 @@
-import { Component, Prop } from '../../../index'
+import { Component, Prop } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
 
 import { AbstractClass, AbstractComponent } from './abstract';
 
@@ -19,7 +18,7 @@ describe('inheritance', () => {
 			@Prop({
 				default: 'hi'
 			})
-			baseProp
+			baseProp: string
 
 			method1() {
 
@@ -29,7 +28,7 @@ describe('inheritance', () => {
 		@Component()
 		class App extends Base {
 
-			msg: string = undefined
+			msg: any = undefined
 		}
 
 		var app = new App();
@@ -46,7 +45,7 @@ describe('inheritance', () => {
 		@Component()
 		class App extends AbstractClass {
 
-			msg: string = undefined
+			msg: any = undefined
 		}
 
 		var app = new App();
@@ -61,7 +60,7 @@ describe('inheritance', () => {
 		@Component()
 		class App extends AbstractComponent {
 
-			msg: string = undefined
+			msg: any = undefined
 		}
 
 		var app = new App();

@@ -1,4 +1,4 @@
-import { Component } from '../../../index'
+import { Component } from '../../../dist/index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 

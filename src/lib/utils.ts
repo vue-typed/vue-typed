@@ -1,8 +1,12 @@
-import { VirtualClass } from '../'
-import * as Vue from 'vue'
+/**
+ * Internal utilities.
+ */
 
-var vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
-var vueInternalHooks = [
+import * as Vue from 'vue'
+import { ComponentOptions } from "vue";
+
+let vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
+let vueInternalHooks = [
 	'data',
 	'props',
 	'watch',
@@ -19,10 +23,14 @@ var vueInternalHooks = [
 	'render'
 ]
 
-export function BuildOptions(Component: Function, options?: any): <Function>(target: any) => Function | void {
+/** @internal */
+export const PROP_KEY = '$_vt_props'
 
 
+/** @internal */
+export function BuildOptions(Component: Function & ComponentOptions<Vue>, options?: any): <Function>(target: any) => Function | void {
 
+	// evaluate component name
 	if (!options) {
 		options = {}
 	}
@@ -30,46 +38,31 @@ export function BuildOptions(Component: Function, options?: any): <Function>(tar
 
 
 	// class prototype.
-	var proto = Component.prototype
+	let proto = Component.prototype
 
 	// avoid parent component initialization while building component
 	if (Object.getPrototypeOf(proto) instanceof Vue)
 		Object.setPrototypeOf(proto.constructor, function () { })
 
-	var constructor = new proto.constructor();
+	let constructor = new proto.constructor();
 
 
-	// has vuex?
-	var vueKeys = [];
-	if (proto.vuex) {
-		var protoVue = proto.vuex;
-		if (protoVue['getters']) {
-			Object.getOwnPropertyNames(protoVue['getters']).forEach((k) => {
-				vueKeys.push(k);
-			});
-		}
 
-		if (protoVue['actions']) {
-			Object.getOwnPropertyNames(protoVue['actions']).forEach((k) => {
-				vueKeys.push(k);
-			});
-		}
-	}
-
-	var propAttrs = proto['$_vt_props'];
-	var propNames = undefined;
-
-	delete proto['$_vt_props'];
+	//
+	// Extract props / build options.props
+	//
+	let propAttrs = proto[PROP_KEY];
+	let propNames = undefined;
+	delete proto[PROP_KEY];
 	if (propAttrs) {
-		var key = 'props';
-		var props = {}
+		let props = {}
 
 		propNames = Object.getOwnPropertyNames(propAttrs);
-		for (var i = 0; i < propNames.length; i++) {
-			var prop = propNames[i];
-			var propVal = undefined;
-			var descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop)
-			var constructorDefault = constructor[prop];
+		for (let i = 0; i < propNames.length; i++) {
+			let prop = propNames[i];
+			let propVal = undefined;
+			let descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop)
+			let constructorDefault = constructor[prop];
 
 			if (typeof (descriptor.value) === 'object') {
 
@@ -108,6 +101,9 @@ export function BuildOptions(Component: Function, options?: any): <Function>(tar
 
 
 
+	//
+	// build internal hooks, methods and computed properties
+	//
 	Object.getOwnPropertyNames(proto).forEach(function (key) {
 
 		// skip constructor     
@@ -116,24 +112,22 @@ export function BuildOptions(Component: Function, options?: any): <Function>(tar
 		}
 
 
-		// hooks
+		// internal hooks
 		if (vueInternalHooks.indexOf(key) > -1) {
 			options[key] = proto[key]
 			return
 		}
 
 
-		var descriptor = Object.getOwnPropertyDescriptor(proto, key)
+		let descriptor = Object.getOwnPropertyDescriptor(proto, key)
 		if (typeof descriptor.value === 'function') {
-
-			if (vueKeys.indexOf(key) > -1)
-				return
 
 			// methods
 			(options.methods || (options.methods = {}))[key] = descriptor.value
 
 
 		} else if (descriptor.get || descriptor.set) {
+
 			// computed properties
 			(options.computed || (options.computed = {}))[key] = {
 				get: descriptor.get,
@@ -143,41 +137,39 @@ export function BuildOptions(Component: Function, options?: any): <Function>(tar
 	})
 
 
-	// Processing data attributes
-
-	var dataNames = []
-	var restrictedNames = vueInternalPropNames;
+	//
+	// Build options.data
+	//
+	let dataNames: string[] = []
+	let restrictedNames = vueInternalPropNames;
 	if (propNames) restrictedNames = restrictedNames.concat(propNames);
-	if (vueKeys && vueKeys.length) restrictedNames = restrictedNames.concat(vueKeys);
 
+	// gather data from constructor
 	Object.getOwnPropertyNames(constructor).forEach(function (key) {
-
-		if (restrictedNames.indexOf(key) === -1) {
+		if (restrictedNames.indexOf(key) === -1)
 			dataNames.push(key);
-		}
-
 	});
 
 
 	if (dataNames.length > 0) {
 
 		// evaluate parent data
-		var parentData = undefined
-		var parentDataType = typeof options['data'];
+		let parentData: any = undefined
+		let parentDataType = typeof options.data;
 		if (parentDataType === 'function') {
-			parentData = options['data']();
+			parentData = options.data();
 		} else if (parentDataType === 'object') {
-			parentData = options['data'];
+			parentData = options.data;
 		}
 
-		options['data'] = () => {
+		options.data = () => {
 
 			// define new data object
-			var data_obj = parentData || {}
+			let data_obj = parentData || {}
 
 			// set data default values initialized from constructor
 			dataNames.forEach(function (prop) {
-				var descriptor = Object.getOwnPropertyDescriptor(constructor, prop)
+				let descriptor = Object.getOwnPropertyDescriptor(constructor, prop)
 				if (!descriptor.get && !descriptor.set && typeof descriptor.value !== 'function') {
 					data_obj[prop] = constructor[prop]
 				}
@@ -187,10 +179,6 @@ export function BuildOptions(Component: Function, options?: any): <Function>(tar
 		}
 	}
 
-		return options;
+	return options;
 
-}
-
-export function Virtual<T>(): VirtualClass<T> {
-	return function () { } as any;
 }

@@ -19,16 +19,18 @@
     "type": "git",
     "url": "https://github.com/vue-typed/vue-typed.git"
   },
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/lib"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && webpack",
     "test:_es6": "webpack --config test/es6/webpack.config.js && mocha test/es6/test.build.js",
-    "test:_common": "mocha --require ts-node/register test/common/specs/**/*.ts",
+    "test:_common": "mocha --require test/common/tshook.js test/common/specs/**/*.ts",
     "test:_browser": "karma start test/browser/karma.conf.js",
     "test:es6": "npm run build && npm run test:_es6",
     "test:common": "npm run build && npm run test:_common",

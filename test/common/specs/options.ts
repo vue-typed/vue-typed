@@ -1,7 +1,5 @@
-import { Prop, Mixin, Mixins, Options, Watch } from '../../../index'
+import { Prop, Options, Watch } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
-
 
 describe('options', () => {
 
@@ -30,7 +28,7 @@ describe('options', () => {
 			}
 
 			@Watch('data1')
-			watcher(val) {
+			watcher(val: any) {
 
 			}
 
@@ -104,7 +102,7 @@ describe('options', () => {
 			}
 
 			@Watch('data1')
-			watcher(val) {
+			watcher(val: any) {
 
 			}
 

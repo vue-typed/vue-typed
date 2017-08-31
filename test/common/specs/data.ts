@@ -1,6 +1,5 @@
-import { Component } from '../../../index'
+import { Component } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
 
 
 describe('vue-class-component data test', () => {
@@ -10,7 +9,7 @@ describe('vue-class-component data test', () => {
 
 		@Component()
 		class App {
-			msg: string = undefined
+			msg: any = undefined
 		}
 
 		var app = new App();

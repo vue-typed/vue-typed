@@ -1,4 +1,4 @@
-import { Component, Prop, Watch } from '../../../index'
+import { Component, Prop, Watch } from '../../../dist/index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -157,7 +157,7 @@ describe('vue-class-component based test (ts)', () => {
   })
 
   it('other options', (done) => {
-    let v
+    let v: number
 
     @Component({
       watch: {

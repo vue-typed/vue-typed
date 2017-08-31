@@ -1,8 +1,12 @@
 
 /**
- * Make a function to be a watch observer.
+ * Treat a function as a Vue watcher.
+ * 
+ * @export
+ * @param {string} property 
+ * @param {boolean} [deep] 
+ * @returns {MethodDecorator} 
  */
-
 export function Watch(property: string, deep?:boolean): MethodDecorator {
 
 	return function (target: Object, key: string) {

@@ -1,4 +1,4 @@
-import { Component, Prop, Mixin, Mixins, Options } from '../../../index'
+import { Component, Prop, Mixin, Mixins, Options, Virtual } from '../../../dist/index'
 import { expect } from 'chai'
 import * as Vue from 'vue'
 
@@ -13,8 +13,8 @@ describe('mixins', () => {
 		let mixinMethodCalled = false
 
 		@Component()
-		class MyMixin {
-			
+		class MyMixin extends Vue {
+
 			mixinData = 'data from mixin'
 
 			@Prop()
@@ -36,7 +36,7 @@ describe('mixins', () => {
 			}
 		}
 
-		var c = new Container()
+		var c: any = new Container()
 
 		expect(mixinCreated).eq(true)
 		expect(mixinMethodCalled).eq(true)
@@ -56,7 +56,7 @@ describe('mixins', () => {
 
 
 		@Component()
-		class MyMixin1 {
+		class MyMixin1 extends Vue {
 
 			mixinData1 = 'data from mixin 1'
 
@@ -70,10 +70,10 @@ describe('mixins', () => {
 			mymix1() {
 				mixinMethodCalled1 = true
 			}
-		}				
+		}
 
 		@Component()
-		class MyMixin2 {
+		class MyMixin2 extends Vue {
 			mixinData2 = 'data from mixin 2'
 
 			@Prop()
@@ -98,7 +98,7 @@ describe('mixins', () => {
 			}
 		}
 
-		var c = new Container()
+		var c: any = new Container()
 
 		expect(mixinCreated1).eq(true)
 		expect(mixinMethodCalled1).eq(true)
@@ -119,8 +119,8 @@ describe('mixins', () => {
 		let mixinMethodCalled = false
 
 		@Options()
-		class MyMixin {
-			
+		class MyMixin extends Virtual<Vue>() {
+
 			mixinData = 'data from mixin'
 
 			@Prop()
@@ -137,12 +137,12 @@ describe('mixins', () => {
 
 		@Component()
 		class Container extends Mixin(MyMixin) {
-			created() {
+			created() {				
 				this.mymix()
 			}
 		}
 
-		var c = new Container()
+		var c: any = new Container()
 
 		expect(mixinCreated).eq(true)
 		expect(mixinMethodCalled).eq(true)
@@ -162,7 +162,7 @@ describe('mixins', () => {
 
 
 		@Options()
-		class MyMixin1 {
+		class MyMixin1 extends Vue {
 
 			mixinData1 = 'data from mixin 1'
 
@@ -176,10 +176,10 @@ describe('mixins', () => {
 			mymix1() {
 				mixinMethodCalled1 = true
 			}
-		}				
+		}
 
 		@Options()
-		class MyMixin2 {
+		class MyMixin2 extends Vue {
 			mixinData2 = 'data from mixin 2'
 
 			@Prop()
@@ -204,7 +204,7 @@ describe('mixins', () => {
 			}
 		}
 
-		var c = new Container()
+		var c: any = new Container()
 
 		expect(mixinCreated1).eq(true)
 		expect(mixinMethodCalled1).eq(true)
