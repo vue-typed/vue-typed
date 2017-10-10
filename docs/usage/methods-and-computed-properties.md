@@ -4,25 +4,29 @@
 All methods in `Component` class will become part of `methods` attributes except for the internal hook methods used by **Vue** (eg: `created, beforeDestroy, destroyed`, etc...).  You can also define `getter` and `setter` that will become part of `computed` attribute.
 
 ```typescript
-@Component({
-  template: 
+import { Component } from 'vue-typed'
+import Vue from 'vue'
+
+@Component(<Vue.ComponentOptions<Foo>>{
+  template:
   `<div>
-      <div id="text">
-        now: <span id="now">{{val}}</span>, 
-        next: <span id="next">{{next}}</span>
-      </div>
+    <div id="text">
+      now: <span id="now">{{val}}</span>, 
+      next: <span id="next">{{next}}</span>
+    </div>
     <button id="btn" v-on:click="inc">Inc</button>
-  </div>`
-})
-class Foo {
-
-  // data
-  val: number = 1
-
+  </div>`,
+  
   // part of internal hooks
   created() {
     console.log('Foo created')
+    this.val = 2 // autocomplete work OK
   }
+})
+class Foo extends Vue {
+
+  // data
+  val: number = 1
 
   // method
   inc() {
@@ -30,7 +34,7 @@ class Foo {
   }
 
   // property - get
-  get next() : number {
+  get next(): number {
     return this.val + 1;
   }
 
