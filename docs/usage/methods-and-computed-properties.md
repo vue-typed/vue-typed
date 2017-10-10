@@ -6,9 +6,8 @@ All methods in `Component` class will become part of `methods` attributes except
 ```typescript
 import { Component } from 'vue-typed'
 import Vue from 'vue'
-import { ComponentOptions } from 'vue/types/options';
 
-@Component(<ComponentOptions<Foo>>{
+@Component(<Vue.ComponentOptions<Foo>>{
   template:
   `<div>
     <div id="text">
