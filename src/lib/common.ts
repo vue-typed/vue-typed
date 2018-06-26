@@ -2,7 +2,7 @@
  * Common helpers.
  */
 
-import * as Vue from 'vue';
+import Vue from 'vue';
 
 /**
  * Vue object declarations from "T".

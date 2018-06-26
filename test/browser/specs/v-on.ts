@@ -1,6 +1,6 @@
 import { Component } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
+import Vue from 'vue'
 
 
 describe('v-on', () => {

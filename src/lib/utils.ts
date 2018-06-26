@@ -2,8 +2,7 @@
  * Internal utilities.
  */
 
-import * as Vue from 'vue'
-import { ComponentOptions } from "vue";
+import Vue, { ComponentOptions, VueConstructor } from "vue";
 
 let vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
 let vueInternalHooks = [
@@ -28,7 +27,7 @@ export const PROP_KEY = '$_vt_props'
 
 
 /** @internal */
-export function BuildOptions(Component: Function & ComponentOptions<Vue>, options?: any): <Function>(target: any) => Function | void {
+export function BuildOptions(Component: Function & ComponentOptions<Vue>, options?: any): <Function>(target: any) => VueConstructor | void {
 
 	// evaluate component name
 	if (!options) {
@@ -61,7 +60,7 @@ export function BuildOptions(Component: Function & ComponentOptions<Vue>, option
 		for (let i = 0; i < propNames.length; i++) {
 			let prop = propNames[i];
 			let propVal = undefined;
-			let descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop)
+			let descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop) as PropertyDescriptor
 			let constructorDefault = constructor[prop];
 
 			if (typeof (descriptor.value) === 'object') {
@@ -119,7 +118,7 @@ export function BuildOptions(Component: Function & ComponentOptions<Vue>, option
 		}
 
 
-		let descriptor = Object.getOwnPropertyDescriptor(proto, key)
+		let descriptor = Object.getOwnPropertyDescriptor(proto, key) as PropertyDescriptor
 		if (typeof descriptor.value === 'function') {
 
 			// methods
@@ -169,7 +168,7 @@ export function BuildOptions(Component: Function & ComponentOptions<Vue>, option
 
 			// set data default values initialized from constructor
 			dataNames.forEach(function (prop) {
-				let descriptor = Object.getOwnPropertyDescriptor(constructor, prop)
+				let descriptor = Object.getOwnPropertyDescriptor(constructor, prop) as PropertyDescriptor
 				if (!descriptor.get && !descriptor.set && typeof descriptor.value !== 'function') {
 					data_obj[prop] = constructor[prop]
 				}

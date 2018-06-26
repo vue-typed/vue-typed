@@ -1,6 +1,6 @@
 import { Component, Prop, Watch } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
+import Vue from 'vue'
 import { getDataOptionsValue } from '../utils';
 
 describe('deprecating data test', () => {

@@ -1,4 +1,4 @@
-import * as Vue from 'vue'
+import Vue, { ComponentOptions } from 'vue';
 import { VirtualClass } from "./common";
 
 /**
@@ -9,9 +9,9 @@ import { VirtualClass } from "./common";
  * @param {{ new () : T; }} component 
  * @returns {VirtualClass<T>} 
  */
-export function Mixin<T>(component: { new(): T; }): VirtualClass<T> {
+export function Mixin<T>(component: ({ new(): T; } | ComponentOptions<Vue> | typeof Vue)): VirtualClass<T> {
 	return Vue.extend({
-		mixins: [component]
+		mixins: [component as ComponentOptions<Vue> | typeof Vue]		
 	}) as any
 }
 
@@ -23,8 +23,8 @@ export function Mixin<T>(component: { new(): T; }): VirtualClass<T> {
  * @param {...{ new () : any; }[]} components 
  * @returns {VirtualClass<T>} 
  */
-export function Mixins<T>(...components: { new(): any; }[]): VirtualClass<T> {
+export function Mixins<T>(...components: ({ new(): any; } | ComponentOptions<Vue> | typeof Vue)[]): VirtualClass<T> {
 	return Vue.extend({
-		mixins: components
+		mixins: components as (ComponentOptions<Vue> | typeof Vue)[]
 	}) as any
 }

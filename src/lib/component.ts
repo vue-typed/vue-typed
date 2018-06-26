@@ -1,5 +1,4 @@
-import * as Vue from 'vue'
-import { ComponentOptions } from 'vue/types/options';
+import Vue, { ComponentOptions } from 'vue'
 import { BuildOptions } from './utils';
 
 /**

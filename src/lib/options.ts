@@ -1,5 +1,4 @@
-import * as Vue from 'vue'
-import { ComponentOptions } from 'vue/types/options';
+import Vue, { ComponentOptions } from 'vue'
 import { BuildOptions } from './utils';
 
 /**
@@ -21,7 +20,7 @@ export function Options(options?: ComponentOptions<Vue>): ClassDecorator {
 				var keys = Object.getOwnPropertyNames(Super.prototype)
 				for (var i = 0; i < keys.length; i++) {
 					var key = keys[i]
-					var descriptor = Object.getOwnPropertyDescriptor(Super.prototype, key);
+					var descriptor = Object.getOwnPropertyDescriptor(Super.prototype, key) as PropertyDecorator; 
 					if (!Component.prototype.hasOwnProperty(key))
 						Object.defineProperty(Component.prototype, key, descriptor)
 				}

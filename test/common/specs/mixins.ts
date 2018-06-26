@@ -1,6 +1,6 @@
 import { Component, Prop, Mixin, Mixins, Options, Virtual } from '../../../dist/index'
 import { expect } from 'chai'
-import * as Vue from 'vue'
+import Vue from 'vue'
 
 
 describe('mixins', () => {

@@ -1,5 +1,4 @@
-import * as Vue from 'vue'
-import { ComponentOptions } from 'vue/types/options';
+import Vue, { ComponentOptions } from 'vue'
 import { BuildOptions } from './utils';
 
 /**
@@ -12,7 +11,7 @@ import { BuildOptions } from './utils';
 export function GlobalMixin(options?: ComponentOptions<Vue>): ClassDecorator {
 	
 	var factory = function (Component: Function, options?: any): void {
-		Vue.mixin(BuildOptions(Component, options))
+		Vue.mixin(BuildOptions(Component, options) as any)
 	}
 
 	return function (Component) {
