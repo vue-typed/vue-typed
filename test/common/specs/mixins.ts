@@ -1,220 +1,234 @@
-import { Component, Prop, Mixin, Mixins, Options, Virtual } from '../../../dist/index'
 import { expect } from 'chai'
 import Vue from 'vue'
-
+import {
+  Component,
+  Mixin,
+  Mixins,
+  Options,
+  Prop,
+  Virtual
+} from '../../../dist/index'
 
 describe('mixins', () => {
+  it('single mixin', () => {
+    let mixinCreatedCalls = 0
+    let mixinCreated = false
+    let mixinMethodCalled = false
 
+    @Component()
+    class MyMixin extends Vue {
+      mixinData = 'data from mixin'
 
-	it('single mixin', () => {
+      @Prop() mixinProp = 'prop from mixin'
 
-		let mixinCreatedCalls = 0
-		let mixinCreated = false
-		let mixinMethodCalled = false
+      created() {
+        mixinCreatedCalls++
+        mixinCreated = true
+      }
+      mymix() {
+        mixinMethodCalled = true
+      }
+    }
 
-		@Component()
-		class MyMixin extends Vue {
+    @Component()
+    class Container extends Mixin(MyMixin) {
+      created() {
+        this.mymix()
+      }
+    }
 
-			mixinData = 'data from mixin'
+    const c: any = new Container()
 
-			@Prop()
-			mixinProp = 'prop from mixin'
+    expect(mixinCreated).eq(true)
+    expect(mixinMethodCalled).eq(true)
+    expect(mixinCreatedCalls, 'mixin created method should be called once').eq(
+      1
+    )
+    expect(c['$options']['data']())
+      .to.have.property('mixinData')
+      .that.equals('data from mixin')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp')
+      .have.property('default')
+      .that.equals('prop from mixin')
+  })
 
-			created() {
-				mixinCreatedCalls++
-				mixinCreated = true
-			}
-			mymix() {
-				mixinMethodCalled = true
-			}
-		}
+  it('multiple mixins', () => {
+    let mixinCreated1 = false
+    let mixinMethodCalled1 = false
+    let mixinCreated2 = false
+    let mixinMethodCalled2 = false
 
-		@Component()
-		class Container extends Mixin(MyMixin) {
-			created() {
-				this.mymix()
-			}
-		}
+    @Component()
+    class MyMixin1 extends Vue {
+      mixinData1 = 'data from mixin 1'
 
-		var c: any = new Container()
+      @Prop() mixinProp1 = 'prop from mixin 1'
 
-		expect(mixinCreated).eq(true)
-		expect(mixinMethodCalled).eq(true)
-		expect(mixinCreatedCalls, 'mixin created method should be called once').eq(1)
-		expect(c['$options']['data']()).to.have.property('mixinData').that.equals('data from mixin')
-		expect(c['$options']['props']).to.have.property('mixinProp').have.property('default').that.equals('prop from mixin')
+      created() {
+        mixinCreated1 = true
+      }
 
+      mymix1() {
+        mixinMethodCalled1 = true
+      }
+    }
 
-	})
+    @Component()
+    class MyMixin2 extends Vue {
+      mixinData2 = 'data from mixin 2'
 
-	it('multiple mixins', () => {
+      @Prop() mixinProp2 = 'prop from mixin 2'
 
-		let mixinCreated1 = false
-		let mixinMethodCalled1 = false
-		let mixinCreated2 = false
-		let mixinMethodCalled2 = false
+      created() {
+        mixinCreated2 = true
+      }
 
+      mymix2() {
+        mixinMethodCalled2 = true
+      }
+    }
 
-		@Component()
-		class MyMixin1 extends Vue {
+    interface AllMyMixins extends MyMixin1, MyMixin2 {}
 
-			mixinData1 = 'data from mixin 1'
+    @Component()
+    class Container extends Mixins<AllMyMixins>(MyMixin1, MyMixin2) {
+      created() {
+        this.mymix1()
+        this.mymix2()
+      }
+    }
 
-			@Prop()
-			mixinProp1 = 'prop from mixin 1'
+    const c: any = new Container()
 
-			created() {
-				mixinCreated1 = true
-			}
+    expect(mixinCreated1).eq(true)
+    expect(mixinMethodCalled1).eq(true)
+    expect(mixinCreated2).eq(true)
+    expect(mixinMethodCalled2).eq(true)
+    expect(c['$options']['data']())
+      .to.have.property('mixinData1')
+      .that.equals('data from mixin 1')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp1')
+      .have.property('default')
+      .that.equals('prop from mixin 1')
+    expect(c['$options']['data']())
+      .to.have.property('mixinData2')
+      .that.equals('data from mixin 2')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp2')
+      .have.property('default')
+      .that.equals('prop from mixin 2')
+  })
 
-			mymix1() {
-				mixinMethodCalled1 = true
-			}
-		}
+  it('single mixin using @Options', () => {
+    let mixinCreatedCalls = 0
+    let mixinCreated = false
+    let mixinMethodCalled = false
 
-		@Component()
-		class MyMixin2 extends Vue {
-			mixinData2 = 'data from mixin 2'
+    @Options()
+    class MyMixin extends Virtual<Vue>() {
+      mixinData = 'data from mixin'
 
-			@Prop()
-			mixinProp2 = 'prop from mixin 2'
+      @Prop() mixinProp = 'prop from mixin'
 
-			created() {
-				mixinCreated2 = true
-			}
+      created() {
+        mixinCreatedCalls++
+        mixinCreated = true
+      }
+      mymix() {
+        mixinMethodCalled = true
+      }
+    }
 
-			mymix2() {
-				mixinMethodCalled2 = true
-			}
-		}
+    @Component()
+    class Container extends Mixin(MyMixin) {
+      created() {
+        this.mymix()
+      }
+    }
 
-		interface AllMyMixins extends MyMixin1, MyMixin2 { }
+    const c: any = new Container()
 
-		@Component()
-		class Container extends Mixins<AllMyMixins>(MyMixin1, MyMixin2) {
-			created() {
-				this.mymix1()
-				this.mymix2()
-			}
-		}
+    expect(mixinCreated).eq(true)
+    expect(mixinMethodCalled).eq(true)
+    expect(mixinCreatedCalls, 'mixin created method should be called once').eq(
+      1
+    )
+    expect(c['$options']['data']())
+      .to.have.property('mixinData')
+      .that.equals('data from mixin')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp')
+      .have.property('default')
+      .that.equals('prop from mixin')
+  })
 
-		var c: any = new Container()
+  it('multiple mixins using @Options', () => {
+    let mixinCreated1 = false
+    let mixinMethodCalled1 = false
+    let mixinCreated2 = false
+    let mixinMethodCalled2 = false
 
-		expect(mixinCreated1).eq(true)
-		expect(mixinMethodCalled1).eq(true)
-		expect(mixinCreated2).eq(true)
-		expect(mixinMethodCalled2).eq(true)
-		expect(c['$options']['data']()).to.have.property('mixinData1').that.equals('data from mixin 1')
-		expect(c['$options']['props']).to.have.property('mixinProp1').have.property('default').that.equals('prop from mixin 1')
-		expect(c['$options']['data']()).to.have.property('mixinData2').that.equals('data from mixin 2')
-		expect(c['$options']['props']).to.have.property('mixinProp2').have.property('default').that.equals('prop from mixin 2')
+    @Options()
+    class MyMixin1 extends Vue {
+      mixinData1 = 'data from mixin 1'
 
-	})
+      @Prop() mixinProp1 = 'prop from mixin 1'
 
+      created() {
+        mixinCreated1 = true
+      }
 
-	it('single mixin using @Options', () => {
+      mymix1() {
+        mixinMethodCalled1 = true
+      }
+    }
 
-		let mixinCreatedCalls = 0
-		let mixinCreated = false
-		let mixinMethodCalled = false
+    @Options()
+    class MyMixin2 extends Vue {
+      mixinData2 = 'data from mixin 2'
 
-		@Options()
-		class MyMixin extends Virtual<Vue>() {
+      @Prop() mixinProp2 = 'prop from mixin 2'
 
-			mixinData = 'data from mixin'
+      created() {
+        mixinCreated2 = true
+      }
 
-			@Prop()
-			mixinProp = 'prop from mixin'
+      mymix2() {
+        mixinMethodCalled2 = true
+      }
+    }
 
-			created() {
-				mixinCreatedCalls++
-				mixinCreated = true
-			}
-			mymix() {
-				mixinMethodCalled = true
-			}
-		}
+    interface AllMyMixins extends MyMixin1, MyMixin2 {}
 
-		@Component()
-		class Container extends Mixin(MyMixin) {
-			created() {				
-				this.mymix()
-			}
-		}
+    @Component()
+    class Container extends Mixins<AllMyMixins>(MyMixin1, MyMixin2) {
+      created() {
+        this.mymix1()
+        this.mymix2()
+      }
+    }
 
-		var c: any = new Container()
+    const c: any = new Container()
 
-		expect(mixinCreated).eq(true)
-		expect(mixinMethodCalled).eq(true)
-		expect(mixinCreatedCalls, 'mixin created method should be called once').eq(1)
-		expect(c['$options']['data']()).to.have.property('mixinData').that.equals('data from mixin')
-		expect(c['$options']['props']).to.have.property('mixinProp').have.property('default').that.equals('prop from mixin')
-
-
-	})
-
-	it('multiple mixins using @Options', () => {
-
-		let mixinCreated1 = false
-		let mixinMethodCalled1 = false
-		let mixinCreated2 = false
-		let mixinMethodCalled2 = false
-
-
-		@Options()
-		class MyMixin1 extends Vue {
-
-			mixinData1 = 'data from mixin 1'
-
-			@Prop()
-			mixinProp1 = 'prop from mixin 1'
-
-			created() {
-				mixinCreated1 = true
-			}
-
-			mymix1() {
-				mixinMethodCalled1 = true
-			}
-		}
-
-		@Options()
-		class MyMixin2 extends Vue {
-			mixinData2 = 'data from mixin 2'
-
-			@Prop()
-			mixinProp2 = 'prop from mixin 2'
-
-			created() {
-				mixinCreated2 = true
-			}
-
-			mymix2() {
-				mixinMethodCalled2 = true
-			}
-		}
-
-		interface AllMyMixins extends MyMixin1, MyMixin2 { }
-
-		@Component()
-		class Container extends Mixins<AllMyMixins>(MyMixin1, MyMixin2) {
-			created() {
-				this.mymix1()
-				this.mymix2()
-			}
-		}
-
-		var c: any = new Container()
-
-		expect(mixinCreated1).eq(true)
-		expect(mixinMethodCalled1).eq(true)
-		expect(mixinCreated2).eq(true)
-		expect(mixinMethodCalled2).eq(true)
-		expect(c['$options']['data']()).to.have.property('mixinData1').that.equals('data from mixin 1')
-		expect(c['$options']['props']).to.have.property('mixinProp1').have.property('default').that.equals('prop from mixin 1')
-		expect(c['$options']['data']()).to.have.property('mixinData2').that.equals('data from mixin 2')
-		expect(c['$options']['props']).to.have.property('mixinProp2').have.property('default').that.equals('prop from mixin 2')
-
-	})
-
+    expect(mixinCreated1).eq(true)
+    expect(mixinMethodCalled1).eq(true)
+    expect(mixinCreated2).eq(true)
+    expect(mixinMethodCalled2).eq(true)
+    expect(c['$options']['data']())
+      .to.have.property('mixinData1')
+      .that.equals('data from mixin 1')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp1')
+      .have.property('default')
+      .that.equals('prop from mixin 1')
+    expect(c['$options']['data']())
+      .to.have.property('mixinData2')
+      .that.equals('data from mixin 2')
+    expect(c['$options']['props'])
+      .to.have.property('mixinProp2')
+      .have.property('default')
+      .that.equals('prop from mixin 2')
+  })
 })

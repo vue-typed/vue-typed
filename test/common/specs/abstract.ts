@@ -1,25 +1,20 @@
 import { Component, Prop } from '../../../dist/index'
 
 export abstract class AbstractClass {
+  baseData = 'hello'
 
-	baseData = 'hello'
-
-	@Prop({
-		default: 'hi'
-	})
-	baseProp: string
-
+  @Prop({
+    default: 'hi'
+  })
+  baseProp: string
 }
 
 @Component()
 export abstract class AbstractComponent {
+  baseData = 'hello'
 
-	baseData = 'hello'
-
-	@Prop({
-		default: 'hi'
-	})
-	baseProp: string
-
+  @Prop({
+    default: 'hi'
+  })
+  baseProp: string
 }
-
