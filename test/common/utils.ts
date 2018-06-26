@@ -1,3 +1,3 @@
 export function getDataOptionsValue(app: any) {
-		return app.$options.data()
+  return app.$options.data()
 }

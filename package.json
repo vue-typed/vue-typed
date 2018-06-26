@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "clean": "rimraf ./dist",
+    "lint": "tslint '{src,test}/**/*.ts'",
     "build": "npm run clean && webpack",
     "test:_es6": "webpack --config test/es6/webpack.config.js && mocha test/es6/test.build.js",
     "test:_common": "mocha --require test/common/tshook.js test/common/specs/**/*.ts",
@@ -35,7 +36,7 @@
     "test:es6": "npm run build && npm run test:_es6",
     "test:common": "npm run build && npm run test:_common",
     "test:browser": "npm run build && npm run test:_browser",
-    "test": "npm run build && npm run test:_es6 && npm run test:_common && npm run test:_browser"
+    "test": "npm run lint && npm run build && npm run test:_es6 && npm run test:_common && npm run test:_browser"
   },
   "license": "MIT",
   "devDependencies": {
@@ -64,14 +65,21 @@
     "mocha": "^3.4.2",
     "node-libs-browser": "^2.0.0",
     "phantomjs-prebuilt": "^2.1.14",
+    "prettier": "^1.13.6",
     "rollup": "^0.45.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-typescript": "^0.8.1",
     "ts-loader": "^2.2.2",
     "ts-node": "^3.2.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.4.1",
     "vue": "^2.3.4",
     "webpack": "^3.1.0",
     "webpack-merge": "^4.1.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

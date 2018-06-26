@@ -2,10 +2,8 @@
 
 var merge = require('webpack-merge')
 
-
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -14,31 +12,26 @@ module.exports = function (config) {
     frameworks: ['mocha'],
 
     // list of files / patterns to load in the browser
-    files: [
-      'specs/**/*.ts',
-    ],
+    files: ['specs/**/*.ts'],
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'specs/**/*.ts': ['webpack'],
+      'specs/**/*.ts': ['webpack']
     },
-    // webpack preprocessor config    
+    // webpack preprocessor config
     webpack: {
       resolve: {
         extensions: ['.js', '.ts'],
         alias: {
-          'vue$': 'vue/dist/vue.common.js'
+          vue$: 'vue/dist/vue.common.js'
         }
       },
       module: {
-        loaders: [
-          { test: /\.ts(x?)$/, loader: 'ts-loader' }
-        ]
+        loaders: [{ test: /\.ts(x?)$/, loader: 'ts-loader' }]
       }
     },
 
@@ -92,6 +85,5 @@ module.exports = function (config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-
   })
 }

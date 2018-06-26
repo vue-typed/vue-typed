@@ -16,9 +16,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "stripInternal": true,
     "allowJs": true,
-    "lib": [
-      "dom",
-      "es2015"
-    ]
+    "esModuleInterop": true,
+    "lib": ["dom", "es2015"]
   }
 }

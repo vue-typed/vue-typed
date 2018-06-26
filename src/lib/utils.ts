@@ -2,183 +2,182 @@
  * Internal utilities.
  */
 
-import * as Vue from 'vue'
-import { ComponentOptions } from "vue";
+import Vue, { ComponentOptions, VueConstructor } from 'vue'
 
-let vueInternalPropNames = Object.getOwnPropertyNames(new Vue());
-let vueInternalHooks = [
-	'data',
-	'props',
-	'watch',
-	'beforeCreate',
-	'created',
-	'beforeMount',
-	'mounted',
-	'beforeUpdate',
-	'updated',
-	'activated',
-	'deactivated',
-	'beforeDestroy',
-	'destroyed',
-	'render'
+const vueInternalPropNames = Object.getOwnPropertyNames(new Vue())
+const vueInternalHooks = [
+  'data',
+  'props',
+  'watch',
+  'beforeCreate',
+  'created',
+  'beforeMount',
+  'mounted',
+  'beforeUpdate',
+  'updated',
+  'activated',
+  'deactivated',
+  'beforeDestroy',
+  'destroyed',
+  'render'
 ]
 
 /** @internal */
 export const PROP_KEY = '$_vt_props'
 
-
 /** @internal */
-export function BuildOptions(Component: Function & ComponentOptions<Vue>, options?: any): <Function>(target: any) => Function | void {
+export function BuildOptions(
+  Component: Function & ComponentOptions<Vue>,
+  options?: any
+): <Function>(target: any) => VueConstructor | void {
+  // evaluate component name
+  if (!options) {
+    options = {}
+  }
+  options.name = options.name || Component.name
 
-	// evaluate component name
-	if (!options) {
-		options = {}
-	}
-	options.name = options.name || Component.name
+  // class prototype.
+  const proto = Component.prototype
 
+  // avoid parent component initialization while building component
+  if (Object.getPrototypeOf(proto) instanceof Vue) {
+    // tslint:disable-next-line:no-empty
+    Object.setPrototypeOf(proto.constructor, function() {})
+  }
 
-	// class prototype.
-	let proto = Component.prototype
+  const constructor = new proto.constructor()
 
-	// avoid parent component initialization while building component
-	if (Object.getPrototypeOf(proto) instanceof Vue)
-		Object.setPrototypeOf(proto.constructor, function () { })
+  //
+  // Extract props / build options.props
+  //
+  const propAttrs = proto[PROP_KEY]
+  let propNames
+  delete proto[PROP_KEY]
+  if (propAttrs) {
+    const props = {}
 
-	let constructor = new proto.constructor();
+    propNames = Object.getOwnPropertyNames(propAttrs)
+    for (const prop of propNames) {
+      let propVal
+      const descriptor = Object.getOwnPropertyDescriptor(
+        propAttrs,
+        prop
+      ) as PropertyDescriptor
+      const constructorDefault = constructor[prop]
 
+      if (typeof descriptor.value === 'object') {
+        // prop options defined
+        propVal = descriptor.value
 
+        // try to assign default value
+        if (!propVal.default) {
+          propVal.default = constructorDefault
+        }
+      } else if (constructorDefault) {
+        // create prop object with default value from constructor
+        propVal = {
+          default: constructorDefault
+        }
+      }
 
-	//
-	// Extract props / build options.props
-	//
-	let propAttrs = proto[PROP_KEY];
-	let propNames = undefined;
-	delete proto[PROP_KEY];
-	if (propAttrs) {
-		let props = {}
+      // just define empty prop
+      if (typeof propVal === 'undefined') {
+        propVal = true
+      }
 
-		propNames = Object.getOwnPropertyNames(propAttrs);
-		for (let i = 0; i < propNames.length; i++) {
-			let prop = propNames[i];
-			let propVal = undefined;
-			let descriptor = Object.getOwnPropertyDescriptor(propAttrs, prop)
-			let constructorDefault = constructor[prop];
+      props[prop] = propVal
+    }
 
-			if (typeof (descriptor.value) === 'object') {
+    if (!options.props) {
+      options.props = {}
+    }
 
-				// prop options defined
-				propVal = descriptor.value
+    for (const p in props) {
+      if (props.hasOwnProperty(p)) {
+        options.props[p] = props[p]
+      }
+    }
+  }
 
-				// try to assign default value
-				if (!propVal.default)
-					propVal.default = constructorDefault;
+  //
+  // build internal hooks, methods and computed properties
+  //
+  Object.getOwnPropertyNames(proto).forEach(function(key) {
+    // skip constructor
+    if (key === 'constructor') {
+      return
+    }
 
-			} else if (constructorDefault) {
+    // internal hooks
+    if (vueInternalHooks.indexOf(key) > -1) {
+      options[key] = proto[key]
+      return
+    }
 
-				// create prop object with default value from constructor
-				propVal = {
-					default: constructorDefault
-				}
-			}
+    const descriptor = Object.getOwnPropertyDescriptor(
+      proto,
+      key
+    ) as PropertyDescriptor
+    if (typeof descriptor.value === 'function') {
+      // methods
+      ;(options.methods || (options.methods = {}))[key] = descriptor.value
+    } else if (descriptor.get || descriptor.set) {
+      // computed properties
+      ;(options.computed || (options.computed = {}))[key] = {
+        get: descriptor.get,
+        set: descriptor.set
+      }
+    }
+  })
 
-			// just define empty prop
-			if (typeof (propVal) === 'undefined') {
-				propVal = true;
-			}
+  //
+  // Build options.data
+  //
+  const dataNames: string[] = []
+  let restrictedNames = vueInternalPropNames
+  if (propNames) {
+    restrictedNames = restrictedNames.concat(propNames)
+  }
 
-			props[prop] = propVal;
-		}
+  // gather data from constructor
+  Object.getOwnPropertyNames(constructor).forEach(function(key) {
+    if (restrictedNames.indexOf(key) === -1) {
+      dataNames.push(key)
+    }
+  })
 
-		if (!options.props) {
-			options.props = {}
-		}
+  if (dataNames.length > 0) {
+    // evaluate parent data
+    let parentData: any
+    const parentDataType = typeof options.data
+    if (parentDataType === 'function') {
+      parentData = options.data()
+    } else if (parentDataType === 'object') {
+      parentData = options.data
+    }
 
-		for (let p in props) {
-			options.props[p] = props[p]
-		}
+    options.data = () => {
+      // define new data object
+      const dataObj = parentData || {}
 
-	}
+      // set data default values initialized from constructor
+      dataNames.forEach(function(prop) {
+        const descriptor = Object.getOwnPropertyDescriptor(
+          constructor,
+          prop
+        ) as PropertyDescriptor
+        if (
+          !descriptor.get &&
+          !descriptor.set &&
+          typeof descriptor.value !== 'function'
+        ) {
+          dataObj[prop] = constructor[prop]
+        }
+      })
 
+      return dataObj
+    }
+  }
 
-
-	//
-	// build internal hooks, methods and computed properties
-	//
-	Object.getOwnPropertyNames(proto).forEach(function (key) {
-
-		// skip constructor     
-		if (key === 'constructor') {
-			return
-		}
-
-
-		// internal hooks
-		if (vueInternalHooks.indexOf(key) > -1) {
-			options[key] = proto[key]
-			return
-		}
-
-
-		let descriptor = Object.getOwnPropertyDescriptor(proto, key)
-		if (typeof descriptor.value === 'function') {
-
-			// methods
-			(options.methods || (options.methods = {}))[key] = descriptor.value
-
-
-		} else if (descriptor.get || descriptor.set) {
-
-			// computed properties
-			(options.computed || (options.computed = {}))[key] = {
-				get: descriptor.get,
-				set: descriptor.set
-			}
-		}
-	})
-
-
-	//
-	// Build options.data
-	//
-	let dataNames: string[] = []
-	let restrictedNames = vueInternalPropNames;
-	if (propNames) restrictedNames = restrictedNames.concat(propNames);
-
-	// gather data from constructor
-	Object.getOwnPropertyNames(constructor).forEach(function (key) {
-		if (restrictedNames.indexOf(key) === -1)
-			dataNames.push(key);
-	});
-
-
-	if (dataNames.length > 0) {
-
-		// evaluate parent data
-		let parentData: any = undefined
-		let parentDataType = typeof options.data;
-		if (parentDataType === 'function') {
-			parentData = options.data();
-		} else if (parentDataType === 'object') {
-			parentData = options.data;
-		}
-
-		options.data = () => {
-
-			// define new data object
-			let data_obj = parentData || {}
-
-			// set data default values initialized from constructor
-			dataNames.forEach(function (prop) {
-				let descriptor = Object.getOwnPropertyDescriptor(constructor, prop)
-				if (!descriptor.get && !descriptor.set && typeof descriptor.value !== 'function') {
-					data_obj[prop] = constructor[prop]
-				}
-			})
-
-			return data_obj
-		}
-	}
-
-	return options;
-
+  return options
 }

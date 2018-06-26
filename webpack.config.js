@@ -18,19 +18,17 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    libraryTarget: 'umd',
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: ['.ts', '.js']
   },
   externals: {
     vue: 'vue',
-    chai: 'chai',
+    chai: 'chai'
   },
   module: {
-    rules: [
-      {test: /\.ts$/, use: 'ts-loader'}
-    ]
+    rules: [{ test: /\.ts$/, use: 'ts-loader' }]
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
